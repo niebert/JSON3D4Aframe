@@ -1,0 +1,100 @@
+vDataJSON[vSchemaID] = {
+	"type": "object",
+	"title": "3D Objects",
+	"headerTemplate": "Icon: {{ self.title}}",
+	"type": "object",
+    "id": "https://niebert.github.io/json-editor",
+    "defaultProperties": [
+        "id",
+				"tagname",
+				"comment",
+				"position",
+        "color",
+				"opacity",
+				"scale"
+    ],
+	"properties": {
+		"id": {
+            "type": "string",
+            "id": "/properties/id",
+            "title": "ID",
+            "default": "",
+            "format": "text",
+            "description": "Unique ID for 3D Object"
+        },
+        "comment": {
+            "type": "string",
+            "id": "/properties/comment",
+            "title": "Comment:",
+            "default": "",
+            "format": "text",
+            "description": "Short comment about the 3D object."
+        },
+				"tagname": {
+            "type": "string",
+            "id": "/properties/tagname",
+            "title": "Type of Object:",
+  		    "enum": [
+        			"a-box",
+          		"a-sphere",
+          		"a-cylinder",
+							"a-cone",
+							"a-plane",
+							"a-triangle",
+          		"a-cycle",
+          		"a-image",
+          		"a-sky"
+          	],
+          	 "options": {
+       		   "enum_titles": [
+            		"Box",
+            		"Sphere",
+            		"Cylinder",
+								"Cone",
+								"Plane",
+								"Triangle",
+            		"Circle",
+            		"Image",
+								"Sky"
+            	]
+       		},
+            "default": "a-box",
+            "format": "text",
+            "description": "Select the 3D object you want to add to the scene."
+        },
+				"position": {
+            "type": "string",
+            "id": "/properties/position",
+            "title": "x,y,z Coordinates",
+            "default": "0.0 0.5 0.0",
+            "format": "text",
+            "description": "e.g. '0.5 2 3' means 0.5 marker units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension)"
+        },
+				"color": {
+            "type": "string",
+            "id": "/properties/color",
+            "title": "Color",
+            "default": "#4545AA",
+            "format": "color",
+            "description": "Summary describes the location"
+        },
+        "opacity": {
+            "type": "number",
+            "id": "/properties/opacity",
+            "title": "Opacity",
+            "default": 0.5,
+            "format": "text",
+            "description": "Defines how transparent the 3D object is in a camera video"
+        },
+        "scale": {
+            "type": "number",
+            "id": "/properties/scale",
+            "title": "Scale Factor",
+            "default": 1.0,
+            "format": "text",
+            "description": "Basic size is determined by the marker size. With this factor you can scale the object"
+        }
+ 	},
+  	"definitions": {
+  	}
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Marker4Map Editor - OpenLayers</title>
+    <!--
+      Link Parameter (optional):
+       "schema" is a string defining the schema (stringified JSON)
+       "json" is a
+
+  -->
+    <link href="jquery/jquery-ui.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+     <!-- Font-Awesome CSS -->
+     <link href="css/font-awesome.min.css" rel="stylesheet">
+
+     <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+     <script src="jquery/external/jquery/jquery.js" type="text/javascript"></script>
+     <script src="js/arrayhash.js"></script>
+     <script src="js/lodash.js"></script>
+     <script src="js/filesaver.js"></script>
+     <script src="js/handlebars.js"></script>
+     <script src="js/linkparam.js"></script>
+     <script src="js/string.js"></script>
+     <script src="js/jsoneditor.js"></script>
+     <script src="js/editor4json.js"></script>
+     <script src="js/predbedit.js"></script>
+     <script src="js/submit2map.js"></script>
+     <script src="js/writedom.js"></script>
+     <script>
+     var vDataJSON = {};
+     var vSchemaID =  "object3d"; // file defined in schema/object3d.schema
+     // Set the default CSS theme and icon library globally
+     JSONEditor.defaults.theme = 'bootstrap3';
+     JSONEditor.defaults.iconlib = 'fontawesome4';
+     JSONEditor.plugins.ace.theme = 'xcode';
+
+    </script>
+   <!-- BEGIN: load JSON data -->
+    <script src="db/data.js"></script>
+    <!-- END:  load JSON data -->
+    <!-- BEGIN: load JSON schema -->
+    <script src="schema/object3d.schema"></script>
+    <!-- END:  load JSON schema -->
+    <script>
+    </script>
+    <textarea id="handlebars-template" rows="10" cols="120">
+      &lt;!doctype HTML&gt;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;script src="https://aframe.io/releases/0.6.1/aframe.min.js"&gt;&lt;/script&gt;
+          &lt;script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"&gt; &lt;/script&gt;
+          &lt;title&gt;
+            AR.js for {{marker}} Marker
+          &lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body style='margin : 0px; overflow: hidden;'&gt;
+          &lt;a-scene&gt;
+              &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
+{{{arobjects}}}
+        	    &lt;/a-marker&gt;
+        	    &lt;a-entity camera&gt;&lt;/a-entity&gt;
+         &lt;/a-scene&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    </textarea>
+    <!--
+    <a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
+    <script id="object-template" type="text/x-handlebars-template">
+      <{{tagname}} position='{{position}}' material='color: {{color}};opacity:{{opacity}}' width='{{scale}}' height='{{scale}}' depth='{{scale}}'></{{tagname}}></textarea>
+	 </script>
+ -->
+ <textarea id="object-template" rows="10" cols="120">
+   &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
+   &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}"" width="{{scale}}" height="{{scale}}" depth="{{scale}}"&gt;&lt;/{{tagname}}&gt;</textarea>
+</textarea>
+ </head>
+  <body style="margin:20px">
+    <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
+    <h2 align="center">
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a>
+    </h2>
+    <div data-role="fieldcontain" style="display:none">
+         <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
+    </div>
+
+  	<div id="divNavigate"  align="center">
+    <!-- the button vOpenJSON generates an onclick event for the fileJSON input file element in the DOM -->
+ 	 	<button id='bOpenJSON' style="color: white;background-color: #225988"  onclick="$( '#fileJSON' ).trigger('click');return false">
+			<i class="fa fa-folder-open-o" aria-hidden="true"></i> Load
+		</button>
+    <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save();return false">
+			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+		</button>
+    <button id='bExportHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML();return false">
+			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save HTML
+		</button>
+    &nbsp;
+		&nbsp;
+
+		<button id='bFastBackward' onclick="vEditor4JSON.first();return false">
+			<i class="fa fa-fast-backward" aria-hidden="true"></i>
+		</button>
+		<button id='bStepBackward' onclick="vEditor4JSON.prev();return false">
+			<i class="fa fa-step-backward" aria-hidden="true"></i>
+		</button>
+		<input type="text" id="array_index" value="0" size="2" onchange="vEditor4JSON.goto(this.value);return false">
+		/<label id="array_length">0</label>
+		<button id='bStepForward'  onclick="vEditor4JSON.next();return false">
+			<i class="fa fa-step-forward" aria-hidden="true"></i>
+		</button>
+	   <button id='bFastForward' onclick="vEditor4JSON.last();return false">
+			<i class="fa fa-fast-forward" aria-hidden="true"></i>
+		</button>
+		&nbsp;
+		&nbsp;
+		<button id='bAddRecord' style="color: white;background-color: #225988"  onclick="vEditor4JSON.add();return false">
+			<i class="fa fa-plus-square" aria-hidden="true"></i> Add
+		</button>
+		<button id='bDeleteRecord' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.deleteAsk();return false">
+			<i class="fa fa-minus-square" aria-hidden="true"></i> Delete
+		</button>
+    <button id='bInitDB' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.initAsk();return false">
+      <i class="fa fa-minus-square" aria-hidden="true"></i> Init DB
+    </button>
+    <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
+    <table>
+      <tr>
+        <td>
+            <form id="mapselector"  onsubmit="populateDataJSON('jsonaframe')" action="https://niebert.github.io/json2ar/view3d.html" method="GET">
+              <!-- Set the Callback URL for the OpenLayers location selector here: -->
+              <!-- <input type="string" name="callback" value="../Markers4Map/index.html" style="display:none"> -->
+              <input type="string" name="callback" value="https://niebert.github.io/JSON3D4Aframe/index.html" style="display:none">
+              <b>Marker:</b>
+              <!-- <input type="string" name="marker" id="mymarker" size="3" value="5"> -->
+              <select name="marker" id="marker">
+                <option selected="selected">hiro</option>
+                <option>kanyi</option>
+              </select>
+              &nbsp;
+              <button type="submit"  style="color: #000000;background-color: #DFDFDF">
+                  <i class="fa fa-globe" aria-hidden="true"></i> Display 3D
+              </button>
+              <textarea rows="5" cols="80" id="jsonaframe" name="jsondata" style="display:none"> </textarea>
+              </form>
+          </td>
+      <td>
+          <form id="mapselector" onsubmit="populateDataJSON('jsondata')" action="https://niebert.github.io/display_aframe/viewaframe.html" method="GET">
+            <!-- Set the Callback URL for the OpenLayers location selector here: -->
+            &nbsp;
+            &nbsp;
+            <input type="text" id="viewmarker" name="marker" value="5" style="display:none">
+            <button type="submit"  style="color: white;background-color: #225988">
+                <i class="fa fa-globe" aria-hidden="true"></i> Display Marker 3D
+            </button>
+            <textarea rows="5" cols="80" id="jsondata" name="jsondata" style="display:none"> </textarea>
+          </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+          <div class="text" id="load_filename"></div>
+        </td>
+      </tr>
+    </table>
+    <hr>
+	</div>
+
+    <div id='editor_holder' style="margin-right: 30px; margin-left: 30px"></div>
+    <div id='button_holder' style="margin:20px">
+      <button id='bExportJSON' onclick="vEditor4JSON.exportData();return false">Export JSON</button>
+      <button id='bExportSchema' onclick="vEditor4JSON.exportSchema();return false">Export JSON Schema</button>
+      <button id='bWinClose' onclick="window.close()" style="color: white;background-color: #225988;display:none">Close</button>
+      <button id='bExportEditorContent'  style="display:none">Export Editor innerHTML - Debug</button>
+      <button id='view' onclick="console.log(JSON.stringify(editor.getValue()))" style="display:none">View (console.log)</button>
+    </div>
+    <div align="center" style="font-size: 80%">
+    	<a href="https://en.wikiversity.org/wiki/User-driven_spatial_activities#Learning_Task" target="_blank">Wikiversity: User-driven spatial activities</a><br>
+      <a href="https://www.github.com/niebert/Markers4Map" target="_blank">GitHub-Repo</a> -
+      2017 - Engelbert Niehaus -
+          <a href="https://github.com/niebert/Markers4Map/archive/master.zip" target="_blank">Download GitHub (2017)</a><br/>
+          Markers4Map used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
+
+    </div>
+    <script>
+      //-------------------------------------------------------
+      // SCHEMA: Initialize the editor with a default JSON schema
+      // other keys for a pre-loads schema (see script-tags "load JSON schema" above):
+      //  "classlist", "class", "globallibs", "elementdb", "databaseschema", ...
+      var vSchemaDefined = false;
+      var vDefaultID = vSchemaID; // save the default SchemaID
+      var vSchemaJSON = vDataJSON[vSchemaID];
+      var vInitData = {}; // init record
+      //-------------------------------------------------------
+      // LINK PARAMETER: Evaluation link parameter in JSON Path
+      var vLinkParam = new LinkParam();
+      vLinkParam.init(document);
+      if (vLinkParam.exists("schemaid")) {
+        vSchemaID = vLinkParam.getValue("schemaid");
+        if (vDataJSON.hasOwnProperty(vSchemaID)) {
+          vSchemaJSON = vDataJSON[vSchemaID];
+          vSchemaDefined = true;
+        }
+      };
+      if (vLinkParam.exists("schema")) {
+        vSchemaString = vLinkParam.getValue("schema");
+        try {
+          vSchemaJSON = JSON.parse(vSchemaString);
+          console.log("Loaded Schema via LinkParameter for SchemaID='"+vSchemaID+"'");
+          vSchemaDefined = true;
+        } catch (e) {
+          alert(e);
+        };
+      };
+      //-------------------------------------------------------
+      // InitJSON: Get the JSON data to init the Editor from Window Opener
+      var vDOMID = {
+        "name" : vSchemaID,
+        "editor" : "editor_holder", //DIV element in which the JSON editor is injected
+        "validate" : "valid_indicator", // DIV Element that shows "valid" or "not valid"
+        "current" :  "array_index",
+        "length" : "array_length"
+      };
+      //-------------------------------------------------------
+      //---- Create JSON Editor -------------------------------
+      //-------------------------------------------------------
+      var vEditor4JSON = new Editor4JSON();
+      var vInitData = vDataJSON["data"];
+      console.log("JSON Editor call init()");
+      vEditor4JSON.init(vDOMID,vInitData,vSchemaJSON);
+      var editor = vEditor4JSON.aEditor;
+      //-------------------------------------------------------
+      //---JSON EDITOR Handle Change Event---------------------
+      //-------------------------------------------------------
+      // Hook up the submit button to log to the console
+      document.getElementById('bExportEditorContent').addEventListener('click',function() {
+        var vContent = style_html(getEditorInnerHTML("editor_holder"));
+        // Get the value from the editor
+        saveFile2HDD("editor_innerhtml.html",vContent);
+        //console.log(editor.getValue());
+      });
+      // Read geolocation from LinkParam instance
+      if (vLinkParam.exists("geolocation")) {
+        console.log("Set GeoLocation for current="+vEditor4JSON.current);
+        var vRecJSON = vEditor4JSON.aEditor.getValue();
+        //vRecJSON["geolocation"] = vLinkParam.getValue("geolocation");
+        var vGeoLoc = vLinkParam.getValue("geolocation");
+        var vGeoArr = vGeoLoc.split(",");
+        vRecJSON["lat"] = vGeoArr[1];
+        vRecJSON["lng"] = vGeoArr[0];
+        vEditor4JSON.aData[vEditor4JSON.current] = vRecJSON;
+        vEditor4JSON.aEditor.setValue(vRecJSON);
+        // update the selected current record in JSON with the selected geolocation
+        document.getElementById("mymapcenter").value = vLinkParam.getValue("geolocation");
+      };
+      if (vLinkParam.exists("marker")) {
+        document.getElementById("mymarker").value = vLinkParam.getValue("marker");
+      };
+    </script>
+    <script src="js/datetime4json.js"></script>
+  </body>
+</html>
