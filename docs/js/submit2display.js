@@ -24,14 +24,10 @@ function populateDataJSON(pTextareaID) {
   var vRecOut = "";
   var vMapCenterMissing = true;
   for (var i = 0; i < vData.length; i++) {
-    vRecOut = getMarkerString(i+1,vData[i]);
+    vRecOut = getString4Object(i+1,vData[i]);
     if (vRecOut != "") {
       vOut += vCR + vRecOut;
       vCR = ",\n";
-      if (vMapCenterMissing) {
-        el4id("mymapcenter").value = vData[i].lng+","+vData[i].lat;
-        vMapCenterMissing = false;
-      }
     };
   };
   vOut = "[" + vOut + "]";
@@ -40,30 +36,8 @@ function populateDataJSON(pTextareaID) {
   document.getElementById('jsondata').value = vOut;
 };
 
-function getMarkerString(pNr,pRec) {
+function getString4Object(pNr,pRec) {
   var vOut = "";
-  if ((pRec.lat != "") && (pRec.lng != "")) {
-    vOut += "{ \"geolocation\" : ["+pRec.lng+","+pRec.lat+"],";
-    vOut += "\"name\" : \"";
-    vOut +="<b>";
-    if (pRec.webpage != "") {
-      vOut += "<a href=\\\""+pRec.webpage+"\\\" target=\\\"_blank\\\">"+pRec.title+"</a>";
-    } else {
-      vOut += pRec.title;
-    };
-    vOut +="</b>";
-    if (pRec.hasOwnProperty("summary")) {
-      if (pRec.summary != "") {
-        vOut +="<br>";
-        vOut += pRec.summary.replace(/"/g,'\"');
-        vOut +="\"";
-      }
-    };
-    vOut +="}";
-
-  } else {
-    //console.log("("+pNr+") missing geolocation in record");
-    alert("("+pNr+") missing geolocation in record");
-  };
+  vOut = JSON.stringify(pRec,null,4)
   return vOut;
 }
