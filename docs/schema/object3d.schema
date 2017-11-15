@@ -1,7 +1,7 @@
 vDataJSON[vSchemaID] = {
 	"type": "object",
 	"title": "3D Objects",
-	"headerTemplate": "Icon: {{ self.title}}",
+	"headerTemplate": "3D: {{self.tagname}} - {{self.comment}}",
 	"type": "object",
     "id": "https://niebert.github.io/json-editor",
     "defaultProperties": [

@@ -26,7 +26,7 @@
      <script src="js/jsoneditor.js"></script>
      <script src="js/editor4json.js"></script>
      <script src="js/predbedit.js"></script>
-     <script src="js/submit2map.js"></script>
+     <script src="js/submit2display.js"></script>
      <script src="js/writedom.js"></script>
      <script>
      var vDataJSON = {};
@@ -128,33 +128,34 @@
     <table>
       <tr>
         <td>
-            <form id="mapselector"  onsubmit="populateDataJSON('jsonaframe')" action="https://niebert.github.io/json2ar/view3d.html" method="GET">
+            <form id="submit2aframe"  onsubmit="populateDataJSON('jsonaframe')" action="https://niebert.github.io/JSON3D4Aframe/view3d.html" method="GET">
               <!-- Set the Callback URL for the OpenLayers location selector here: -->
-              <!-- <input type="string" name="callback" value="../Markers4Map/index.html" style="display:none"> -->
+              <!-- <input type="string" name="callback" value="../Markers4Map/index.html" style="display:none">
               <input type="string" name="callback" value="https://niebert.github.io/JSON3D4Aframe/index.html" style="display:none">
+              -->
               <b>Marker:</b>
               <!-- <input type="string" name="marker" id="mymarker" size="3" value="5"> -->
               <select name="marker" id="marker">
                 <option selected="selected">hiro</option>
-                <option>kanyi</option>
+                <option>kanji</option>
               </select>
               &nbsp;
               <button type="submit"  style="color: #000000;background-color: #DFDFDF">
                   <i class="fa fa-globe" aria-hidden="true"></i> Display 3D
               </button>
-              <textarea rows="5" cols="80" id="jsonaframe" name="jsondata" style="display:none"> </textarea>
+              <textarea rows="5" cols="80" id="jsonaframe" name="jsondata" Xstyle="display:none"> </textarea>
               </form>
           </td>
       <td>
-          <form id="mapselector" onsubmit="populateDataJSON('jsondata')" action="https://niebert.github.io/display_aframe/viewaframe.html" method="GET">
+          <form id="submit2arjs" onsubmit="populateDataJSON('jsondata')" action="viewaframe.html" method="GET">
             <!-- Set the Callback URL for the OpenLayers location selector here: -->
             &nbsp;
             &nbsp;
-            <input type="text" id="viewmarker" name="marker" value="5" style="display:none">
+            <input type="text" id="viewmarker" name="marker" value="5" Xstyle="display:none">
             <button type="submit"  style="color: white;background-color: #225988">
                 <i class="fa fa-globe" aria-hidden="true"></i> Display Marker 3D
             </button>
-            <textarea rows="5" cols="80" id="jsondata" name="jsondata" style="display:none"> </textarea>
+            <textarea rows="5" cols="80" id="jsondata" name="jsondata" Xstyle="display:none"> </textarea>
           </form>
         </td>
     </tr>

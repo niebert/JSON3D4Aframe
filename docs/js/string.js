@@ -1,6 +1,8 @@
 function correctHandleBarsTemplate(pTemplate) {
   pTemplate = pTemplate.replace(/&lt;/g,"<");
   pTemplate = pTemplate.replace(/&gt;/g,">");
+  //pTemplate = pTemplate.replace(/&gt;/g,">");
+
   return pTemplate;
 }
 

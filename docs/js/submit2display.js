@@ -9,13 +9,13 @@ function el4id(pID) {
 
 function copyMarker3D() {
   console.log("copyMarker3D");
-  el4id("viewmapcenter").value = el4id("mymapcenter").value;
+  el4id("aframemarker").value = el4id("mymarker").value;
   el4id("viewmarker").value = el4id("mymarker").value;
   console.log("copyMarker3D after");
 
 }
 
-function populateDataJSON() {
+function populateDataJSON(pTextareaID) {
   vEditor4JSON.saveLS(); // save JSON Data to Local Storage
   copyMarker3D();
   var vData = vEditor4JSON.aData;

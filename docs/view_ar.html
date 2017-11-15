@@ -1,0 +1,110 @@
+<!doctype HTML>
+<html>
+<script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
+<!--
+<script src="js/aframe-master.js"></script>
+<script src="js/aframe-ar.min.js" async></script>
+-->
+<script src="js/handlebars.js"></script>
+<script src="js/linkparam.js"></script>
+<script src="js/viewar.js"></script>
+<textarea id="handlebars-template" rows="10" cols="120" style="display:none">
+      &lt;a-scene&gt;
+          &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
+{{{arobjects}}}
+          &lt;/a-marker&gt;
+          &lt;a-entity camera&gt;&lt;/a-entity&gt;
+     &lt;/a-scene&gt;
+</textarea>
+
+<textarea id="X_handlebars-template" rows="10" cols="120" style="display:none">
+      &lt;a-scene&gt;
+          &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
+{{{arobjects}}}
+          &lt;/a-marker&gt;
+          &lt;a-entity camera&gt;&lt;/a-entity&gt;
+     &lt;/a-scene&gt;
+</textarea>
+<!--
+<a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
+<script id="object-template" type="text/x-handlebars-template">
+  <{{tagname}} position='{{position}}' material='color: {{color}};opacity:{{opacity}}' width='{{scale}}' height='{{scale}}' depth='{{scale}}'></{{tagname}}></textarea>
+</script>
+-->
+<textarea id="object-template" rows="10" cols="120"  style="display:none">
+&lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
+&lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}"" width="{{scale}}" height="{{scale}}" depth="{{scale}}"&gt;&lt;/{{tagname}}&gt;</textarea>
+
+</textarea>
+<input type="text" id="marker" value="hiro" size="10" >
+<textarea id="jsondata" rows="10" cols="120"  Xstyle="display:none">
+  [
+      {
+          "id": "1510149323701",
+          "tagname": "a-sphere",
+          "comment": "Hydrogen",
+          "position": "0.0 0.0 0.0",
+          "color": "#aa101f",
+          "opacity": 0.7,
+          "scale": 0.5
+      },
+      {
+          "id": "1510149323702",
+          "tagname": "a-sphere",
+          "comment": "Oxygen1",
+          "position": "1.0 1.2 0.0",
+          "color": "#ffffff",
+          "opacity": 0.7,
+          "scale": 0.5
+      },
+      {
+          "id": "1510235133212",
+          "tagname": "a-sphere",
+          "comment": "Oxygen2",
+          "position": "-1.0 1.2 0.0",
+          "color": "#ffffff",
+          "opacity": 0.7,
+          "scale": 0.5
+      }
+  ]
+</textarea>
+<script>
+//-------------------------------------------------------
+// LINK PARAMETER: Evaluation link parameter in JSON Path
+var vHashAR = {};
+var vLinkParam = new LinkParam();
+vLinkParam.init(document);
+var vArrID = ["jsondata","marker"];
+var vID = "";
+for (var i = 0; i < vArrID.length; i++) {
+  vID = vArrID[i];
+  if (vLinkParam.exists(vID)) {
+    console.log("Parameter '"+vID+"' exists");
+    vHashAR[vID] = vLinkParam.getValue(vID);
+  };
+}
+//-------------------------------------------------------
+</script>
+  <body id="htmlbody" style='margin : 0px; overflow: hidden;'>
+    <!--
+    <a-scene>
+  	<a-marker id="mymarker" preset="hiro">
+      <a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
+  	</a-marker>
+  	<a-entity camera></a-entity>
+    </a-scene>
+    -->
+  </body>
+  <script>
+  //-------------------------------------------------------
+  // INJECT TEMPLATE: HandleBar generated HTML
+  //-------------------------------------------------------
+  function el(pID) {
+    return document.getElementById(pID);
+  };
+  var vJSON = parseJSON3D(el("jsondata").value);
+  el("htmlbody").innerHTML = compileHTML(vJSON);
+  //alert( compileHTML(vJSON));
+  </script>
+</html>
