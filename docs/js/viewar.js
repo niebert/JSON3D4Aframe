@@ -1,4 +1,4 @@
-function compileHTML(pData,pMarker) {
+function compileHTML(pTplID,pData,pMarker) {
   //----Debugging------------------------------------------
   // console.log("js/editor4json.js - Call: exporFileHTML()");
   // alert("js/editor4json.js - Call: exportData()");
@@ -7,7 +7,7 @@ function compileHTML(pData,pMarker) {
   //    vMyInstance.exportHTML();
   //-------------------------------------------------------
 	// load the 3D object template
-	var objecttpl = document.getElementById("object-template").value;
+	var objecttpl = vDataJSON["objecttpl"];
 	//objecttpl = correctHandleBarsTemplate(objecttpl);
 	console.log(objecttpl);
 	//compile the template text into a function for replacing JSON content
@@ -23,12 +23,12 @@ function compileHTML(pData,pMarker) {
     console.log("pData in compileHTML undefined!");
   }
 	// load the main Handlebars template and replace
-	var template = document.getElementById("handlebars-template").value;
+	var template =vDataJSON[pTplID]; // pTplID = "aframetpl" or "artpl" defined in db/handlebars_tpl.js
 	//alert("Template:"+template);
 	// Compile the template data into a function
 	var templateScript = Handlebars.compile(template);
 	// identify the selected marker
-	var vMarker = pMarker || document.getElementById("marker").value;
+	var vMarker = pMarker || vDataJSON["marker"];
 	var context = { "arobjects" : vARobjects, "marker": vMarker};
 	// Perform the replacement with the "templateScript()"
 	var vHTML = templateScript(context);

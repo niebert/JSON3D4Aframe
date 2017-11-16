@@ -59,6 +59,7 @@ if (vLinkParam.exists(vID)) {
     return document.getElementById(pID);
   };
   //----- Parse the JSON data of the AR objects -----------
-  el("htmlbody").innerHTML = compileHTML("aframe",vDataJSON["jsondata"],vDataJSON["marker"]);
+  // use template vDataJSON["aframetpl"] defined db/handlebars_tpl.js
+  el("htmlbody").innerHTML = compileHTML("aframetpl",vDataJSON["jsondata"],vDataJSON["marker"]);
   </script>
 </html>
