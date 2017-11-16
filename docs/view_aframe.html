@@ -33,11 +33,10 @@ if (vLinkParam.exists(vID)) {
     console.log("Parameter '"+vID+"' exists");
     //--- Overwrite the default value in marker, jsondata ---
     vDataJSON["jsondata"] = parseJSON3D(vLinkParam.getValue(vID));
-  } else {
+} else {
     console.log("Use initdata of 3D objects for '"+vID+"'");
     vDataJSON["jsondata"] = vDataJSON["initdata"];
-  };
-}
+};
 //-------------------------------------------------------
 </script>
 <body id="htmlbody" style='margin : 0px; overflow: hidden;' onload="inject3Dmodel('aframetpl')">
