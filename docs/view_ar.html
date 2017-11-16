@@ -35,6 +35,7 @@ vID = "jsondata";
 if (vLinkParam.exists(vID)) {
     console.log("Parameter '"+vID+"' exists");
     //--- Overwrite the default value in marker, jsondata ---
+    console.log("vDataJSON['"+vID+"']\n"+vLinkParam.getValue(vID));
     vDataJSON["jsondata"] = parseJSON3D(vLinkParam.getValue(vID));
   } else {
     console.log("Use initdata of 3D objects for '"+vID+"'");
