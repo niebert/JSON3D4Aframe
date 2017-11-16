@@ -47,3 +47,12 @@ function parseJSON3D(pStringJSON) {
   };
   return vJSON;
 }
+
+function inject3Dmodel(pTplID) {
+	//-------------------------------------------------------
+  // INJECT TEMPLATE: HandleBar generated HTML
+  //-------------------------------------------------------
+  //----- Parse the JSON data of the AR objects -----------
+  // use template vDataJSON["aframetpl"] defined db/handlebars_tpl.js
+	var vOut = compileHTML(pTplID,vDataJSON["jsondata"],vDataJSON["marker"]);
+}

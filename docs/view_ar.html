@@ -43,7 +43,7 @@ if (vLinkParam.exists(vID)) {
 }
 //-------------------------------------------------------
 </script>
-  <body id="htmlbody" style='margin : 0px; overflow: hidden;'>
+  <body id="htmlbody" style='margin : 0px; overflow: hidden;' onload="inject3Dmodel('artpl')">
     <!--
     <a-scene>
   	<a-marker id="mymarker" preset="hiro">
@@ -53,16 +53,4 @@ if (vLinkParam.exists(vID)) {
     </a-scene>
     -->
   </body>
-  <script>
-  //-------------------------------------------------------
-  // INJECT TEMPLATE: HandleBar generated HTML
-  //-------------------------------------------------------
-  function el(pID) {
-    // this is a function that shortens the the getElementById call
-    return document.getElementById(pID);
-  };
-  //----- Parse the JSON data of the AR objects -----------
-  // use template vDataJSON["artpl"] defined db/handlebars_tpl.js
-  el("htmlbody").innerHTML = compileHTML("artpl",vDataJSON["jsondata"],vDataJSON["marker"]);
-  </script>
 </html>
