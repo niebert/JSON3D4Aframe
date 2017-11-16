@@ -12,7 +12,11 @@ function copyMarker3D() {
   el4id("aframemarker").value = el4id("marker").value;
   //el4id("viewmarker").value = el4id("marker").value;
   console.log("copyMarker3D after");
+};
 
+function setTimeID() {
+  el4id("timeaframe").value = Date.now();
+  el4id("timear").value = Date.now();
 }
 
 function populateDataJSON(pTextareaID) {
