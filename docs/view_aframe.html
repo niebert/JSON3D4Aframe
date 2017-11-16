@@ -1,90 +1,46 @@
 <!doctype HTML>
 <html>
+<title>AFrame - LinkParam</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
-<!--
-<script src="js/aframe-master.js"></script>
-<script src="js/aframe-ar.min.js" async></script>
--->
 <script src="js/handlebars.js"></script>
 <script src="js/linkparam.js"></script>
 <script src="js/viewar.js"></script>
-<textarea id="handlebars-template" rows="10" cols="120" style="display:none">
-      &lt;a-scene&gt;
-{{{arobjects}}}
-     &lt;/a-scene&gt;
-</textarea>
-
-<textarea id="X_handlebars-template" rows="10" cols="120" style="display:none">
-      &lt;a-scene&gt;
-          &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
-{{{arobjects}}}
-          &lt;/a-marker&gt;
-          &lt;a-entity camera&gt;&lt;/a-entity&gt;
-     &lt;/a-scene&gt;
-</textarea>
-<!--
-<a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
-<script id="object-template" type="text/x-handlebars-template">
-  <{{tagname}} position='{{position}}' material='color: {{color}};opacity:{{opacity}}' width='{{scale}}' height='{{scale}}' depth='{{scale}}'></{{tagname}}></textarea>
+<!-- Load the handlebars-template form DB file - templates stored in JSON format loaded into vDataJSON -->
+<script>
+  var vDataJSON = {};
 </script>
--->
-<textarea id="object-template" rows="10" cols="120"  style="display:none">
-&lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
-&lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}"" width="{{scale}}" height="{{scale}}" depth="{{scale}}"&gt;&lt;/{{tagname}}&gt;
-</textarea>
-<input type="text" id="marker" value="hiro" size="10" >
-<textarea id="jsondata" rows="10" cols="120"  style="display:none">
-  [
-      {
-          "id": "1510149323701",
-          "tagname": "a-sphere",
-          "comment": "Hydrogen",
-          "position": "0.0 0.0 0.0",
-          "color": "#aa101f",
-          "opacity": 0.7,
-          "scale": 0.5
-      },
-      {
-          "id": "1510149323702",
-          "tagname": "a-sphere",
-          "comment": "Oxygen1",
-          "position": "1.0 1.2 0.0",
-          "color": "#ffffff",
-          "opacity": 0.7,
-          "scale": 0.5
-      },
-      {
-          "id": "1510235133212",
-          "tagname": "a-sphere",
-          "comment": "Oxygen2",
-          "position": "-1.0 1.2 0.0",
-          "color": "#ffffff",
-          "opacity": 0.7,
-          "scale": 0.5
-      }
-  ]
-</textarea>
+<script src="db/handlebars_tpl.js"></script>
+<!-- the following default data is loaded into JSON id "initdata" in vDataJSON -->
+<script src="db/data.js"></script>
 <script>
 //-------------------------------------------------------
 // LINK PARAMETER: Evaluation link parameter in JSON Path
-var vHashAR = {};
 var vLinkParam = new LinkParam();
 vLinkParam.init(document);
-var vArrID = ["jsondata","marker"];
-var vID = "";
-for (var i = 0; i < vArrID.length; i++) {
-  vID = vArrID[i];
-  if (vLinkParam.exists(vID)) {
+//----MARKER load ------
+var vID = "marker";
+if (vLinkParam.exists(vID)) {
+  console.log("Parameter '"+vID+"' exists");
+  //--- Overwrite the default value in marker, jsondata ---
+  var vMarker = vLinkParam.getValue(vID);
+  // a Marker may consist of characters only - remove all other chars for security
+  vMarker = vMarker.replace(/[^A-Za-z]/g,"");
+  vDataJSON[vID] = vMarker;
+};
+//----JSONDATA load into "initdata"------
+vID = "jsondata";
+if (vLinkParam.exists(vID)) {
     console.log("Parameter '"+vID+"' exists");
     //--- Overwrite the default value in marker, jsondata ---
-    el(vID).value = vLinkParam.getValue(vID);
-    //--- LinkParam data in vHashAR (not used) --------------
-    //vHashAR[vID] = vLinkParam.getValue(vID);
+    vDataJSON["jsondata"] = parseJSON3D(vLinkParam.getValue(vID));
+  } else {
+    console.log("Use initdata of 3D objects for '"+vID+"'");
+    vDataJSON["jsondata"] = vDataJSON["initdata"];
   };
 }
 //-------------------------------------------------------
 </script>
-  <body id="htmlbody" style='margin : 0px; overflow: hidden;'>
+<body id="htmlbody" style='margin : 0px; overflow: hidden;'>
     <!--
     <a-scene>
   	<a-marker id="mymarker" preset="hiro">
@@ -103,11 +59,6 @@ for (var i = 0; i < vArrID.length; i++) {
     return document.getElementById(pID);
   };
   //----- Parse the JSON data of the AR objects -----------
-  //alert(el("jsondata").value)
-  var vJSON = parseJSON3D(el("jsondata").value);
-  //--- Load the selected marker ID -----------------------
-  var vMarkerID = el("marker").value
-  el("htmlbody").innerHTML = compileHTML(vJSON,vMarkerID);
-  //alert( compileHTML(vJSON));
+  el("htmlbody").innerHTML = compileHTML("aframe",vDataJSON["jsondata"],vDataJSON["marker"]);
   </script>
 </html>

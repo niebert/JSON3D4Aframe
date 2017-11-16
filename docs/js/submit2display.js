@@ -15,13 +15,22 @@ function copyMarker3D() {
 };
 
 function setTimeID() {
-  el4id("timeaframe").value = Date.now();
-  el4id("timear").value = Date.now();
+  el4id("aframetime").value = Date.now();
+  el4id("artime").value = Date.now();
 }
-
 function populateDataJSON(pTextareaID) {
   vEditor4JSON.saveLS(); // save JSON Data to Local Storage
-  copyMarker3D();
+  //copyMarker3D();
+  setTimeID();
+  var vData = vEditor4JSON.aData;
+    //document.getElementById('jsondata').value = vOut;
+  document.getElementById(pTextareaID).value = JSON.stringify(vData,null,2);
+};
+
+function X_populateDataJSON(pTextareaID) {
+  vEditor4JSON.saveLS(); // save JSON Data to Local Storage
+  //copyMarker3D();
+  setTimeID();
   var vData = vEditor4JSON.aData;
   var vOut = "";
   var vCR = "";

@@ -45,6 +45,14 @@
     <!-- END:  load JSON schema -->
     <script>
     </script>
+    <!--
+    <a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
+    <script id="object-template" type="text/x-handlebars-template">
+      <{{tagname}} position='{{position}}' material='color: {{color}};opacity:{{opacity}}' width='{{scale}}' height='{{scale}}' depth='{{scale}}'></{{tagname}}></textarea>
+	 </script>
+ -->
+  </head>
+  <body style="margin:20px">
     <textarea id="handlebars-template" rows="10" cols="120" style="display:none">
       &lt;!doctype HTML&gt;
       &lt;html&gt;
@@ -59,24 +67,17 @@
           &lt;a-scene&gt;
               &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
 {{{arobjects}}}
-        	    &lt;/a-marker&gt;
-        	    &lt;a-entity camera&gt;&lt;/a-entity&gt;
+              &lt;/a-marker&gt;
+              &lt;a-entity camera&gt;&lt;/a-entity&gt;
          &lt;/a-scene&gt;
         &lt;/body&gt;
       &lt;/html&gt;
     </textarea>
-    <!--
-    <a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
-    <script id="object-template" type="text/x-handlebars-template">
-      <{{tagname}} position='{{position}}' material='color: {{color}};opacity:{{opacity}}' width='{{scale}}' height='{{scale}}' depth='{{scale}}'></{{tagname}}></textarea>
-	 </script>
- -->
- <textarea id="object-template" rows="10" cols="120"  style="display:none">
-   &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
-   &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}"" width="{{scale}}" height="{{scale}}" depth="{{scale}}"&gt;&lt;/{{tagname}}&gt;</textarea>
-</textarea>
- </head>
-  <body style="margin:20px">
+    <textarea id="object-template" rows="10" cols="120"  style="display:none">
+      &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
+      &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}"" width="{{scale}}" height="{{scale}}" depth="{{scale}}"&gt;&lt;/{{tagname}}&gt;</textarea>
+   </textarea>
+
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
     	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a>
@@ -128,17 +129,7 @@
     <table>
       <tr>
         <td>
-            <form id="submit2aframe"  onsubmit="populateDataJSON('jsonaframe')" action="view_aframe.html" method="GET">
-              <!-- Set the Callback URL for the OpenLayers location selector here: -->
-              <!-- <input type="string" name="callback" value="../Markers4Map/index.html" style="display:none">
-              <input type="string" name="callback" value="https://niebert.github.io/JSON3D4Aframe/index.html" style="display:none">
-              -->
-              <b>Marker:</b>
-              <!-- <input type="string" name="marker" id="mymarker" size="3" value="5"> -->
-              <select name="marker" id="marker">
-                <option selected="selected">hiro</option>
-                <option>kanji</option>
-              </select>
+            <form id="submit2aframe"  onsubmit="populateDataJSON('jsonaframe')" action="view_aframe.html" method="GET" target="_blank">
               <input type="text" id="timeaframe" name="time" value="" size="10" >
               &nbsp;
               <button type="submit"  style="color: #000000;background-color: #DFDFDF">
@@ -148,11 +139,16 @@
               </form>
           </td>
       <td>
-          <form id="submit2arjs" onsubmit="populateDataJSON('jsondata')" action="view_aframe.html" method="GET">
+          <form id="submit2arjs" onsubmit="populateDataJSON('jsondata')" action="view_aframe.html" method="GET" target="_blank">
             <!-- Set the Callback URL for the OpenLayers location selector here: -->
             &nbsp;
             &nbsp;
-            <input type="text" id="aframemarker" name="marker" value="5" Xstyle="display:none">
+            <b>Marker:</b>
+            <!-- <input type="string" name="marker" id="mymarker" size="3" value="5"> -->
+            <select name="marker" id="marker">
+              <option selected="selected">hiro</option>
+              <option>kanji</option>
+            </select>
             <input type="text" id="timear" name="time" value="" size="10" >
             <button type="submit"  style="color: white;background-color: #225988">
                 <i class="fa fa-globe" aria-hidden="true"></i> Display Marker 3D
