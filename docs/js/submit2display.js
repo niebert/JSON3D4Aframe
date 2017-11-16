@@ -9,8 +9,8 @@ function el4id(pID) {
 
 function copyMarker3D() {
   console.log("copyMarker3D");
-  el4id("aframemarker").value = el4id("mymarker").value;
-  el4id("viewmarker").value = el4id("mymarker").value;
+  el4id("aframemarker").value = el4id("marker").value;
+  //el4id("viewmarker").value = el4id("marker").value;
   console.log("copyMarker3D after");
 
 }
@@ -31,9 +31,8 @@ function populateDataJSON(pTextareaID) {
     };
   };
   vOut = "[" + vOut + "]";
-  //var vJSON = vData;
-  //document.getElementById('jsondata').value = JSON.stringify(vJSON,null,4);
-  document.getElementById('jsondata').value = vOut;
+  //document.getElementById('jsondata').value = vOut;
+  document.getElementById(pTextareaID).value = vOut;
 };
 
 function getString4Object(pNr,pRec) {
