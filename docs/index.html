@@ -126,7 +126,8 @@
       <i class="fa fa-minus-square" aria-hidden="true"></i> Init DB
     </button>
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
-    <table style="display:none">
+    <div style="display:none">
+    <table>
       <tr>
         <td>
           <form id="submit2arjs" onsubmit="populateDataJSON('jsonar')" action="view_ar.html" method="GET" target="_blank">
@@ -144,26 +145,27 @@
                     <i class="fa fa-globe" aria-hidden="true"></i> Display Marker 3D
                 </button>
                 <textarea rows="5" cols="80" id="jsonar" name="jsondata" Xstyle="display:none"> </textarea>
-              </form>
-            </td>
-            <td>
-              <form id="submit2aframe"  onsubmit="populateDataJSON('jsonaframe')" action="view_aframe.html" method="GET" target="_blank">
+            </form>
+          </td>
+          <td>
+            <form id="submit2aframe"  onsubmit="populateDataJSON('jsonaframe')" action="view_aframe.html" method="GET" target="_blank">
                 <input type="text" id="timeaframe" name="time" value="" size="10" >
                 &nbsp;
                 <button type="submit"  style="color: #000000;background-color: #DFDFDF">
                     <i class="fa fa-globe" aria-hidden="true"></i> Display 3D
                 </button>
                 <textarea rows="5" cols="80" id="jsonaframe" name="jsondata" Xstyle="display:none"> </textarea>
-                </form>
-            </td>
-    </tr>
-    <tr>
+            </form>
+          </td>
+       </tr>
+      <tr>
         <td>
           <div class="text" id="load_filename"></div>
         </td>
       </tr>
     </table>
     <hr>
+    </div>
 	</div>
 
     <div id='editor_holder' style="margin-right: 30px; margin-left: 30px"></div>
