@@ -1,4 +1,4 @@
-function compileHTML(pData) {
+function compileHTML(pData,pMarker) {
   //----Debugging------------------------------------------
   // console.log("js/editor4json.js - Call: exporFileHTML()");
   // alert("js/editor4json.js - Call: exportData()");
@@ -28,7 +28,7 @@ function compileHTML(pData) {
 	// Compile the template data into a function
 	var templateScript = Handlebars.compile(template);
 	// identify the selected marker
-	var vMarker = document.getElementById("marker").value;
+	var vMarker = pMarker || document.getElementById("marker").value;
 	var context = { "arobjects" : vARobjects, "marker": vMarker};
 	// Perform the replacement with the "templateScript()"
 	var vHTML = templateScript(context);

@@ -11,10 +11,7 @@
 <script src="js/viewar.js"></script>
 <textarea id="handlebars-template" rows="10" cols="120" style="display:none">
       &lt;a-scene&gt;
-          &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
 {{{arobjects}}}
-          &lt;/a-marker&gt;
-          &lt;a-entity camera&gt;&lt;/a-entity&gt;
      &lt;/a-scene&gt;
 </textarea>
 
@@ -81,7 +78,10 @@ for (var i = 0; i < vArrID.length; i++) {
   vID = vArrID[i];
   if (vLinkParam.exists(vID)) {
     console.log("Parameter '"+vID+"' exists");
-    vHashAR[vID] = vLinkParam.getValue(vID);
+    //--- Overwrite the default value in marker, jsondata ---
+    el(vID).value = vLinkParam.getValue(vID);
+    //--- LinkParam data in vHashAR (not used) --------------
+    //vHashAR[vID] = vLinkParam.getValue(vID);
   };
 }
 //-------------------------------------------------------
@@ -101,10 +101,15 @@ for (var i = 0; i < vArrID.length; i++) {
   // INJECT TEMPLATE: HandleBar generated HTML
   //-------------------------------------------------------
   function el(pID) {
+    // this is a function that shortens the the getElementById call
     return document.getElementById(pID);
   };
+  //----- Parse the JSON data of the AR objects -----------
+  //alert(el("jsondata").value)
   var vJSON = parseJSON3D(el("jsondata").value);
-  el("htmlbody").innerHTML = compileHTML(vJSON);
+  //--- Load the selected marker ID -----------------------
+  var vMarkerID = el("marker").value
+  el("htmlbody").innerHTML = compileHTML(vJSON,vMarkerID);
   //alert( compileHTML(vJSON));
   </script>
 </html>
