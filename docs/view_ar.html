@@ -81,7 +81,8 @@ for (var i = 0; i < vArrID.length; i++) {
   vID = vArrID[i];
   if (vLinkParam.exists(vID)) {
     console.log("Parameter '"+vID+"' exists");
-    vHashAR[vID] = vLinkParam.getValue(vID);
+    //vHashAR[vID] = vLinkParam.getValue(vID);
+    el(vID).value = vLinkParam.getValue(vID);
   };
 }
 //-------------------------------------------------------
@@ -103,6 +104,7 @@ for (var i = 0; i < vArrID.length; i++) {
   function el(pID) {
     return document.getElementById(pID);
   };
+  //alert(el("jsondata").value);
   var vJSON = parseJSON3D(el("jsondata").value);
   el("htmlbody").innerHTML = compileHTML(vJSON);
   //alert( compileHTML(vJSON));
