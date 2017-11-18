@@ -1,4 +1,4 @@
-function compileHTML(pTplID,pData,pMarker) {
+function compileHTML(pTplID,pDataJSON) {
   //----Debugging------------------------------------------
   // console.log("js/editor4json.js - Call: exporFileHTML()");
   // alert("js/editor4json.js - Call: exportData()");
@@ -7,28 +7,31 @@ function compileHTML(pTplID,pData,pMarker) {
   //    vMyInstance.exportHTML();
   //-------------------------------------------------------
 	// load the 3D object template
-	var objecttpl = vDataJSON["objecttpl"];
+	var objecttpl = pDataJSON["objecttpl"] || vDataJSON["objecttpl"];
 	//objecttpl = correctHandleBarsTemplate(objecttpl);
-	console.log(objecttpl);
+	console.log("Object Template for HandleBars:\n"+objecttpl);
 	//compile the template text into a function for replacing JSON content
 	var objectScript = Handlebars.compile(objecttpl);
 	var vARobjects = "";
 	// call the objectScript for all records in the Editor4JSON array
-  if (pData) {
-    for (var i = 0; i < pData.length; i++) {
-  		vARobjects += objectScript(pData[i]);
+	var vData = pDataJSON["jsondata"];
+  if (vData) {
+    for (var i = 0; i < vData.length; i++) {
+			console.log("Data["+i+"]: "+JSON.stringify(vData[i]));
+  		vARobjects += objectScript(vData[i]);
   	};
   } else {
     //alert("pData in compileHTML undefined!");
     console.log("pData in compileHTML undefined!");
   }
 	// load the main Handlebars template and replace
-	var template =vDataJSON[pTplID]; // pTplID = "aframetpl" or "artpl" defined in db/handlebars_tpl.js
-	//alert("Template:"+template);
+	var template = pDataJSON[pTplID] || vDataJSON[pTplID]; // pTplID = "aframetpl" or "artpl" defined in db/handlebars_tpl.js
+	console.log("HandleBars Template ["+pTplID+"]: "+template);
+	console.log("AR template: "+ vDataJSON["artpl"]);
 	// Compile the template data into a function
 	var templateScript = Handlebars.compile(template);
 	// identify the selected marker
-	var vMarker = pMarker || vDataJSON["marker"];
+	var vMarker = pDataJSON["marker"] || vDataJSON["marker"];
 	var context = { "arobjects" : vARobjects, "marker": vMarker};
 	// Perform the replacement with the "templateScript()"
 	var vHTML = templateScript(context);
@@ -48,11 +51,13 @@ function parseJSON3D(pStringJSON) {
   return vJSON;
 }
 
-function inject3Dmodel(pTplID) {
+function inject3Dmodel(pTplID,pDataJSON) {
 	//-------------------------------------------------------
   // INJECT TEMPLATE: HandleBar generated HTML
   //-------------------------------------------------------
   //----- Parse the JSON data of the AR objects -----------
   // use template vDataJSON["aframetpl"] defined db/handlebars_tpl.js
-	var vOut = compileHTML(pTplID,vDataJSON["jsondata"],vDataJSON["marker"]);
+	var vOut = compileHTML(pTplID,pDataJSON);
+	console.log("Body Inject:\n"+vOut);
+	document.getElementById("htmlbody").innerHTML = vOut;
 }
