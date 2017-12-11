@@ -11,6 +11,8 @@ vDataJSON[vSchemaID] = {
 				"position",
         "color",
 				"opacity",
+				"sizexyz",
+				"rotation",
 				"scale"
     ],
 	"properties": {
@@ -41,9 +43,10 @@ vDataJSON[vSchemaID] = {
 							"a-cone",
 							"a-plane",
 							"a-triangle",
-          		"a-cycle",
-          		"a-image",
-          		"a-sky"
+							"a-circle",
+							"a-torus",
+							"a-ring",
+          		"a-image"
           	],
           	 "options": {
        		   "enum_titles": [
@@ -54,8 +57,7 @@ vDataJSON[vSchemaID] = {
 								"Plane",
 								"Triangle",
             		"Circle",
-            		"Image",
-								"Sky"
+            		"Image"
             	]
        		},
             "default": "a-box",
@@ -86,14 +88,30 @@ vDataJSON[vSchemaID] = {
             "format": "text",
             "description": "Defines how transparent the 3D object is in a camera video"
         },
-        "scale": {
+				"scale": {
             "type": "number",
             "id": "/properties/scale",
             "title": "Scale Factor",
             "default": 1.0,
             "format": "text",
             "description": "Basic size is determined by the marker size. With this factor you can scale the object"
-        }
+        },
+				"sizexyz": {
+            "type": "number",
+            "id": "/properties/scale",
+            "title": "Size x (width/radius), Size y (height), Size z (depth)",
+            "default": "1.0 1.0 1.0",
+            "format": "text",
+            "description": "Defines the extension x=width/radius, y=height, z=depth. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy)"
+        },
+				"rotation": {
+						"type": "number",
+						"id": "/properties/scale",
+						"title": "Rotation in degree in xyz-direction",
+						"default": "0 0 0",
+						"format": "text",
+						"description": "Defines the rotation in x-direction (width), y-direction (height), z-direction (depth). For some objects rotation does not make sense in some direction (e.g. sphere)"
+				}
  	},
   	"definitions": {
   	}

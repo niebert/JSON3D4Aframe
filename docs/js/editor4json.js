@@ -640,12 +640,16 @@ Editor4JSON.prototype.exportHTML = function () {
   //-------------------------------------------------------
 	// load the 3D object template
 	var objecttpl = document.getElementById("object-template").value;
+	objecttpl = correctHandleBarsTemplate(objecttpl);
+	console.log(objecttpl);
 	//compile the template text into a function for replacing JSON content
 	var objectScript = Handlebars.compile(objecttpl);
 	var vARobjects = "";
 	// call the objectScript for all records in the Editor4JSON array
+	var vData = null;
 	for (var i = 0; i < this.aData.length; i++) {
-		vARobjects += objectScript(this.aData[i]);
+		vData = calcRecordJSON(this.aData[i]);
+		vARobjects += objectScript(vData);
 	};
 	// load the main Handlebars template and replace
 	var template = document.getElementById("handlebars-template").value;

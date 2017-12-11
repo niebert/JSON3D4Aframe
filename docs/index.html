@@ -18,6 +18,7 @@
      <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
      <script src="jquery/external/jquery/jquery.js" type="text/javascript"></script>
      <script src="js/arrayhash.js"></script>
+     <script src="js/calcrecord.js"></script>
      <script src="js/lodash.js"></script>
      <script src="js/filesaver.js"></script>
      <script src="js/handlebars.js"></script>
@@ -75,7 +76,7 @@
     </textarea>
     <textarea id="object-template" rows="10" cols="120"  style="display:none">
       &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
-      &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" width="{{scale}}" height="{{scale}}" depth="{{scale}}"&gt;&lt;/{{tagname}}&gt;
+      &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{attributes}}&gt;&lt;/{{tagname}}&gt;
    </textarea>
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
@@ -126,6 +127,13 @@
       <i class="fa fa-minus-square" aria-hidden="true"></i> Init DB
     </button>
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
+    <br>
+    <b>Marker:</b>
+    <select id="marker" onchange="$('#armarker').val(this.value)">
+      <option selected="selected">hiro</option>
+      <option>kanji</option>
+    </select>
+
     <div style="display:none">
       <table>
         <tr>
@@ -134,12 +142,8 @@
                   <!-- Set the Callback URL for the OpenLayers location selector here: -->
                   &nbsp;
                   &nbsp;
-                  <b>Marker:</b>
                   <!-- <input type="string" name="marker" id="mymarker" size="3" value="5"> -->
-                  <select name="marker" id="marker">
-                    <option selected="selected">hiro</option>
-                    <option>kanji</option>
-                  </select>
+                  <input type="text" name="marker" id="armarker" value="hiro" style="display:none">
                   <input type="text" id="timear" name="time" value="" size="10" >
                   <button type="submit"  style="color: white;background-color: #225988">
                       <i class="fa fa-globe" aria-hidden="true"></i> Display Marker 3D
