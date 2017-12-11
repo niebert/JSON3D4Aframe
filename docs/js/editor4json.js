@@ -69,7 +69,7 @@ function Editor4JSON () {
 	//---PUBLIC: aConfig (Hash): the attribute 'aConfig' stores the configuration variables of the editor
 	this.aConfig = {
 			"dataid": vSchemaID
-		}
+	}
   //---------------------------------------------------------------------
   //---Methods of Class "Editor4JSON()"
   //---------------------------------------------------------------------
@@ -741,9 +741,15 @@ Editor4JSON.prototype.loadLS = function () {
   //-------------------------------------------------------
 
   if (typeof(Storage) != "undefined") {
-      // Store
+      // load selected marker
+			if (typeof(localStorage.getItem("marker")) !== undefined) {
+				var vMarker = localStorage.getItem("marker");
+				console.log("Marker '"+vMarker+"' try loading from Local Storage");
+				$('#marker').val(vMarker);
+				$('#armarker').val(vMarker);
+		  };
 			var vLSID = this.aConfig["dataid"];
-      if (typeof(localStorage.getItem(vLSID)) !== undefined) {
+			if (typeof(localStorage.getItem(vLSID)) !== undefined) {
         console.log("JSON-DB '"+vLSID+"' try loading from Local Storage");
         var vJSONstring = localStorage.getItem(vLSID);
   	  if (!vJSONstring) {
@@ -757,6 +763,7 @@ Editor4JSON.prototype.loadLS = function () {
           } catch(e) {
               alert(e)
           };
+
   	  }
       } else {
         console.log("loadLS('"+vLSID+"') is undefined in Local Storage.\nSave default as JSON");
@@ -792,6 +799,9 @@ Editor4JSON.prototype.saveLS = function () {
   //-------------------------------------------------------
 
   if (typeof(Storage) != "undefined") {
+		  // save selected Marker
+		  localStorage.setItem("marker",$("#marker").val());
+			//----Editor Data load -----
 			var vLSID = this.aConfig["dataid"];
 			// Store
       if (typeof(this.aData) != undefined) {
