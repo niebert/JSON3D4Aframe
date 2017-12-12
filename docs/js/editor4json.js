@@ -186,6 +186,8 @@ Editor4JSON.prototype.init = function (pDOMID,pData,pSchema) {
   this.aSchema = pSchema;
 	if (pData) {
 		this.aData = pData;
+	} else {
+		console.log("InitData 'pData' in Editor4JSON is undefined");
 	};
   this.loadLS(); // load aData from local storage if that exists
 	if (this.aData.length == 0) {
@@ -630,7 +632,7 @@ Editor4JSON.prototype.exportData = function () {
 //# last modifications 2017/06/02 20:56:06
 //#################################################################
 
-Editor4JSON.prototype.exportHTML = function () {
+Editor4JSON.prototype.exportHTML = function (pTplID) {
   //----Debugging------------------------------------------
   // console.log("js/editor4json.js - Call: exporFileHTML()");
   // alert("js/editor4json.js - Call: exportData()");
@@ -638,6 +640,25 @@ Editor4JSON.prototype.exportHTML = function () {
   //    var vMyInstance = new Editor4JSON();
   //    vMyInstance.exportHTML();
   //-------------------------------------------------------
+	var vTplID = pTplID || "aframe";
+	var vMarker = document.getElementById("marker").value;
+	var vFilename = "";
+	var vMoveXYZstr = $("#globalmove").val();
+	var vMoveXYZ = getGlobalMove();
+
+	switch (vTplID) {
+		case "ar":
+			vFilename = "ar_"+vMarker+".html"
+		break;
+		case "aframe":
+			vFilename = "aframe_3d.html";
+			vMoveXYZ[2] -= 4.0; // move backward for better inital 3D scenario
+			$("#globalmove").val(floatArr2String(vMoveXYZ));
+		break;
+		default:
+			vTplID = "aframe";
+			vFilename = "aframe_3d.html"
+	};
 	// load the 3D object template
 	var objecttpl = document.getElementById("object-template").value;
 	objecttpl = correctHandleBarsTemplate(objecttpl);
@@ -646,22 +667,27 @@ Editor4JSON.prototype.exportHTML = function () {
 	var objectScript = Handlebars.compile(objecttpl);
 	var vARobjects = "";
 	// call the objectScript for all records in the Editor4JSON array
-	var vData = null;
+	var vDataArr = [];
 	for (var i = 0; i < this.aData.length; i++) {
-		vData = calcRecordJSON(this.aData[i]);
-		vARobjects += objectScript(vData);
+		// the repeat count defines the number of repetitions of an 3D object
+		vDataArr = get3DRepeatedArray(this.aData[i]);
+		for (var k = 0; k < vDataArr.length; k++) {
+			//create all repeated 3D objects
+			vARobjects += objectScript(vDataArr[k]);
+		};
 	};
 	// load the main Handlebars template and replace
-	var template = document.getElementById("handlebars-template").value;
+	var template = document.getElementById(vTplID +"-template").value;
 	//alert("Template:"+template);
 	// Compile the template data into a function
 	var templateScript = Handlebars.compile(template);
 	// identify the selected marker
-	var vMarker = document.getElementById("marker").value;
 	var context = { "arobjects" : vARobjects, "marker": vMarker};
 	// Perform the replacement with the "templateScript()"
 	var vHTML = templateScript(context);
-	this.saveFile("ar_"+vMarker+".html",vHTML);
+	this.saveFile(vFilename,vHTML);
+	// restore old move setting
+	$("#globalmove").val(vMoveXYZstr);
 };
 //----End of Method exportData Definition
 
@@ -742,12 +768,7 @@ Editor4JSON.prototype.loadLS = function () {
 
   if (typeof(Storage) != "undefined") {
       // load selected marker
-			if (typeof(localStorage.getItem("marker")) !== undefined) {
-				var vMarker = localStorage.getItem("marker");
-				console.log("Marker '"+vMarker+"' try loading from Local Storage");
-				$('#marker').val(vMarker);
-				$('#armarker').val(vMarker);
-		  };
+			loadConfigLS();
 			var vLSID = this.aConfig["dataid"];
 			if (typeof(localStorage.getItem(vLSID)) !== undefined) {
         console.log("JSON-DB '"+vLSID+"' try loading from Local Storage");
@@ -800,7 +821,7 @@ Editor4JSON.prototype.saveLS = function () {
 
   if (typeof(Storage) != "undefined") {
 		  // save selected Marker
-		  localStorage.setItem("marker",$("#marker").val());
+			saveConfigLS();
 			//----Editor Data load -----
 			var vLSID = this.aConfig["dataid"];
 			// Store

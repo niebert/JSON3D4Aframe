@@ -1,6 +1,42 @@
+function get3DRepeatedArray(pData) {
+  var v3DOutArr = [];
+  var vCountArr = getRepeatCount(pData); // Array of integers [0,2,0] 2 attiional copies in y-driection
+  var vStepsArr = getRepeatSteps(pData); //Array of Real
+  var vPositionArr = string2FloatArray(pData["position"]);
+  while (vPositionArr.length < 3) {
+    vDefaultValue = 0.0; // default 0 repetitions copies of 3D object
+    vPositionArr.push(vDefaultValue);
+  };
+  var vPosIteration = [0.0,0.0,0.0];
+  var vData = null;
+  for (var ix = 0; ix <= vCountArr[0]; ix++) { // Count x-direction
+    vPosIteration[0] = vPositionArr[0] + ix * vStepsArr[0];
+    for (var iy = 0; iy <= vCountArr[1]; iy++) { // Count y-direction
+      vPosIteration[1] = vPositionArr[1] + iy * vStepsArr[1];
+      for (var iz = 0; iz <= vCountArr[2]; iz++) { // Count z-direction
+        vPosIteration[2] = vPositionArr[2] + iz * vStepsArr[2];
+        vData = cloneJSON(pData);
+        console.log("vData['position']='"+vData["position"]+"' new position");
+        vData["position"] = floatArr2String(vPosIteration);
+        // Global scaling will be performed in calcRecordJSON
+        v3DOutArr.push(calcRecordJSON(vData))
+      }
+    }
+  };
+  return v3DOutArr;
+};
+
+
 function calcRecordJSON(pData) {
-  // pData is a pointer to a Hash of a 3D object
-  var vData = cloneJSON(pData);
+  // pData is a clone Hash of a SINGLE 3D object
+  var vGlobalScale = getGlobalScale();
+  var vScale = pData["scale"] || 1.0;
+  vScale *= vGlobalScale; //
+  //var vData = cloneJSON(pData);
+  var vData = pData;
+  //global scaling of position
+  scalePosition(vData,vGlobalScale);
+  movePosition(vData,getGlobalMove());
   checkAttribs3D(vData);
   // String attribute "sizexyz" will be extracted by getArraySizeXYZ() and
   // parsed into an array of real values, that can be scaled
@@ -17,7 +53,7 @@ function calcRecordJSON(pData) {
   // "a-ring"
   // "a-sky" set global "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Newman_University_Church_Interior_360x180%2C_Dublin%2C_Ireland_-_Diliff.jpg/1280px-Newman_University_Church_Interior_360x180%2C_Dublin%2C_Ireland_-_Diliff.jpg"
   var vAttribs = "";
-  switch (vData["scale"]) {
+  switch (vData["tagname"]) {
     case "a-box":
       vAttribs += getAttribAframe("width",vSizeXYZ,0,vScale);
       vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
@@ -59,8 +95,15 @@ function calcRecordJSON(pData) {
     break;
     case "a-triangle":
       vAttribs += " vertex-a=\"0 0 0\"";
-      vAttribs += " vertex-b=\""+real2str(vSizeXYZ[0])+" 0 0\"";
-      vAttribs += " vertex-c=\""+real2str(vSizeXYZ[1])+" "+real2str(vSizeXYZ[2])+" 0\"";
+      vAttribs += " vertex-b=\""+real2str(vSizeXYZ[0]*vGlobalScale)+" 0 0\"";
+      vAttribs += " vertex-c=\""+real2str(vSizeXYZ[1]*vGlobalScale)+" "+real2str(vSizeXYZ[2]*vGlobalScale)+" 0\"";
+    break;
+    case "a-text":
+      var vText = pData["comment"];
+      vText = vText.replace(/"/g,'\"')
+      vAttribs += " value=\""+vText+"\"";
+      vAttribs += " color=\""+pData["color"]+"\"";
+      vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
     break;
     default:
 
@@ -71,38 +114,114 @@ function calcRecordJSON(pData) {
   return vData
 };
 
+function getRepeatCount(pData) {
+  // extend array to length 3
+  var vCountXYZstr = pData["repeat"] || "0 0 0";
+  var vCountXYZ = string2FloatArray(vCountXYZstr);
+  while (vCountXYZ.length < 3) {
+    vDefaultValue = 0; // default 0 repetitions copies of 3D object
+    vCountXYZ.push(vDefaultValue);
+  };
+  return vCountXYZ
+};
+
+function getRepeatSteps(pData) {
+  // extend array to length 3
+  var vStepsXYZstr = pData["repeatsteps"] || "1.0 1.0 1.0";
+  //if (pData.hasOwnProperty("repeatsteps")) {
+  //  vStepsXYZstr = pData["repeatsteps"];
+  //};
+  var vStepsXYZ = string2FloatArray(vStepsXYZstr);
+  while (vStepsXYZ.length < 3) {
+    vDefaultValue = 1.0; // default step width 1.0 for repetitions/copies of 3D object
+    vStepsXYZ.push(vDefaultValue);
+  };
+  return vStepsXYZ
+};
+
+
+function getGlobalScale() {
+  var vFloatStr = $("#globalscale").val() || "1.0";
+  return parseFloat(vFloatStr) || 1.0;
+};
+
+function getGlobalMove() {
+  var vFloatStrArr = $("#globalmove").val() || "0.0 0.0 0.0";
+  return string2FloatArray(vFloatStrArr) || [0.0,0.0,0.0];
+};
+
+function scaleStringArray(pStringArr,pScale) {
+  var vScale = pScale || 1.0;
+  var vFloatArr = string2FloatArray(pStringArr);
+  for (var i = 0; i < vFloatArr.length; i++) {
+    vFloatArr[i] *= vScale;
+  };
+  return floatArr2String(vFloatArr);
+};
+
+
+function floatArr2String(pFloatArr) {
+  var vOut = "";
+  var vSep = "";
+  for (var i = 0; i < pFloatArr.length; i++) {
+    vOut += vSep + real2str(pFloatArr[i]);
+    vSep = " ";
+  };
+  return vOut
+}
+
+function scalePosition(pData,pGlobalScale) {
+  var vGlobalScale = pGlobalScale || 1.0;
+  pData["position"] = scaleStringArray(pData["position"],vGlobalScale);
+};
+
+function movePosition(pData,pGlobalMove) {
+  var vFloatArr = string2FloatArray(pData["position"]);
+  var vMoveVal = 0.0;
+  for (var i = 0; i < vFloatArr.length; i++) {
+    vMoveVal = pGlobalMove[i] || 0.0;
+    vFloatArr[i] += vMoveVal
+  };
+  pData["position"] = floatArr2String(vFloatArr);
+};
+
+function transformPosition(pData,pGlobalScale,pGlobalMove) {
+  var vScale = pGlobalScale || 1.0;
+  var vFloatArr = string2FloatArray(pData["position"]);
+  var vMoveVal = 0.0;
+  for (var i = 0; i < vFloatArr.length; i++) {
+    vFloatArr[i] *= vScale;
+    vMoveVal = pGlobalMove[i] || 0.0;
+    vFloatArr[i] += vMoveVal
+  };
+  pData["position"] = floatArr2String(vFloatArr);
+};
+
 function checkAttribs3D(pData) {
-  if (pData["rotation"]) {
-    if (pData["rotation"].length < 5) {
-      pData["rotation"] = "0 0 0";
+  setUndefinedDefault(pData,"rotation","0 0 0");
+  setUndefinedDefault(pData,"position","0.0 0.0 0.0");
+  setUndefinedDefault(pData,"repeat","0 0 0");
+  setUndefinedDefault(pData,"repeatsteps","1.0 1.0 1.0");
+};
+
+function setUndefinedDefault(pData,pID,pDefault) {
+  if (pData[pID]) {
+    if (pData[pID].length < 5) {
+      pData[pID] = pDefault;
     };
   } else {
-    pData["rotation"] = "0 0 0";
-  }
-}
+    pData[pID] = pDefault;
+  };
+};
+
 
 function getArraySizeXYZ(pData) {
   // pData is Hash for one 3D object/primitive
   // String attribute "sizexyz" will be extracted by getArraySizeXYZ() and
   // parsed into an array of real values, that can be scaled
   var vSizeXYZstr = pData["sizexyz"] || "3.0 2.0 1.0";
-  //remove ledading and tailing white spaces
-  vSizeXYZstr = vSizeXYZstr.replace(/^\s+|\s+$/g,'');
-  // replace german comma "," by a decimal point "."
-  vSizeXYZstr = vSizeXYZstr.replace(/,/g,'.');
-  // split String into array at whitespace
-  var vSizeArr = vSizeXYZstr.split(/\s+/);
-  var vOutXYZ = [];
-  var vDefaultValue = 1.0;
-  for (var i = 0; i < vSizeArr.length; i++) {
-    if (isNaN(vSizeArr[i])) {
-      console.log("getArraySizeXYZ() parsing Float for '"+vSizeArr[i]+"' undefined");
-      vDefaultValue = 3-i;
-      vOutXYZ.push(vDefaultValue);
-    } else {
-      vOutXYZ.push(parseFloat(vSizeArr[i]));
-    };
-  };
+  var vOutXYZ = string2FloatArray(vSizeXYZstr);
+  // extend array to length 3
   while (vOutXYZ.length < 3) {
     vDefaultValue = 3-vOutXYZ.length;
     vOutXYZ.push(vDefaultValue);
@@ -111,10 +230,33 @@ function getArraySizeXYZ(pData) {
 };
 
 function real2str(pVal) {
-  return pVal.toFixed(4);
+  return pVal.toFixed(2);
+}
+
+function string2FloatArray(pString) {
+  var vString = pString || "3.0 2.0 1.0";
+  //remove ledading and tailing white spaces
+  vString = vString.replace(/^\s+|\s+$/g,'');
+  // replace german comma "," by a decimal point "."
+  vString = vString.replace(/,/g,'.');
+  // split String into array at whitespace
+  var vStringArr = vString.split(/\s+/);
+  var vFloatArr = [];
+  var vDefaultValue = 1.0;
+  for (var i = 0; i < vStringArr.length; i++) {
+    if (isNaN(vStringArr[i])) {
+      console.log("blankSepString2FloatArray() parsing Float for '"+vStringArr[i]+"' undefined");
+      vDefaultValue = 3-i;
+      vFloatArr.push(vDefaultValue);
+    } else {
+      vFloatArr.push(parseFloat(vStringArr[i]));
+    };
+  };
+  return vFloatArr;
 }
 
 function getAttribAframe(pAtt,pSizeXYZ,i,pScale) {
+  var vScale = pScale || 1.0;
   var vOut = "";
   if (pSizeXYZ) {
     if ((i>=0) && (i < pSizeXYZ.length)) {

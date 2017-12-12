@@ -14,8 +14,9 @@
      <link href="css/bootstrap.min.css" rel="stylesheet">
      <!-- Font-Awesome CSS -->
      <link href="css/font-awesome.min.css" rel="stylesheet">
-
+     <!--
      <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+     -->
      <script src="jquery/external/jquery/jquery.js" type="text/javascript"></script>
      <script src="js/arrayhash.js"></script>
      <script src="js/calcrecord.js"></script>
@@ -23,6 +24,7 @@
      <script src="js/filesaver.js"></script>
      <script src="js/handlebars.js"></script>
      <script src="js/linkparam.js"></script>
+     <script src="js/localstorage.js"></script>
      <script src="js/string.js"></script>
      <script src="js/jsoneditor.js"></script>
      <script src="js/editor4json.js"></script>
@@ -31,6 +33,8 @@
      <script src="js/writedom.js"></script>
      <script>
      var vDataJSON = {};
+     vDataJSON["initdata"] = {};
+     vDataJSON["schema"] = {};
      var vSchemaID =  "object3d"; // file defined in schema/object3d.schema
      // Set the default CSS theme and icon library globally
      JSONEditor.defaults.theme = 'bootstrap3';
@@ -39,12 +43,13 @@
 
     </script>
    <!-- BEGIN: load JSON data -->
-    <script src="db/data.js"></script>
+    <script src="db/initdata.js"></script>
     <!-- END:  load JSON data -->
     <!-- BEGIN: load JSON schema -->
     <script src="schema/object3d.schema"></script>
     <!-- END:  load JSON schema -->
     <script>
+      //console.log("vDataJSON['initdata']: "+JSON.stringify(vDataJSON['initdata'],null,2));
     </script>
     <!--
     <a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
@@ -54,7 +59,7 @@
  -->
   </head>
   <body style="margin:20px">
-    <textarea id="handlebars-template" rows="10" cols="120" style="display:none">
+    <textarea id="ar-template" rows="10" cols="120" style="display:none">
       &lt;!doctype HTML&gt;
       &lt;html&gt;
         &lt;head&gt;
@@ -74,9 +79,26 @@
         &lt;/body&gt;
       &lt;/html&gt;
     </textarea>
+    <textarea id="aframe-template" rows="10" cols="120" style="display:none">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;A-Frame Demo&lt;/title&gt;
+    &lt;meta name="description" content="A-Frame Demo"&gt;
+    &lt;script src="https://aframe.io/releases/0.7.0/aframe.min.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;a-scene&gt;
+{{{arobjects}}}
+      &lt;a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow&gt;&lt;/a-plane&gt;
+      &lt;a-sky color="#ECECEC"&gt;&lt;/a-sky&gt;
+    &lt;/a-scene&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </textarea>
     <textarea id="object-template" rows="10" cols="120"  style="display:none">
       &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
-      &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{attributes}}&gt;&lt;/{{tagname}}&gt;
+      &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}&gt;&lt;/{{tagname}}&gt;
    </textarea>
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
@@ -95,8 +117,11 @@
     <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save();return false">
 			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
 		</button>
-    <button id='bExportHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML();return false">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save HTML
+    <button id='bExportARHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML('ar');return false">
+			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AR
+		</button>
+    <button id='bExportAframeHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML('aframe');return false">
+			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AFrame
 		</button>
     &nbsp;
 		&nbsp;
@@ -129,11 +154,19 @@
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
     <br>
     <b>Marker:</b>
-    <select id="marker" onchange="$('#armarker').val(this.value)">
+    <select id="marker" onchange="selectMarker(this.value)">
       <option selected="selected">hiro</option>
       <option>kanji</option>
     </select>
-
+    <img  id="imghiro" src="img/hiro_marker.png" width="50px" height="50px">
+    <img id="imgkanji"  src="img/kanji_marker.png" width="50px" height="50px" style="display:none">
+    &nbsp;
+    <b>Global Scale:</b>
+    <input type="text" name="globalscale" id="globalscale" value="1.0" size="5">
+    &nbsp;
+    <b>Global Move:</b>
+    <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15">
+    <br>
     <div style="display:none">
       <table>
         <tr>
@@ -181,11 +214,11 @@
       <button id='view' onclick="console.log(JSON.stringify(editor.getValue()))" style="display:none">View (console.log)</button>
     </div>
     <div align="center" style="font-size: 80%">
-    	<a href="https://en.wikiversity.org/wiki/User-driven_spatial_activities#Learning_Task" target="_blank">Wikiversity: User-driven spatial activities</a><br>
-      <a href="https://www.github.com/niebert/Markers4Map" target="_blank">GitHub-Repo</a> -
+    	<a href="https://en.wikiversity.org/wiki/3D_Modelling" target="_blank">Wikiversity: 3D Modelling</a><br>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo</a> -
       2017 - Engelbert Niehaus -
-          <a href="https://github.com/niebert/Markers4Map/archive/master.zip" target="_blank">Download GitHub (2017)</a><br/>
-          Markers4Map used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (2017)</a><br/>
+        JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>
     <script>
@@ -231,9 +264,12 @@
       //---- Create JSON Editor -------------------------------
       //-------------------------------------------------------
       var vEditor4JSON = new Editor4JSON();
-      var vInitData = vDataJSON["data"];
-      console.log("JSON Editor call init()");
+      var vInitData = vDataJSON["initdata"];
+      console.log("Editor4JSON created");
+      //console.log("Schema: "+JSON.stringify(vSchemaJSON,null,2));
+      //console.log("Data: "+JSON.stringify(vInitData,null,2));
       vEditor4JSON.init(vDOMID,vInitData,vSchemaJSON);
+      console.log("Editor4JSON  init() called");
       var editor = vEditor4JSON.aEditor;
       //-------------------------------------------------------
       //---JSON EDITOR Handle Change Event---------------------

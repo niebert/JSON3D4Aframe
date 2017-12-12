@@ -13,7 +13,9 @@ vDataJSON[vSchemaID] = {
 				"opacity",
 				"sizexyz",
 				"rotation",
-				"scale"
+				"scale",
+				"repeat",
+				"repeatsteps"
     ],
 	"properties": {
 		"id": {
@@ -36,7 +38,7 @@ vDataJSON[vSchemaID] = {
             "type": "string",
             "id": "/properties/tagname",
             "title": "Type of Object:",
-  		    "enum": [
+  		    	"enum": [
         			"a-box",
           		"a-sphere",
           		"a-cylinder",
@@ -46,7 +48,7 @@ vDataJSON[vSchemaID] = {
 							"a-circle",
 							"a-torus",
 							"a-ring",
-          		"a-image"
+							"a-text"
           	],
           	 "options": {
        		   "enum_titles": [
@@ -56,8 +58,10 @@ vDataJSON[vSchemaID] = {
 								"Cone",
 								"Plane",
 								"Triangle",
-            		"Circle",
-            		"Image"
+								"Circle",
+								"Torus",
+								"Ring",
+								"Text"
             	]
        		},
             "default": "a-box",
@@ -93,24 +97,39 @@ vDataJSON[vSchemaID] = {
             "id": "/properties/scale",
             "title": "Scale Factor",
             "default": 1.0,
-            "format": "text",
             "description": "Basic size is determined by the marker size. With this factor you can scale the object"
         },
 				"sizexyz": {
-            "type": "number",
-            "id": "/properties/scale",
+						"type": "string",
+				  	"id": "/properties/scale",
             "title": "Size x (width/radius), Size y (height), Size z (depth)",
             "default": "1.0 1.0 1.0",
             "format": "text",
             "description": "Defines the extension x=width/radius, y=height, z=depth. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy)"
         },
 				"rotation": {
-						"type": "number",
-						"id": "/properties/scale",
+						"type": "string",
+						"id": "/properties/rotation",
 						"title": "Rotation in degree in xyz-direction",
 						"default": "0 0 0",
 						"format": "text",
 						"description": "Defines the rotation in x-direction (width), y-direction (height), z-direction (depth). For some objects rotation does not make sense in some direction (e.g. sphere)"
+				},
+				"repeat": {
+						"type": "string",
+						"id": "/properties/repeat",
+						"title": "Repeat 3D object in xyz-direction",
+						"default": "0 0 0",
+						"format": "text",
+						"description": "Defines the number of additional copies/repetitions of the 3D object in x-direction (width), y-direction (height), z-direction (depth). Default number of copies/repitiions is 0"
+				},
+				"repeatsteps": {
+						"type": "string",
+						"id": "/properties/repeatsteps",
+						"title": "Repeat Steps shifts the copies of 3D object in xyz-direction",
+						"default": "1.0 1.0 1.0",
+						"format": "text",
+						"description": "Defines the step width (vector length) of additional copies/repetitions of the 3D object in x-direction (width), y-direction (height), z-direction (depth). Default vector length of copies/repitiions is 1.0"
 				}
  	},
   	"definitions": {

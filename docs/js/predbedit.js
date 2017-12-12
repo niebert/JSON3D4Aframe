@@ -2,6 +2,25 @@
 //loadInputJSON();
 //document.write(vLinkParam.getTableHTML());
 
+function selectMarker(pMarkerID) {
+  // set the marker in submission form
+  console.log("Select Marker: '"+pMarkerID+"'");
+  $('#armarker').val(pMarkerID);
+  // hide all marker images
+  $("#imgkanji").hide();
+  $("#imghiro").hide();
+  switch (pMarkerID) {
+    case "hiro":
+      $("#imghiro").show();
+    break;
+    case "kanji":
+      $("#imgkanji").show();
+    break;
+    default:
+      $("#imghiro").show();
+  }
+}
+
 function getWinOpener() {
   var vWinOpener = window.opener;
   return vWinOpener;
