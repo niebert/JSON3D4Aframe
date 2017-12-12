@@ -9,7 +9,18 @@ https://niebert.github.io/JSON3D4Aframe
 ## Main Library for Large Arrays
 
 Main library to handle large arrays is ___docs/js/editor4json.js___
-https://github.com/niebert/Mapper4SDG/tree/master/docs
+https://github.com/niebert/JSON3D4Aframe/tree/master/docs
+
+## Screenshot Examples
+![AFrame Example](https://raw.githubusercontent.com/niebert/SamplesAR/master/images/water_molecule_aframe.png)
+![AR.js Kanji Marker Example](https://raw.githubusercontent.com/niebert/SamplesAR/master/images/water_molecule_kanji.png)
+
+
+## Molecule Models
+Molecule Models can be turn and viewed from all sides. With AR.js you need to place the specified marker in the camera image
+* [Molecule Model Water - AFrame 3D Model](https://niebert.github.io/SampleAR/water_aframe.html) create with [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe/index.html) this 3D-Model does not need mobile phone camera or marker to viewing the 3D model.
+* [Molecule Model Water - Kanji-Marker](https://niebert.github.io/SampleAR/water_hiro.html) place a printed paper version of the  [Kanji-Marker](https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Kanji%20pattern.pdf) in front of you mobile phone camera or webcam. Size of print-out 6cm x 6cm of black box.
+* Created with [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe)
 
 ## UML Diagram of Editor4JSON Class
 
