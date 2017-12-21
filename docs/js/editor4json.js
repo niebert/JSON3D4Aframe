@@ -1257,6 +1257,40 @@ Editor4JSON.prototype.add = function () {
 
 
 //#################################################################
+//# PUBLIC Method: cloneObject3D()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    cloneObject3D() appends a the current object cloned as new record
+//#    at the end of the array.
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/07/06 14:19:48
+//#################################################################
+
+Editor4JSON.prototype.cloneObject3D = function () {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: cloneObject3D()");
+  // alert("js/editor4json.js - Call: cloneObject3D()");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.cloneObject3D();
+  //-------------------------------------------------------
+
+  //this.aData.push({"id":new Date().toLocaleString()});
+	var vObjectStr = JSON.stringify(this.aData[this.current]);
+	var vObject = JSON.parse(vObjectStr);
+	vObject["id"] = Date.now();
+  this.aData.push(vObject);
+  this.current = this.aData.length - 1; // this is the index of the last new element
+	this.saveLS();
+	this.edit();
+  this.updateDOM(); // updateDOM()-call necessary because length and current index changed due to clone-click of user
+
+};
+//----End of Method cloneObject3D Definition
+
+//#################################################################
 //# PUBLIC Method: importJSON()
 //#    used in Class: Editor4JSON
 //# Parameter:
