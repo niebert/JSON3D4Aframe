@@ -90,8 +90,9 @@ function calcRecordJSON(pData) {
       vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
     break;
     case "a-cone":
-      vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
-      vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
+    vAttribs += getAttribAframe("radius-bottom",vSizeXYZ,0,vScale);
+    vAttribs += getAttribAframe("radius-top",vSizeXYZ,1,vScale);
+    vAttribs += getAttribAframe("height",vSizeXYZ,2,vScale);
     break;
     case "a-triangle":
       vAttribs += " vertex-a=\"0 0 0\"";
