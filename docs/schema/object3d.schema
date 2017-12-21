@@ -105,7 +105,7 @@ vDataJSON[vSchemaID] = {
             "title": "Size x (width/radius), Size y (height), Size z (depth)",
             "default": "1.5 1.0 0.5",
             "format": "text",
-            "description": "Defines the extension x=width/radius/radius-botton, y=height/radius-top, z=depth. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy)"
+            "description": "Defines the extension x=width/radius/cone-radius-botton-cone, y=height/con-radius-top, z=depth/cone-height. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy, z used for cone-height)"
         },
 				"rotation": {
 						"type": "string",
