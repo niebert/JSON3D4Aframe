@@ -108,9 +108,9 @@ function Editor4JSON () {
 	//----PUBLIC Method: Editor4JSON.exportData()-----
 	// exportData()
 	//	exportData() exports the JSON data in this.aData as file. The filename is defined by this.aName. if aName="myjson" the filename is "myjson.json"
-	//----PUBLIC Method: Editor4JSON.exportMixare()-----
-	// exportMixare()
-	//	exportMixare() exports the Mixare JSON including a result as this.aData as file. The filename is defined by this.aName. if aName="myjson" the filename is "myjson.json"
+	//----PUBLIC Method: Editor4JSON.loadConfig()-----
+	// loadConfig()
+	//	loadConfig() exports the Mixare JSON including a result as this.aData as file. The filename is defined by this.aName. if aName="myjson" the filename is "myjson.json"
 	//----PUBLIC Method: Editor4JSON.exportSchema()-----
 	// exportSchema()
 	//	exportSchema() exports the JSON schema in this.aSchemaJSON as file. The filename is defined by this.aName. if aName="myjson" the filename is "myjson_schema.json"
@@ -768,7 +768,7 @@ Editor4JSON.prototype.loadLS = function () {
 
   if (typeof(Storage) != "undefined") {
       // load selected marker
-			loadConfigLS();
+			loadConfigLS(this.aConfig);
 			var vLSID = this.aConfig["dataid"];
 			if (typeof(localStorage.getItem(vLSID)) !== undefined) {
         console.log("JSON-DB '"+vLSID+"' try loading from Local Storage");
@@ -1317,12 +1317,12 @@ Editor4JSON.prototype.importJSON = function (pStringJSON) {
 				var vData = JSON.parse(pStringJSON);
 				if (vData.hasOwnProperty("geonames")) {
 					this.aData = vData["geonames"];
-					alert("File JSON '"+this.aLoadedFile+"' loaded successfully as Mixare JSON!")
+					alert("File JSON '"+this.aLoadedFile+"' loaded successfully as JSON!")
 				} else if (isArray(vData)) {
 					this.aData = vData;
 					alert("File JSON '"+this.aLoadedFile+"' loaded successfully!")
 				} else {
-					alert("ERROR: JSON is not an array of Mixare Points!")
+					alert("ERROR: JSON is not an array of hashes!")
 				};
       } catch(e) {
           alert(e); // error in the above string (in this case, yes)!
