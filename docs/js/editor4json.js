@@ -821,7 +821,7 @@ Editor4JSON.prototype.saveLS = function () {
 
   if (typeof(Storage) != "undefined") {
 		  // save selected Marker
-			saveConfigLS();
+			saveConfigLS(this.aConfig);
 			//----Editor Data load -----
 			var vLSID = this.aConfig["dataid"];
 			// Store
