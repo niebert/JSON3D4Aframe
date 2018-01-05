@@ -2,7 +2,7 @@
     {
         "id": "23432423",
         "tagname": "a-sphere",
-        "comment": "Green big 1",
+        "comment": "Green big 1 - with Global Scale '0.35' and Global Move '-1.0 0.0 -1.0'",
         "position": "0.0 1.0 0.0",
         "color": "#5b9c58",
         "opacity": 0.8,
