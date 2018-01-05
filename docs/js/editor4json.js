@@ -55,7 +55,7 @@ function Editor4JSON () {
 	//---PUBLIC: aName (String): the attribute 'aName' stores the base name of the JSON file. it used for base name for export files.
 	this.aName = "myjson";
 	//---PUBLIC: aLoadedFile (String): the attribute 'aLoadedFile' stores the base name of the JSON file. it used for base name for export files.
-	this.aLoadedFile = ""; //e.g. "data.json";
+	this.aFileName = "data.json"; //e.g. "data.json";
 	//---PUBLIC: aData (Array): the attribute 'aData' is a array of JSON records that are edited with the JSON editor by Jeremy Dorn
 	this.aData = [];
 	//---PUBLIC: current ( ): the attribute 'current' stores the current selected index in the array, -1 means no JSON record selected in array or array is empty
@@ -68,7 +68,15 @@ function Editor4JSON () {
 	this.aDOMID = null;
 	//---PUBLIC: aConfig (Hash): the attribute 'aConfig' stores the configuration variables of the editor
 	this.aConfig = {
+		  "json_file": "object3d.json",
+			"globalscale": "1.0",
+			"globalemove": "0.0 0.0 0.0",
 			"dataid": vSchemaID
+	};
+	this.aConfigIDs = {
+		"DOMID": ["globalscale","globalmove","json_file"],
+		"InnerHTMLID": [],
+		"CheckBoxID": []
 	}
   //---------------------------------------------------------------------
   //---Methods of Class "Editor4JSON()"
@@ -142,6 +150,9 @@ function Editor4JSON () {
 	//----PUBLIC Method: Editor4JSON.updateDOM()-----
 	// updateDOM()
 	//	updateDOM() updates the index of the currently edited record from the array and updates the length of the array e.g. if a new record was pushed the array this.aData
+	//----PUBLIC Method: Editor4JSON.updateConfigDOM()-----
+	// updateConfigDOM()
+	//	updateConfigDOM() updates the config setting this.aConfig
 	//----PUBLIC Method: Editor4JSON.setEditorData(pEditorData:Hash)-----
 	// setEditorData(pEditorData)
 	//	setEditorData() sets the Editor with current, data and schema
@@ -542,7 +553,7 @@ Editor4JSON.prototype.getSchema = function () {
 //#################################################################
 //# PUBLIC Method: exportJSON()
 //#    used in Class: Editor4JSON
-//# Parameter:
+//# Parameter: pFilename, pJSON
 //#
 //# Comment:
 //#    exportJSON() uses the FileSaver.js to create a download of exported JSON pJSON after the JSON was stringified
@@ -614,8 +625,10 @@ Editor4JSON.prototype.exportData = function () {
   //    var vMyInstance = new Editor4JSON();
   //    vMyInstance.exportData();
   //-------------------------------------------------------
-
-  this.exportJSON(this.aName+".json",this.aData)
+	var vJSON = {};
+	vJSON["data"] = this.aData;
+	vJSON["config"] = this.aConfig;
+  this.exportJSON(this.aConfig["json_file"],vJSON);
 
 };
 //----End of Method exportData Definition
@@ -642,22 +655,22 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
   //-------------------------------------------------------
 	var vTplID = pTplID || "aframe";
 	var vMarker = document.getElementById("marker").value;
-	var vFilename = "";
+	var vFilename = getName4Filename(this.aConfig["json_file"]);
 	var vMoveXYZstr = $("#globalmove").val();
 	var vMoveXYZ = getGlobalMove();
 
 	switch (vTplID) {
 		case "ar":
-			vFilename = "ar_"+vMarker+".html"
+			vFilename += "_ar_"+vMarker+".html"
 		break;
 		case "aframe":
-			vFilename = "aframe_3d.html";
+			vFilename += "_aframe.html";
 			vMoveXYZ[2] -= 4.0; // move backward for better inital 3D scenario
 			$("#globalmove").val(floatArr2String(vMoveXYZ));
 		break;
 		default:
 			vTplID = "aframe";
-			vFilename = "aframe_3d.html"
+			vFilename += "_aframe.html"
 	};
 	// load the 3D object template
 	var objecttpl = document.getElementById("object-template").value;
@@ -1072,7 +1085,7 @@ Editor4JSON.prototype.updateDOM = function () {
 		}
 	};
 	//----Debugging------------------------------------------
-  console.log("js/editor4json.js - Call: updateDOM() current="+this.current+"/"+this.aData.length);
+  console.log("js/editor4json.js - Call: updateDOM('"+this.aConfig["json_file"]+"') current="+this.current+"/"+this.aData.length);
   write2value(vID,(this.current+1));
   //--- update array length -------------------
   vID = this.aDOMID["length"] || "array_length";
@@ -1085,11 +1098,63 @@ Editor4JSON.prototype.updateDOM = function () {
       };
   };
   // validate the record against Schema JSON
+	this.updateConfigDOM();
   this.validate();
   this.saveLS();
 };
 //----End of Method updateDOM Definition
 
+//#################################################################
+//# PUBLIC Method: updateConfigDOM()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    updateConfigDOM() updates the index of the currently edited record from the array and updates the length of the array e.g. if a new record was pushed the array this.aData
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.updateConfigDOM = function () {
+	//----Debugging------------------------------------------
+  console.log("js/editor4json.js - Call: updateConfigDOM() current="+this.current);
+  // alert("js/editor4json.js - Call: updateConfigDOM()");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.updateConfigDOM();
+  //-------------------------------------------------------
+	if (this.aConfigIDs) {
+		var vType = 'DOMID';
+		var iID = "";
+		var vArrID = this.aConfigIDs[vType];
+		for (var i = 0; i < vArrID.length; i++) {
+			iID = vArrID[i];
+			if (this.aConfig.hasOwnProperty(iID)) {
+				write2value(iID,this.aConfig[iID]);
+			};
+		};
+		vType = 'InnerHTMLID';
+		var vArrID = this.aConfigIDs[vType];
+		for (var i = 0; i < vArrID.length; i++) {
+			iID = vArrID[i];
+			if (this.aConfig.hasOwnProperty(iID)) {
+				write2innerHTML(iID,this.aConfig[iID]);
+			};
+		};
+		vType = 'CheckBoxID';
+		var vArrID = this.aConfigIDs[vType];
+		for (var i = 0; i < vArrID.length; i++) {
+			iID = vArrID[i];
+			if (this.aConfig.hasOwnProperty(iID)) {
+				write2checkbox(iID,this.aConfig[iID]);
+			};
+		};
+	} else {
+		console.log("this.aConfigIDs in updateConfigDOM() undefined");
+	}
+}
+//----End of Method updateConfigDOM Definition
 
 //#################################################################
 //# PUBLIC Method: setEditorData()
@@ -1171,15 +1236,20 @@ Editor4JSON.prototype.load = function (pFileID4DOM) {
 	var vThis = this; // necessary due to visibility of this in onload handler
 	var fileToLoad = document.getElementById(pFileID4DOM).files[0]; //for input type=file
 	if (fileToLoad) {
-		console.log("importJSON() - File '"+fileToLoad.name+"' exists.");
-		$('#load_filename').html('<b>File:</b> '+ fileToLoad.name); // this.value.replace(/.*[\/\\]/, '')
+		//console.log("load()-Call: - File '"+fileToLoad.name+"' exists.");
+		// vFilename ="/home/myname/Documents/myfile.json"
+		var vFilename = fileToLoad.name;
+		// vFilename ="myfile.json"
+		vFilename = vFilename.substr(vFilename.lastIndexOf("/")+1,vFilename.length);
+		this.aConfig["json_file"] = vFilename;
+		$('#load_filename').html('<b>File:</b> '+ vFilename); // this.value.replace(/.*[\/\\]/, '')
+		console.log("load()-Call: - File '"+vFilename+"' exists.");
 		var fileReader = new FileReader();
 		// set the onload handler
 		fileReader.onload = function(fileLoadedEvent){
 				var vTextFromFileLoaded = fileLoadedEvent.target.result;
 				//document.getElementById("inputTextToSave").value = textFromFileLoaded;
 				//alert("vTextFromFileLoaded="+vTextFromFileLoaded);
-				vThis.aLoadedFile = fileToLoad.name;
 				vThis.importJSON(vTextFromFileLoaded);
 				vThis.check();
 				vThis.edit();
@@ -1189,7 +1259,7 @@ Editor4JSON.prototype.load = function (pFileID4DOM) {
 		//onload handler set now start loading the file
 		fileReader.readAsText(fileToLoad, "UTF-8");
 	} else {
-		alert("File is missing");
+		alert("load()-Call: File is missing");
 	};
 
 };
@@ -1311,16 +1381,23 @@ Editor4JSON.prototype.importJSON = function (pStringJSON) {
   //    vMyInstance.importJSON(pStringJSON);
   //-------------------------------------------------------
 
-   console.log("importJSON('"+this.aLoadedFile+"')");
+  console.log("importJSON('"+this.aConfig["json_file"]+"')");
+	var vFilename = this.aConfig["json_file"];
   if (pStringJSON) {
       try {
 				var vData = JSON.parse(pStringJSON);
-				if (vData.hasOwnProperty("geonames")) {
-					this.aData = vData["geonames"];
-					alert("File JSON '"+this.aLoadedFile+"' loaded successfully as JSON!")
+				if (vData.hasOwnProperty("data")) {
+					// JSON is a Hash with attributes "data" (array) "config" (hash)
+					this.aData = vData["data"];
+					if (vData.hasOwnProperty("config")) {
+						// load the config from file
+						this.aConfig = vData["config"];
+						this.aConfig["json_file"] = vFilename;
+					};
+					alert("File JSON '"+this.aConfig["json_file"]+"' loaded successfully as JSON!")
 				} else if (isArray(vData)) {
 					this.aData = vData;
-					alert("File JSON '"+this.aLoadedFile+"' loaded successfully!")
+					alert("File JSON '"+this.aConfig["json_file"]+"' loaded successfully!")
 				} else {
 					alert("ERROR: JSON is not an array of hashes!")
 				};

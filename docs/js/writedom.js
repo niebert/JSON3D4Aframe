@@ -43,6 +43,24 @@ function getInnerHTML(pID) {
   return vReturn;
 };
 
+function getChecked(pID) {
+  var vNode =document.getElementById(pID);
+  if (vNode){
+    return vNode.checked;
+  } else {
+    console.log("Get DOM-Node for 'checkbox' with ID=["+pID+"] was undefined");
+  };
+}
+
+function write2checkbox(pID,pContent) {
+  var vNode =document.getElementById(pID);
+  if (vNode){
+    vNode.checked =pContent;
+  } else {
+    console.log("Write DOM-Node 'innerHTML' with ID=["+pID+"] was undefined");
+  }
+}
+
 function write2innerHTML(pID,pContent) {
   var vNode =document.getElementById(pID)
   if (vNode){

@@ -24,6 +24,7 @@
      <script src="js/linkparam.js"></script>
      <script src="js/localstorage.js"></script>
      <script src="js/string.js"></script>
+     <script src="js/pathfiles.js"></script>
      <script src="js/jsoneditor.js"></script>
      <script src="js/editor4json.js"></script>
      <script src="js/predbedit.js"></script>
@@ -155,7 +156,7 @@
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
     <br>
     <b>Marker:</b>
-    <select id="marker" onchange="selectMarker(this.value)">
+    <select id="marker" onchange="selectMarker(this.value);vEditor4JSON.aConfig[this.id]=this.value">
       <option selected="selected">hiro</option>
       <option>kanji</option>
     </select>
@@ -163,10 +164,13 @@
     <img id="imgkanji"  src="img/kanji_marker.png" width="50px" height="50px" style="display:none">
     &nbsp;
     <b>Global Scale:</b>
-    <input type="text" name="globalscale" id="globalscale" value="1.0" size="5">
+    <input type="text" name="globalscale" id="globalscale" value="1.0" size="5" onchange="vEditor4JSON.aConfig[this.id]=this.value">
     &nbsp;
     <b>Global Move:</b>
-    <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15">
+    <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+    &nbsp;
+    <b>File:</b>
+    <input type="text" name="json_file" id="json_file" value="object3d.json" size="15" onchange="vEditor4JSON.aConfig[this.id]=this.value">
     <br>
     <div style="display:none">
       <table>
