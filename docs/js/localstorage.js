@@ -25,12 +25,20 @@ function loadConfigLS(pConfig) {
   loadMarkerLS(pConfig);
   loadDOMLS(pConfig,"globalscale","1.0");
   loadDOMLS(pConfig,"globalmove","0.0 0.0 0.0");
+  loadDOMLS(pConfig,"use_aframe_sky","N");
+  loadDOMLS(pConfig,"aframe_sky_file","https://niebert.github.io/HuginSample/img/cloud_grass.jpg");
+  loadDOMLS(pConfig,"use_aframe_plane","Y");
+  loadDOMLS(pConfig,"aframe_plane_color","#7BC8A4");
 }
 
 function saveConfigLS(pConfig) {
   saveDOMLS(pConfig,"marker");
   saveDOMLS(pConfig,"globalscale");
   saveDOMLS(pConfig,"globalmove");
+  saveDOMLS(pConfig,"use_aframe_sky");
+  saveDOMLS(pConfig,"aframe_sky_file");
+  saveDOMLS(pConfig,"use_aframe_plane");
+  saveDOMLS(pConfig,"aframe_plane_color");
 }
 
 

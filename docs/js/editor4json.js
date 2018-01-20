@@ -74,7 +74,7 @@ function Editor4JSON () {
 			"dataid": vSchemaID
 	};
 	this.aConfigIDs = {
-		"DOMID": ["globalscale","globalmove","json_file"],
+		"DOMID": ["globalscale","globalmove","json_file","aframe_sky","use_aframe_sky","use_aframe_plane"],
 		"InnerHTMLID": [],
 		"CheckBoxID": []
 	}
@@ -692,11 +692,33 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	// load the main Handlebars template and replace
 	var template = document.getElementById(vTplID +"-template").value;
 	//alert("Template:"+template);
+	// identify the selected marker
+	// Add Sky to Aframe
+	var context = {
+		"arobjects" : vARobjects,
+		"marker" : vMarker,
+		"sky":"",
+		"plane": ""
+	};
+	var sky_plane_context = {
+		"aframe_sky_file": getValueDOM("aframe_sky_file"),
+		"aframe_plane_color": getValueDOM("aframe_plane_color")
+	};
+	if (getValueDOM("use_aframe_sky") == "Y") {
+		context["sky"] = getValueDOM("sky-template");
+	} else {
+		context["sky"] = getValueDOM("sky-default-template");
+	};
+	var skyScript = Handlebars.compile(context["sky"]);
+	context["sky"] = skyScript(sky_plane_context);
+	if (getValueDOM("use_aframe_plane") == "Y") {
+		context["plane"] = getValueDOM("plane-template");
+		var planeScript = Handlebars.compile(context["plane"]);
+		context["plane"] = planeScript(sky_plane_context);
+	};
+	// Perform the replacement with the "templateScript()"
 	// Compile the template data into a function
 	var templateScript = Handlebars.compile(template);
-	// identify the selected marker
-	var context = { "arobjects" : vARobjects, "marker": vMarker};
-	// Perform the replacement with the "templateScript()"
 	var vHTML = templateScript(context);
 	this.saveFile(vFilename,vHTML);
 	// restore old move setting
