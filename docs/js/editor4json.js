@@ -701,8 +701,8 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 		"plane": ""
 	};
 	var sky_plane_context = {
-		"aframe_sky_file": getValueDOM("aframe_sky_file"),
-		"aframe_plane_color": getValueDOM("aframe_plane_color")
+		"aframe_sky_file": getValueDOM("aframe_sky_file") || "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
+		"aframe_plane_color": getValueDOM("aframe_plane_color") || "#7BC8A4"
 	};
 	if (getValueDOM("use_aframe_sky") == "Y") {
 		context["sky"] = getValueDOM("sky-template");

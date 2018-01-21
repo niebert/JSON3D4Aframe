@@ -107,10 +107,10 @@
     ],
     "config": {
         "json_file": "cristal_lattice.json",
-        "globalscale": "0.25",
+        "globalscale": "0.35",
         "globalemove": "0.0 0.0 0.0",
         "dataid": "object3d",
         "marker": "hiro",
-        "globalmove": "-1.0 0.0 -0.5"
+        "globalmove": "-1.0 0.0 -1.0"
     }
 }
