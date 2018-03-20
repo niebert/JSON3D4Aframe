@@ -113,7 +113,7 @@ vDataJSON[vSchemaID] = {
 						"title": "Rotation in degree in xyz-direction",
 						"default": "0 0 0",
 						"format": "text",
-						"description": "Defines the rotation in x-direction (width), y-direction (height), z-direction (depth). For some objects rotation does not make sense in some direction (e.g. sphere)"
+						"description": "Defines the rotation in x-direction (width), y-direction (depth), z-direction (height). For some objects rotation does not make sense in some direction (e.g. sphere)"
 				},
 				"repeat": {
 						"type": "string",
