@@ -823,7 +823,7 @@ Editor4JSON.prototype.loadLS = function () {
   	  }
       } else {
         console.log("loadLS('"+vLSID+"') is undefined in Local Storage.\nSave default as JSON");
-        localStorage.setItem(vDBID, JSON.stringify(this.aData));
+        localStorage.setItem(vLSID, JSON.stringify(this.aData));
       };
   }	 else {
       console.log("WARNING: Sorry, your browser does not support Local Storage of JSON Database. Use Firefox ...");

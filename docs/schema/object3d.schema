@@ -24,7 +24,8 @@ vDataJSON[vSchemaID] = {
             "title": "ID",
             "default": "",
             "format": "text",
-            "description": "Unique ID for 3D Object"
+						"propertyOrder": 10,
+						"description": "Unique ID for 3D Object"
         },
         "comment": {
             "type": "string",
@@ -32,7 +33,8 @@ vDataJSON[vSchemaID] = {
             "title": "Comment:",
             "default": "",
             "format": "text",
-            "description": "Short comment about the 3D object."
+						"propertyOrder": 20,
+						"description": "Short comment about the 3D object."
         },
 				"tagname": {
             "type": "string",
@@ -66,7 +68,8 @@ vDataJSON[vSchemaID] = {
        		},
             "default": "a-box",
             "format": "text",
-            "description": "Select the 3D object you want to add to the scene."
+						"propertyOrder": 30,
+						"description": "Select the 3D object you want to add to the scene."
         },
 				"position": {
             "type": "string",
@@ -74,7 +77,8 @@ vDataJSON[vSchemaID] = {
             "title": "x,y,z Coordinates",
             "default": "0.0 0.5 0.0",
             "format": "text",
-            "description": "e.g. '0.5 2 3' means 0.5 marker units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension)"
+						"propertyOrder": 40,
+						"description": "e.g. '0.5 2 3' means 0.5 marker units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension)"
         },
 				"color": {
             "type": "string",
@@ -82,7 +86,8 @@ vDataJSON[vSchemaID] = {
             "title": "Color",
             "default": "#4545AA",
             "format": "color",
-            "description": "Summary describes the location"
+						"propertyOrder": 50,
+						"description": "Summary describes the location"
         },
         "opacity": {
             "type": "number",
@@ -90,14 +95,16 @@ vDataJSON[vSchemaID] = {
             "title": "Opacity",
             "default": 0.5,
             "format": "text",
-            "description": "Defines how transparent the 3D object is in a camera video"
+						"propertyOrder": 60,
+						"description": "Defines how transparent the 3D object is in a camera video"
         },
 				"scale": {
             "type": "number",
             "id": "/properties/scale",
             "title": "Scale Factor",
             "default": 1.0,
-            "description": "Basic size is determined by the marker size. With this factor you can scale the object"
+						"propertyOrder": 70,
+						"description": "Basic size is determined by the marker size. With this factor you can scale the object"
         },
 				"sizexyz": {
 						"type": "string",
@@ -105,7 +112,8 @@ vDataJSON[vSchemaID] = {
             "title": "Size x (width/radius), Size y (height), Size z (depth)",
             "default": "1.5 1.0 0.5",
             "format": "text",
-            "description": "Defines the extension x=width/radius/cone-radius-botton-cone, y=height/con-radius-top, z=depth/cone-height. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy, z used for cone-height)"
+						"propertyOrder": 80,
+						"description": "Defines the extension x=width/radius/cone-radius-botton-cone, y=height/con-radius-top, z=depth/cone-height. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy, z used for cone-height)"
         },
 				"rotation": {
 						"type": "string",
@@ -113,6 +121,7 @@ vDataJSON[vSchemaID] = {
 						"title": "Rotation in degree in xyz-direction",
 						"default": "0 0 0",
 						"format": "text",
+						"propertyOrder": 90,
 						"description": "Defines the rotation in x-direction (width), y-direction (depth), z-direction (height). For some objects rotation does not make sense in some direction (e.g. sphere)"
 				},
 				"repeat": {
@@ -121,6 +130,7 @@ vDataJSON[vSchemaID] = {
 						"title": "Repeat 3D object in xyz-direction",
 						"default": "0 0 0",
 						"format": "text",
+						"propertyOrder": 100,
 						"description": "Defines the number of additional copies/repetitions of the 3D object in x-direction (width), y-direction (height), z-direction (depth). Default number of copies/repitiions is 0"
 				},
 				"repeatsteps": {
@@ -129,6 +139,7 @@ vDataJSON[vSchemaID] = {
 						"title": "Repeat Steps shifts the copies of 3D object in xyz-direction",
 						"default": "1.0 1.0 1.0",
 						"format": "text",
+						"propertyOrder": 110,
 						"description": "Defines the step width (vector length) of additional copies/repetitions of the 3D object in x-direction (width), y-direction (height), z-direction (depth). Default vector length of copies/repitiions is 1.0"
 				}
  	},
