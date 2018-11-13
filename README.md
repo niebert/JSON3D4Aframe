@@ -1,5 +1,7 @@
 # JSON3D4Aframe
-This repository provides a generator for a 3D scene in AFrame with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to AFrame and AR.js
+The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**.
+
+This repository provides a generator for a 3D scene in [AFrame](https://www.aframe.io) with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to AFrame and AR.js
 
 
 ## Online Demo
@@ -29,6 +31,12 @@ Molecule Models can be turn and viewed from all sides. With AR.js you need to pl
 ## JSON to Schema Generator
 
 Used the following tool that creates a [JSON schema](http://json-schema.org/) for a provided JSON file. Used the given JSON file to create the JSON Schema with [JSON2schema.html](https://niebert.github.io/json-editor/plugins/json2schema.html).
+
+## Python Web-Server for Testing from shell
+Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a web server (duer to cross-site scripting security feature). E.g. text elements with fonts will not be displayed. To check the Aframe 3D scene with all feature start a webserver with python from shell. the current directory is used as root directory for the web server.
+* Linux/Mac:  ___python -m SimpleHTTPServer 8000___
+* Windows (install python): ___python -m http.server 8000___
+* Check Aframe scene with: ___http://localhost:8000___
 
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
