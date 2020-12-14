@@ -91,11 +91,18 @@
 {{{arobjects}}}
 {{{plane}}}
 {{{sky}}}
+{{{cameraposition}}}
     &lt;/a-scene&gt;
   &lt;/body&gt;
 &lt;/html&gt;
     </textarea>
-    <textarea id="sky-template" rows="10" cols="120"  style="display:none">
+    <textarea id="camera-position-template" rows="10" cols="120" style="display:none">
+    &lt;a-entity id="myCameraPosition" position="{{{camposxyz}}}"&gt;
+        &lt;a-entity id="myCamera" camera look-controls keyboard-controls&gt;
+        &lt;/a-entity&gt;
+    &lt;/a-entity&gt;
+  </textarea>
+  <textarea id="sky-template" rows="10" cols="120"  style="display:none">
     &lt;a-sky src="{{{aframe_sky_file}}}" rotation="0 -130 0"&gt;&lt;/a-sky&gt;
     </textarea>
     <textarea id="sky-default-template" rows="10" cols="120"  style="display:none">
@@ -206,13 +213,18 @@
           <option value="Y">used</option>
         </select>
         &nbsp;&nbsp;
+        Color Plane: <input type="text" name="aframe_plane_color" id="aframe_plane_color" value="#7BC8A4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+        <br>
         <!-- ======================================== -->
         <b>Aframe Default Plane:</b>
-        <input type="text" name="aframe_plane_color" id="aframe_plane_color" value="#7BC8A4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value">
         <select id="use_aframe_plane" onchange="vEditor4JSON.aConfig[this.id]=this.value">
           <option value="N">not used</option>
           <option selected value="Y">used</option>
         </select>
+        &nbsp;&nbsp;
+        <b>Aframe Camera Position:</b>
+        <input type="text" name="camposxyz" id="camposxyz" value="0 2 4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+
     <!-- END: Default Plane and AFrame Sky Settings -->
     <!-- ============================================ -->
   </div>

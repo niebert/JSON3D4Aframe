@@ -658,15 +658,16 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	var vFilename = getName4Filename(this.aConfig["json_file"]);
 	var vMoveXYZstr = $("#globalmove").val();
 	var vMoveXYZ = getGlobalMove();
-
+	var vCameraPosition = "";
 	switch (vTplID) {
 		case "ar":
 			vFilename += "_ar_"+vMarker+".html"
 		break;
 		case "aframe":
 			vFilename += "_aframe.html";
-			vMoveXYZ[2] -= 4.0; // move backward for better inital 3D scenario
+			vMoveXYZ[2] -= 0.0; // move backward for better inital 3D scenario
 			$("#globalmove").val(floatArr2String(vMoveXYZ));
+
 		break;
 		default:
 			vTplID = "aframe";
@@ -674,10 +675,13 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	};
 	// load the 3D object template
 	var objecttpl = document.getElementById("object-template").value;
+	// correctHandleBarsTemplate() defined in string.hs
 	objecttpl = correctHandleBarsTemplate(objecttpl);
 	console.log(objecttpl);
 	//compile the template text into a function for replacing JSON content
 	var objectScript = Handlebars.compile(objecttpl);
+
+
 	var vARobjects = "";
 	// call the objectScript for all records in the Editor4JSON array
 	var vDataArr = [];
@@ -689,6 +693,21 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 			vARobjects += objectScript(vDataArr[k]);
 		};
 	};
+	//----- Camera Position -----
+	var vCamPosJSON = {
+		"camposxyz": getValueDOM("camposxyz")
+	};
+
+	if (vTplID == "aframe") {
+		var campostpl = document.getElementById("camera-position-template").value;
+		// correctHandleBarsTemplate() defined in string.hs
+		campostpl = correctHandleBarsTemplate(campostpl);
+		console.log(campostpl);
+		var camScript = Handlebars.compile(campostpl);
+
+		vCameraPosition = camScript(vCamPosJSON);
+	}
+
 	// load the main Handlebars template and replace
 	var template = document.getElementById(vTplID +"-template").value;
 	//alert("Template:"+template);
@@ -698,7 +717,8 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 		"arobjects" : vARobjects,
 		"marker" : vMarker,
 		"sky":"",
-		"plane": ""
+		"plane": "",
+		"cameraposition":vCameraPosition
 	};
 	var sky_plane_context = {
 		"aframe_sky_file": getValueDOM("aframe_sky_file") || "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
