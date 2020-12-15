@@ -21,9 +21,10 @@ function copyMarker3D() {
 };
 
 function setTimeID() {
-  el4id("timeaframe").value = Date.now();
-  el4id("timear").value = Date.now();
+  write2value("timeaframe", Date.now());
+  write2value("timear", Date.now());
 }
+
 function populateDataJSON(pTextareaID) {
   vEditor4JSON.saveLS(); // save JSON Data to Local Storage
   //copyMarker3D();
@@ -33,25 +34,42 @@ function populateDataJSON(pTextareaID) {
   el4id(pTextareaID).value = JSON.stringify(vData,null,2);
 };
 
-function X_populateDataJSON(pTextareaID) {
+
+function geolocation2mapcenter() {
+  write2value("selectmapcenter",getValueDOM("ar_longitude")+", "+getValueDOM("ar_latitude"));
+  console.log("MapCenter for Select is '"+getValueDOM("selectmapcenter")+"'");
+}
+
+function populateGeoJSON(pTextareaID) {
   vEditor4JSON.saveLS(); // save JSON Data to Local Storage
-  //copyMarker3D();
+  /*
+  JSON to display the GeoAR Model
+  -------------------------------
+  [
+    {
+        "geolocation": [
+            -0.14467470703124907,
+            51.493889053694915
+        ],
+        "name": "The City of London <a href=\"https://en.wikipedia.org/wiki/London\" target=\"_blank\">Link to Wikipedia</a>"
+    }
+  ]
+  */
+  geolocation2mapcenter();
   setTimeID();
-  var vData = vEditor4JSON.aData;
-  var vOut = "";
-  var vCR = "";
-  var vRecOut = "";
-  var vMapCenterMissing = true;
-  for (var i = 0; i < vData.length; i++) {
-    vRecOut = getString4Object(i+1,vData[i]);
-    if (vRecOut != "") {
-      vOut += vCR + vRecOut;
-      vCR = ",\n";
-    };
-  };
-  vOut = "[" + vOut + "]";
+  write2value("viewmapcenter",getValueDOM("selectmapcenter"));
+  write2value("viewzoom",getValueDOM("selectzoom"));
+  var vLatitude = parseFloat(getValueDOM("ar_latitude"));
+  var vLongitude = parseFloat(getValueDOM("ar_longitude"));
+  var vGeoJSON = [
+    {
+      "time": Date.now(),
+      "geolocation":[vLongitude,vLatitude],
+      "name": "The marker defines the geographic reference for the Augmented Reality model at geolocation Latitude: "+getValueDOM("ar_latitude")+ " and Longitude "+ getValueDOM("ar_longitude")+"."
+    }
+  ];
   //document.getElementById('jsondata').value = vOut;
-  el4id(pTextareaID).value = vOut;
+  el4id(pTextareaID).value = JSON.stringify(vGeoJSON,null,4);
 };
 
 function getString4Object(pNr,pRec) {
