@@ -45,7 +45,7 @@ function el4id(pID) {
    } else {
      console.log("ERROR: DOM Node ["+pID+"] does not exist!");
    };
-   return vNode
+   return vNode;
 }
 
 function copyMarker3D() {
