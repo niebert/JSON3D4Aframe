@@ -26,9 +26,9 @@ https://github.com/niebert/JSON3D4Aframe/tree/master/docs
 * [Snow Man - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_aframe.html)
 
 ### AFrame 3D - with Sky and 360 Degree Image
-* [Water Molecule - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_sky_aframe.html)
-* [Cristal Lattice - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_sky_aframe.html)
-* [Snow Man - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_sky_aframe.html)
+* [Water Molecule - Sky 360 Degree - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_sky_aframe.html)
+* [Cristal Lattice - Sky 360 Degree - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_sky_aframe.html)
+* [Snow Man - Sky 360 Degree - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_sky_aframe.html)
 
 ### Marker Print Out
 For the following examples you need a printout of markers that are place in front of your webcam of your laptop, tablet or smartphone camera. You can print out the [PDF document](https://niebert.github.io/JSON2Schema/pdf/marker_hiro_kanji_printout.pdf). Instead holding the marker in the web camera image you can place the marker on the table and view the selected marker in the camera image of your tablet or smartphone. You can also use a VR headset  with the following examples:
