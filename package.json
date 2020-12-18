@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/niebert/JSON3D4Aframe#readme",
   "devDependencies": {
+    "build4code": "^0.3.30",
     "walker4folder": "^1.0.4"
   }
 }

@@ -14,7 +14,7 @@ Main library to handle large arrays is `docs/js/editor4json.js`
 https://github.com/niebert/JSON3D4Aframe/tree/master/docs
 
 ## Screenshots Examples
-![AFrame Example](https://raw.githubusercontent.com/niebert/SamplesAR/master/images/water_molecule_aframe.png)
+![AFrame Example](https://niebert.github.io/JSON3D4Aframe/img/water_molecule_aframe.png)
 ![AR.js Kanji Marker Example](https://raw.githubusercontent.com/niebert/SamplesAR/master/images/water_molecule_kanji.png)
 
 
