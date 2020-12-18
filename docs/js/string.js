@@ -125,7 +125,27 @@ function replaceString(pString,pSearch,pReplace)
 		};
 	};
 	return vReturnString + pString;
-};
+}
+
+function title2filename(pName) {
+  var vFilename = pName || "Model 3D";
+  if (isString(pName)) {
+    if (pName != "") {
+      pName = pName.replace(/[\s]+/g,"_");
+      pName = pName.replace(/[^A-Za-z0-9_]/g,"");
+      pName = pName.toLowerCase();
+	  } else {
+      pName = "model3d";
+    }
+    vFilename = pName;
+  }
+  return vFilename;
+}
+
+function update4filename(pTitleID,pFilenameID) {
+  var vTitle = getValueDOM(pTitleID) || "Model 3D";
+  write2value(pFilenameID,title2filename(vTitle));
+}
 
 function reduceIDName(pName) {
   if (isString(pName)) {
@@ -133,21 +153,22 @@ function reduceIDName(pName) {
       pName = pName.replace(/[^A-Za-z0-9_]/g,"");
       pName = pName.toLowerCase();
 	  }
-  };
-  return pName
-};
+  }
+  return pName;
+}
 
 function reduceFileName(pName) {
   if (isString(pName)) {
     if (pName != "") {
       pName = pName.replace(/[^A-Za-z0-9_\/\-:]/g,"");
 	  }
-  };
+  }
   return pName;
-};
+}
+
 function filename2ID(pFile) {
-  return reduceFileName(pFile)
-};
+  return reduceFileName(pFile);
+}
 
 function reduceVarName(pName) {
   // remove all characters exept "_", A-Z, a-z and digits 0-9

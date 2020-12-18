@@ -1,0 +1,37 @@
+{
+  "name": "json3d4aframe",
+  "version": "1.0.0",
+  "description": "JSON Editor for creating 3D models in AFrame and AR.js - tool is support tool for the Wikiversity learning resource for 3D modelling",
+  "main": "src/main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niebert/JSON3D4Aframe.git"
+  },
+  "keywords": [
+    "JSON",
+    "Editor",
+    "3D",
+    "modelling",
+    "AFrame",
+    "AR.js",
+    "geolocation",
+    "marker",
+    "based",
+    "AR"
+  ],
+  "author": "Engelbert Niehaus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/niebert/JSON3D4Aframe/issues"
+  },
+  "homepage": "https://github.com/niebert/JSON3D4Aframe#readme",
+  "devDependencies": {
+    "walker4folder": "^1.0.4"
+  }
+}

@@ -2,11 +2,14 @@ function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
   if (pARSelect == "argeo") {
     // expand if and only if output is geolocated AR
     // [x-direction,y-direction,z-direction]
-    pData.latitude = pGeoHash.latitude + pPosArray[0] * pGeoHash.unit;
-    pData.longitude = pGeoHash.longitude + pPosArray[3] * pGeoHash.unit;
-    pPosArray[0] = 0.0;
-    pPosArray[2] = 0.0;
-    pData.position = floatArr2String(pPosArray);
+    //pData.latitude = pGeoHash.latitude + pPosArray[0] * pGeoHash.unit;
+    //pData.longitude = pGeoHash.longitude + pPosArray[2] * pGeoHash.unit;
+    //pPosArray[0] = 0.0;
+    //pPosArray[2] = 0.0;
+    pData.latitude  = pGeoHash.latitude;
+    pData.longitude = pGeoHash.longitude;
+    pData.position  = floatArr2String(pPosArray);
+    console.log("CALL: expandGeoLocation() - "+JSON.stringify(pData,null,4));
   }
   return pData;
 }
@@ -14,6 +17,16 @@ function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
 function getGeoLocationHash() {
   var vLatitude = parseFloat(getValueDOM("ar_latitude"));
   var vLongitude = parseFloat(getValueDOM("ar_longitude"));
+  if (isNaN(vLatitude)) {
+    console.error("ERROR: getGeoLocationHash() - Float for ar_latitude is not a number!");
+  } else {
+    console.log("CALL: getGeoLocationHash() - Latitude="+vLatitude);
+  }
+  if (isNaN(vLongitude)) {
+    console.error("ERROR: getGeoLocationHash() - Float for ar_longitude is not a number!");
+  } else {
+    console.log("CALL: getGeoLocationHash() - Longitude="+vLongitude);
+  }
   var vUnit = parseFloat(getValueDOM("ar_unit_length"));
   var vGeoHash = {
     "longitude":vLongitude,
@@ -48,7 +61,7 @@ function get3DRepeatedArray(pData) {
         vData.position = floatArr2String(vPosIteration);
         // Global scaling will be performed in calcRecordJSON
         vData = expandGeoLocation(vData,vGeoHash,vPosIteration,getValueDOM("arselect"));
-        // set reference geolocation for the coordinate system.  
+        // set reference geolocation for the coordinate system.
         vData.ar_latitude = vLatitude;
         vData.ar_longitude = vLongitude;
 
@@ -253,21 +266,29 @@ function getArraySizeXYZ(pData) {
   // pData is Hash for one 3D object/primitive
   // String attribute "sizexyz" will be extracted by getArraySizeXYZ() and
   // parsed into an array of real values, that can be scaled
-  var vSizeXYZstr = pData["sizexyz"] || "3.0 2.0 1.0";
+  var vSizeXYZstr = pData.sizexyz || "3.0 2.0 1.0";
   var vOutXYZ = string2FloatArray(vSizeXYZstr);
   // extend array to length 3
   while (vOutXYZ.length < 3) {
     vDefaultValue = 3-vOutXYZ.length;
     vOutXYZ.push(vDefaultValue);
-  };
+    console.error("ERROR: getArraySizeXYZ(pData) pData does not have a sufficient length - current length=" + vOutXYZ.length +  "<3 - expand length by error correction!");
+  }
   return vOutXYZ;
-};
+}
 
 function real2str(pVal) {
-  return pVal.toFixed(2);
+  var vValue = 0.0;
+  if (isNaN(pVal)) {
+    console.error("ERROR: real2str(" + pVal + ") - calcrecord.js - parameter is not a number!");
+  } else {
+    vValue = pVal.toFixed(2);
+  }
+  return vValue;
 }
 
 function string2FloatArray(pString) {
+  //console.log("string2FloatArray('" + pString + "')");
   var vString = pString || "3.0 2.0 1.0";
   //remove ledading and tailing white spaces
   vString = vString.replace(/^\s+|\s+$/g,'');
@@ -279,13 +300,15 @@ function string2FloatArray(pString) {
   var vDefaultValue = 1.0;
   for (var i = 0; i < vStringArr.length; i++) {
     if (isNaN(vStringArr[i])) {
-      console.log("blankSepString2FloatArray() parsing Float for '"+vStringArr[i]+"' undefined");
+      console.warn("WARNING: string2FloatArray() parsing Float for '"+vStringArr[i]+"' undefined");
       vDefaultValue = 3-i;
       vFloatArr.push(vDefaultValue);
     } else {
       vFloatArr.push(parseFloat(vStringArr[i]));
-    };
-  };
+    }
+  }
+  //console.log("string2FloatArray() Array of Floats: ["+vFloatArr.join(",")+"] result!");
+
   return vFloatArr;
 }
 
@@ -301,7 +324,7 @@ function getAttribAframe(pAtt,pSizeXYZ,i,pScale) {
           vOut = " "+pAtt+"=\""+vOut+"\"";
         } else {
           vOut = " "+vOut;
-        };
+        }
       } else {
         console.log("getAttribAframe() calculated vSize undefined");
       }
@@ -310,6 +333,6 @@ function getAttribAframe(pAtt,pSizeXYZ,i,pScale) {
     }
   } else {
     console.log("getAttribAframe() pSizeXYZ undefined");
-  };
+  }
   return vOut;
 }

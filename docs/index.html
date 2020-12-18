@@ -57,54 +57,66 @@
 	 </script>
  -->
   </head>
-  <body style="margin:20px">
+  <body style="margin:20px;background:#C0C0C0">
     <textarea id="ar-template" rows="10" cols="120" style="display:none">
-      &lt;!doctype HTML&gt;
-      &lt;html&gt;
-        &lt;head&gt;
-          &lt;script src="https://aframe.io/releases/0.6.1/aframe.min.js"&gt;&lt;/script&gt;
-          &lt;script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"&gt; &lt;/script&gt;
-          &lt;title&gt;
+&lt;!doctype HTML&gt;
+&lt;html&gt;
+    &lt;head&gt;
+      &lt;meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe"&gt;
+      &lt;script src="https://aframe.io/releases/1.1.0/aframe.min.js"&gt;&lt;/script&gt;
+      &lt;script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"&gt; &lt;/script&gt;
+      &lt;title&gt;
             AR.js for {{marker}} Marker
-          &lt;/title&gt;
-        &lt;/head&gt;
-        &lt;body style='margin : 0px; overflow: hidden;'&gt;
-          &lt;a-scene&gt;
-              &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
+      &lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body style='margin : 0px; overflow: hidden;'&gt;
+      &lt;a-scene&gt;
+          &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
 {{{arobjects}}}
-              &lt;/a-marker&gt;
-              &lt;a-entity camera&gt;&lt;/a-entity&gt;
-         &lt;/a-scene&gt;
-        &lt;/body&gt;
-      &lt;/html&gt;
+          &lt;/a-marker&gt;
+          &lt;a-entity camera&gt;&lt;/a-entity&gt;
+      &lt;/a-scene&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
     </textarea>
-    <textarea id="ar-location-template" rows="10" cols="120" style="display:none">
-      &lt;!doctype HTML&gt;
-      &lt;html&gt;
-        &lt;head&gt;
-          &lt;script src="https://aframe.io/releases/0.6.1/aframe.min.js"&gt;&lt;/script&gt;
-          &lt;script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"&gt; &lt;/script&gt;
-          &lt;title&gt;
-            AR.js for {{marker}} Marker
-          &lt;/title&gt;
-        &lt;/head&gt;
-        &lt;body style='margin : 0px; overflow: hidden;'&gt;
-          &lt;a-scene&gt;
-              &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
-  {{{arobjects}}}
-              &lt;/a-marker&gt;
-              &lt;a-entity camera&gt;&lt;/a-entity&gt;
-         &lt;/a-scene&gt;
-        &lt;/body&gt;
-      &lt;/html&gt;
+    <textarea id="argeo-template" rows="10" cols="120" style="display:none">
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta http-equiv='X-UA-Compatible' content='IE=edge'&gt;
+    &lt;title&gt;GeoAR - {{titlemodel}} &lt;/title&gt;
+    &lt;meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe"&gt;
+    &lt;script src='https://aframe.io/releases/0.9.2/aframe.min.js'&gt;&lt;/script&gt;
+    &lt;script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body style='margin: 0; overflow: hidden;'&gt;
+    &lt;a-scene
+        vr-mode-ui="enabled: false"
+		embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'&gt;
+
+{{{arobjects}}}
+
+        &lt;a-camera gps-camera rotation-reader&gt;&lt;/a-camera&gt;
+	&lt;/a-scene&gt;
+&lt;/body&gt;
+&lt;/html&gt;
     </textarea>
     <textarea id="aframe-template" rows="10" cols="120" style="display:none">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;A-Frame Demo&lt;/title&gt;
-    &lt;meta name="description" content="A-Frame Demo"&gt;
-    &lt;script src="https://aframe.io/releases/0.7.0/aframe.min.js"&gt;&lt;/script&gt;
+    &lt;title&gt;A-Frame - {{titlemodel}} &lt;/title&gt;
+    &lt;meta name="description" content="A-Frame {{titlemodel}}"&gt;
+    &lt;meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe"&gt;
+    &lt;script src="https://aframe.io/releases/1.1.0/aframe.min.js"&gt;&lt;/script&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;a-scene&gt;
@@ -167,6 +179,7 @@
 			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AR Select
 		</button>
     -->
+     &nbsp;
     <select id="arselect" onchange="displaySettings(this.value);vEditor4JSON.aConfig[this.id]=this.value">
       <option selected="selected" value="aframe">AFrame 3D</option>
       <option value="ar">AR Marker 3D</option>
@@ -206,6 +219,10 @@
     </button>
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
 
+    <br>
+
+    <b>Title 3D Model:</b>
+    <input type="text" name="titlemodel" id="titlemodel" value="3D Model" size="35" onchange="update2filename('titlemodel','json_file');vEditor4JSON.aConfig[this.id]=this.value">
     <br>
 
     <b>Global Scale:</b>
@@ -406,7 +423,37 @@
       <hr>
     </div>
 	</div>
-
+  <div style="Xdisplay:none">
+    <ul>
+      <li>
+        <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
+      </li>
+      <li>
+        <a href="mods3d/cristal_lattice_ar_hiro.html" target="_blank">Cristal Lattice - AR.js Hiro Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/cristal_lattice_ar_kanji.html" target="_blank">Cristal Lattice - AR.js Kanji Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/water_molecule_aframe.html" target="_blank">Water Molecules - AFrame Model</a>
+      </li>
+      <li>
+        <a href="mods3d/water_molecule_ar_hiro.html" target="_blank">Water Molecules - AR.js Hiro Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/water_molecule_ar_kanji.html" target="_blank">Water Molecules - AR.js Kanji Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/snowman_aframe.html" target="_blank">Snowman - AFrame Model</a>
+      </li>
+      <li>
+        <a href="mods3d/snowman_ar_hiro.html" target="_blank">Snowman - AR.js Hiro Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/snowman_ar_kanji.html" target="_blank">Snowman - AR.js Kanji Marker</a>
+      </li>
+    </ul>
+  </div>
     <div id='editor_holder' style="margin-right: 30px; margin-left: 30px"></div>
     <div id='button_holder' style="margin:20px">
       <button id='bExportJSON' onclick="vEditor4JSON.exportData();return false">Export JSON</button>

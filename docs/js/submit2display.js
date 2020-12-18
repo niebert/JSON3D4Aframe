@@ -44,7 +44,7 @@ function el4id(pID) {
      console.log("DOM Node ["+pID+"] exists!");
    } else {
      console.log("ERROR: DOM Node ["+pID+"] does not exist!");
-   };
+   }
    return vNode;
 }
 
@@ -53,7 +53,7 @@ function copyMarker3D() {
   //el4id("aframemarker").value = el4id("marker").value;
   //el4id("viewmarker").value = el4id("marker").value;
   console.log("copyMarker3D after");
-};
+}
 
 function setTimeID() {
   write2value("timeaframe", Date.now());
