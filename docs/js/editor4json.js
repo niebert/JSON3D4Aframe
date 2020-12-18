@@ -655,31 +655,54 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
   //-------------------------------------------------------
 	var vTplID = pTplID || "aframe";
 	var vMarker = document.getElementById("marker").value;
-	var vFilename = getName4Filename(this.aConfig["json_file"]);
+	var vFilename = getName4Filename(this.aConfig.json_file);
 	var vMoveXYZstr = $("#globalmove").val();
 	var vMoveXYZ = getGlobalMove();
 	var vCameraPosition = "";
+	var objecttpl = "undefined template";
+	var objectScript = null;
 	switch (vTplID) {
 		case "ar":
-			vFilename += "_ar_"+vMarker+".html"
+
+			vFilename += "_ar_"+vMarker+".html";
+			// load the 3D object template
+			objecttpl = document.getElementById("object-template").value;
+			// correctHandleBarsTemplate() defined in string.hs
+			objecttpl = correctHandleBarsTemplate(objecttpl);
+			console.log(objecttpl);
+			//compile the template text into a function for replacing JSON content
+			objectScript = Handlebars.compile(objecttpl);
+
 		break;
 		case "aframe":
 			vFilename += "_aframe.html";
-			vMoveXYZ[2] -= 0.0; // move backward for better inital 3D scenario
-			$("#globalmove").val(floatArr2String(vMoveXYZ));
+			//vMoveXYZ[2] -= 0.0; // move backward for better inital 3D scenario
+			//$("#globalmove").val(floatArr2String(vMoveXYZ));
+
+			// load the 3D object template
+			objecttpl = document.getElementById("object-template").value;
+			// correctHandleBarsTemplate() defined in string.hs
+			objecttpl = correctHandleBarsTemplate(objecttpl);
+			console.log(objecttpl);
+			//compile the template text into a function for replacing JSON content
+			objectScript = Handlebars.compile(objecttpl);
 
 		break;
+		case "argeo":
+			vFilename += "_argeo.html";
+			objecttpl = document.getElementById("object-geo-template").value;
+			// correctHandleBarsTemplate() defined in string.hs
+			objecttpl = correctHandleBarsTemplate(objecttpl);
+			console.log(objecttpl);
+			//compile the template text into a function for replacing JSON content
+			objectScript = Handlebars.compile(objecttpl);
+
+		break;
+
 		default:
 			vTplID = "aframe";
 			vFilename += "_aframe.html"
 	};
-	// load the 3D object template
-	var objecttpl = document.getElementById("object-template").value;
-	// correctHandleBarsTemplate() defined in string.hs
-	objecttpl = correctHandleBarsTemplate(objecttpl);
-	console.log(objecttpl);
-	//compile the template text into a function for replacing JSON content
-	var objectScript = Handlebars.compile(objecttpl);
 
 
 	var vARobjects = "";
@@ -718,23 +741,25 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 		"marker" : vMarker,
 		"sky":"",
 		"plane": "",
-		"cameraposition":vCameraPosition
+		"cameraposition":vCameraPosition,
+		"ar_latitude":getValueDOM("ar_latitude"),
+		"ar_longitude":getValueDOM("ar_longitude")
 	};
 	var sky_plane_context = {
 		"aframe_sky_file": getValueDOM("aframe_sky_file") || "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
 		"aframe_plane_color": getValueDOM("aframe_plane_color") || "#7BC8A4"
 	};
 	if (getValueDOM("use_aframe_sky") == "Y") {
-		context["sky"] = getValueDOM("sky-template");
+		context.sky = getValueDOM("sky-template");
 	} else {
-		context["sky"] = getValueDOM("sky-default-template");
+		context.sky = getValueDOM("sky-default-template");
 	};
-	var skyScript = Handlebars.compile(context["sky"]);
-	context["sky"] = skyScript(sky_plane_context);
+	var skyScript = Handlebars.compile(context.sky);
+	context.sky = skyScript(sky_plane_context);
 	if (getValueDOM("use_aframe_plane") == "Y") {
-		context["plane"] = getValueDOM("plane-template");
-		var planeScript = Handlebars.compile(context["plane"]);
-		context["plane"] = planeScript(sky_plane_context);
+		context.plane = getValueDOM("plane-template");
+		var planeScript = Handlebars.compile(context.plane);
+		context.plane = planeScript(sky_plane_context);
 	};
 	// Perform the replacement with the "templateScript()"
 	// Compile the template data into a function
@@ -742,7 +767,7 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	var vHTML = templateScript(context);
 	this.saveFile(vFilename,vHTML);
 	// restore old move setting
-	$("#globalmove").val(vMoveXYZstr);
+	//$("#globalmove").val(vMoveXYZstr);
 };
 //----End of Method exportData Definition
 

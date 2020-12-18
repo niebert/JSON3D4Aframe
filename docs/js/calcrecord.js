@@ -1,13 +1,41 @@
+function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
+  if (pARSelect == "argeo") {
+    // expand if and only if output is geolocated AR
+    // [x-direction,y-direction,z-direction]
+    pData.latitude = pGeoHash.latitude + pPosArray[0] * pGeoHash.unit;
+    pData.longitude = pGeoHash.longitude + pPosArray[3] * pGeoHash.unit;
+    pPosArray[0] = 0.0;
+    pPosArray[2] = 0.0;
+    pData.position = floatArr2String(pPosArray);
+  }
+  return pData;
+}
+
+function getGeoLocationHash() {
+  var vLatitude = parseFloat(getValueDOM("ar_latitude"));
+  var vLongitude = parseFloat(getValueDOM("ar_longitude"));
+  var vUnit = parseFloat(getValueDOM("ar_unit_length"));
+  var vGeoHash = {
+    "longitude":vLongitude,
+    "latitude":vLatitude,
+    "unit":vUnit
+  };
+  return vGeoHash
+}
+
 function get3DRepeatedArray(pData) {
   var v3DOutArr = [];
   var vCountArr = getRepeatCount(pData); // Array of integers [0,2,0] 2 attiional copies in y-driection
   var vStepsArr = getRepeatSteps(pData); //Array of Real
-  var vPositionArr = string2FloatArray(pData["position"]);
+  var vPositionArr = string2FloatArray(pData.position);
   while (vPositionArr.length < 3) {
     vDefaultValue = 0.0; // default 0 repetitions copies of 3D object
     vPositionArr.push(vDefaultValue);
-  };
+  }
   var vPosIteration = [0.0,0.0,0.0];
+  var vGeoHash = getGeoLocationHash();
+  var vLatitude = vGeoHash.latitude;
+  var vLongitude = vGeoHash.longitude;
   var vData = null;
   for (var ix = 0; ix <= vCountArr[0]; ix++) { // Count x-direction
     vPosIteration[0] = vPositionArr[0] + ix * vStepsArr[0];
@@ -16,21 +44,26 @@ function get3DRepeatedArray(pData) {
       for (var iz = 0; iz <= vCountArr[2]; iz++) { // Count z-direction
         vPosIteration[2] = vPositionArr[2] + iz * vStepsArr[2];
         vData = cloneJSON(pData);
-        console.log("vData['position']='"+vData["position"]+"' new position");
-        vData["position"] = floatArr2String(vPosIteration);
+        console.log("vData['position']='" + vData.position + "' new position");
+        vData.position = floatArr2String(vPosIteration);
         // Global scaling will be performed in calcRecordJSON
-        v3DOutArr.push(calcRecordJSON(vData))
+        vData = expandGeoLocation(vData,vGeoHash,vPosIteration,getValueDOM("arselect"));
+        // set reference geolocation for the coordinate system.  
+        vData.ar_latitude = vLatitude;
+        vData.ar_longitude = vLongitude;
+
+        v3DOutArr.push(calcRecordJSON(vData));
       }
     }
-  };
+  }
   return v3DOutArr;
-};
+}
 
 
 function calcRecordJSON(pData) {
   // pData is a clone Hash of a SINGLE 3D object
   var vGlobalScale = getGlobalScale();
-  var vScale = pData["scale"] || 1.0;
+  var vScale = pData.scale || 1.0;
   vScale *= vGlobalScale; //
   //var vData = cloneJSON(pData);
   var vData = pData;

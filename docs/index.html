@@ -135,6 +135,10 @@
       &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
       &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}&gt;&lt;/{{tagname}}&gt;
    </textarea>
+   <textarea id="object-geo-template" rows="10" cols="120"  style="display:none">
+     &lt;!-- Comment for {{tagname}}: {{comment}} with reference location Lat:{{ar_latitude}},Long:{{ar_longitude}} --&gt;
+     &lt;{{tagname}}  gps-projected-entity-place="latitude: {{latitude}}; longitude: {{longitude}}" position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}&gt;&lt;/{{tagname}}&gt;
+  </textarea>
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
@@ -152,12 +156,23 @@
     <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save();return false">
 			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
 		</button>
-    <button id='bExportARHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML('ar');return false">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AR
+    <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(document.getElementById('arselect').value);return false">
+			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save 3D
 		</button>
+    <!--
     <button id='bExportAframeHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML('aframe');return false">
 			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AFrame
 		</button>
+    <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(getValueDOM('arselect'));return false">
+			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AR Select
+		</button>
+    -->
+    <select id="arselect" onchange="displaySettings(this.value);vEditor4JSON.aConfig[this.id]=this.value">
+      <option selected="selected" value="aframe">AFrame 3D</option>
+      <option value="ar">AR Marker 3D</option>
+      <option value="argeo" style="display:none">AR Geolocation</option>
+    </select>
+
     &nbsp;
 		&nbsp;
 
@@ -190,18 +205,9 @@
       <i class="fa fa-minus-square" aria-hidden="true"></i> Init DB
     </button>
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
+
     <br>
-    <b>Marker:</b>
-    <select id="marker" onchange="selectMarker(this.value);vEditor4JSON.aConfig[this.id]=this.value">
-      <option selected="selected">hiro</option>
-      <option>kanji</option>
-    </select>
-    <img  id="imghiro" src="img/hiro_marker.png" width="50px" height="50px">
-    <img id="imgkanji"  src="img/kanji_marker.png" width="50px" height="50px" style="display:none">
-    &nbsp;
-    <a href="./pdf/marker_hiro_kanji_printout.pdf" target="_blank" onclick="alert('Print out PDF Markers for students to display your AR.js models.')">PDF</a>
-    &nbsp;
-    &nbsp;
+
     <b>Global Scale:</b>
     <input type="text" name="globalscale" id="globalscale" value="1.0" size="5" onchange="vEditor4JSON.aConfig[this.id]=this.value">
     &nbsp;
@@ -209,14 +215,26 @@
     <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
     &nbsp;
     <b>File:</b>
-    <input type="text" name="json_file" id="json_file" value="object3d.json" size="15" onchange="vEditor4JSON.aConfig[this.id]=this.value">
-    <button id='bAframeSettings' style="color: white;background-color: #225988"  onclick="$('#aframe_settings').toggle();return false">
+    <input type="text" name="json_file" id="json_file" value="object3d.json" size="25" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+
+    <br>
+
+    <button id='bAframeSettings' style="color: white;background-color: #225988"  onclick="displaySettings('aframe');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AFrame Settings
 		</button>
+    <button id='bARSettings' style="color: white;background-color: #225988"  onclick="displaySettings('ar','toggle');return false">
+			<i class="fa fa-cog" aria-hidden="true"></i> AR Marker Settings
+		</button>
+    <button id='bARGEOSettings' style="display:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
+			<i class="fa fa-cog" aria-hidden="true"></i> AR Geolocation Settings
+		</button>
+
     <br>
+
     <div id="aframe_settings" style="display:none">
     <!-- ============================================ -->
     <!-- BEGIN: Default Plane and AFrame Sky Settings -->
+        <hr>
         <b>Aframe Sky:</b>
         <input type="text" name="aframe_sky_file" id="aframe_sky_file" value="https://niebert.github.io/HuginSample/img/cloud_grass.jpg" size="45" onchange="vEditor4JSON.aConfig[this.id]=this.value">
         <select id="select_aframe_sky" onchange="$('#aframe_sky_file').val(this.value); $('#use_aframe_sky').val('Y')">
@@ -227,6 +245,10 @@
          -->
          <option value="https://upload.wikimedia.org/wikipedia/commons/8/8d/Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg">Amphiteater - Berlin</option>
          <option value="https://upload.wikimedia.org/wikipedia/commons/5/56/Magpupungko_beach_area_spherical_360-degree_08-23-2017.jpg">Magpupungko_beach</option>
+         <option value="https://niebert.github.io/HuginSample/img/rhein1_rodenkirchen.jpg">River Rhine 1 - Cologne</option>
+         <option value="https://niebert.github.io/HuginSample/img/rhein2_rodenkirchen.jpg">River Rhine 2 - Cologne</option>
+         <option value="https://niebert.github.io/HuginSample/img/rhein3_rodenkirchen.jpg">River Rhine 3 - Cologne</option>
+         <option value="https://niebert.github.io/HuginSample/img/rhein4_rodenkirchen.jpg">River Rhine 4 - Cologne</option>
         </select>
         Display Sky:
         <select id="use_aframe_sky" onchange="vEditor4JSON.aConfig[this.id]=this.value">
@@ -246,11 +268,26 @@
         <b>Aframe Camera Position:</b>
         <input type="text" name="camposxyz" id="camposxyz" value="0 2 4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value">
 
+        <hr>
     <!-- END: Default Plane and AFrame Sky Settings -->
     <!-- ============================================ -->
   </div>
-  <br>
   <div id="ar_settings" style="display:none">
+    <hr>
+    <b>AR Marker:</b>
+    <select id="marker" onchange="selectMarker(this.value);vEditor4JSON.aConfig[this.id]=this.value">
+      <option selected="selected">hiro</option>
+      <option>kanji</option>
+    </select>
+    <img  id="imghiro" src="img/hiro_marker.png" width="50px" height="50px">
+    <img id="imgkanji"  src="img/kanji_marker.png" width="50px" height="50px" style="display:none">
+    &nbsp;
+    <a href="./pdf/marker_hiro_kanji_printout.pdf" target="_blank" onclick="alert('Print out PDF Markers for students to display your AR.js models.')">PDF AR-Marker for Printing</a>
+    <hr>
+
+  </div>
+  <br>
+  <div id="argeo_settings" style="display:none">
   <!-- ============================================ -->
   <!-- BEGIN: Default Plane and AR.js Sky Settings -->
   <table>

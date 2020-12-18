@@ -3,6 +3,41 @@
 * If there's a conflict, content of object 'b' overwrites content of 'a'
 */
 
+function displaySettings(vExportID,pToggle) {
+  console.log("Display Settings for Export Mode '" + vExportID + "'");
+  switch (vExportID) {
+    case "aframe":
+      if (pToggle) {
+        $('#aframe_settings').toggle();
+      } else {
+        $('#aframe_settings').show();
+      }
+      $('#ar_settings').hide();
+      $('#argeo_settings').hide();
+    break;
+    case "ar":
+      if (pToggle) {
+        $('#ar_settings').toggle();
+      } else {
+        $('#ar_settings').show();
+      }
+      $('#aframe_settings').hide();
+      $('#argeo_settings').hide();
+    break;
+    case "argeo":
+      if (pToggle) {
+        $('#argeo_settings').toggle();
+      } else {
+        $('#argeo_settings').show();
+      }
+      $('#aframe_settings').hide();
+      $('#ar_settings').hide();
+    break;
+    default:
+
+  }
+}
+
 function el4id(pID) {
    var vNode = document.getElementById(pID);
    if (vNode) {
