@@ -15,7 +15,7 @@ https://github.com/niebert/JSON3D4Aframe/tree/master/docs
 
 ## Screenshots Examples
 ![AFrame Example](https://niebert.github.io/JSON3D4Aframe/img/water_molecule_aframe.png)
-![AR.js Kanji Marker Example](https://raw.githubusercontent.com/niebert/SamplesAR/master/images/water_molecule_kanji.png)
+![AR.js Kanji Marker Example](https://niebert.github.io/JSON3D4Aframe/img/water_molecule_kanji.png)
 
 
 ## Example 3D Output of JSON3D4Aframe
