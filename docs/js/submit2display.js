@@ -14,7 +14,8 @@ function displaySettings(vExportID,pToggle) {
       }
       $('#ar_settings').hide();
       $('#argeo_settings').hide();
-    break;
+      $('#examples3d').hide();
+  break;
     case "ar":
       if (pToggle) {
         $('#ar_settings').toggle();
@@ -23,6 +24,7 @@ function displaySettings(vExportID,pToggle) {
       }
       $('#aframe_settings').hide();
       $('#argeo_settings').hide();
+      $('#examples3d').hide();
     break;
     case "argeo":
       if (pToggle) {
@@ -30,6 +32,18 @@ function displaySettings(vExportID,pToggle) {
       } else {
         $('#argeo_settings').show();
       }
+      $('#aframe_settings').hide();
+      $('#ar_settings').hide();
+      $('#examples3d').hide();
+
+    break;
+    case "examples3d":
+      if (pToggle) {
+        $('#examples3d').toggle();
+      } else {
+        $('#examples3d').show();
+      }
+      $('#argeo_settings').hide();
       $('#aframe_settings').hide();
       $('#ar_settings').hide();
     break;

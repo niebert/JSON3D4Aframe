@@ -245,6 +245,9 @@
     <button id='bARGEOSettings' style="display:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AR Geolocation Settings
 		</button>
+    <button id='bExamples3D' style="color: white;background-color: #225988"  onclick="displaySettings('examples3d','toggle');return false">
+      <i class="fa fa-file" aria-hidden="true"></i> Examples 3D
+    </button>
 
     <br>
 
@@ -423,10 +426,14 @@
       <hr>
     </div>
 	</div>
-  <div style="Xdisplay:none">
+  <div id="examples3d" style="display:none">
+    <h3>Examples of 3D Models</h3>
     <ul>
       <li>
         <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
+      </li>
+      <li>
+        <a href="mods3d/cristal_lattice_sky_aframe.html" target="_blank">Cristal Lattice  with 360 Degree Sky - AFrame Model</a>
       </li>
       <li>
         <a href="mods3d/cristal_lattice_ar_hiro.html" target="_blank">Cristal Lattice - AR.js Hiro Marker</a>
@@ -436,6 +443,9 @@
       </li>
       <li>
         <a href="mods3d/water_molecule_aframe.html" target="_blank">Water Molecules - AFrame Model</a>
+      </li>
+      <li>
+        <a href="mods3d/water_molecule_sky_aframe.html" target="_blank">Water Molecules with 360 Degree Sky - AFrame Model</a>
       </li>
       <li>
         <a href="mods3d/water_molecule_ar_hiro.html" target="_blank">Water Molecules - AR.js Hiro Marker</a>
