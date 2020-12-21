@@ -1,7 +1,7 @@
 # JSON3D4Aframe
-The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**.
+The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist. 
 
-This repository provides a generator for a 3D scene in [AFrame](https://www.aframe.io) with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to AFrame and AR.js
+This repository provides a generator for a 3D scene in [AFrame](https://www.aframe.io) with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to [`AFrame`](https://aframe.io) and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/)
 
 
 ## Online Demo
@@ -53,8 +53,10 @@ Molecule Models can be turn and viewed from all sides. With AR.js you need to pl
 * Created with [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe)
 
 ## Lesson Result of 3D Geometry
-Think of using 3D models in a seasonal context:
-* [Snowman AFrame](https://niebert.github.io/JSON3D4Aframe/mods) no markers required - direct display
+This tool was developed as support tool for a learning resource about 3D modelling in Wikiversity. Think of using 3D models in a seasonal context:
+* [Snowman AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_aframe.html) no markers required - direct display
+* The mathematical learning objective is to plan and organize geometric primitives like spheres, boxes, cones, planes, triangle in a 3D coordinate system and see how a special target 3D model evolves.
+* start with an initialize model and explore the **Save 3D** export options for the pre-loaded 3D models. You can also press **Examples 3D** to explore the basic concept of using [`AFrame`](https://aframe.io) models and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/) in [JSON3D4Aframe](](https://niebert.github.io/JSON3D4Aframe)
 
 ## UML Diagram of Editor4JSON Class
 

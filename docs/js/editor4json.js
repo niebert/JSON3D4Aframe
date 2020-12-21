@@ -736,9 +736,15 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	//alert("Template:"+template);
 	// identify the selected marker
 	// Add Sky to Aframe
+	var vSimulate4GPS = "N";
+	if (getValueDOM("simulate4gps") === true) {
+		vSimulate4GPS = "Y";
+	}
 	var context = {
+		"titlemodel": getValueDOM("titlemodel"),
 		"arobjects" : vARobjects,
 		"marker" : vMarker,
+		"simulate4gps" : vSimulate4GPS,
 		"sky":"",
 		"plane": "",
 		"cameraposition":vCameraPosition,

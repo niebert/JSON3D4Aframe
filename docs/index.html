@@ -66,7 +66,7 @@
       &lt;script src="https://aframe.io/releases/1.1.0/aframe.min.js"&gt;&lt;/script&gt;
       &lt;script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"&gt; &lt;/script&gt;
       &lt;title&gt;
-            AR.js for {{marker}} Marker
+            AR {{marker}} Marker - {{titlemodel}}
       &lt;/title&gt;
     &lt;/head&gt;
     &lt;body style='margin : 0px; overflow: hidden;'&gt;
@@ -222,7 +222,7 @@
     <br>
 
     <b>Title 3D Model:</b>
-    <input type="text" name="titlemodel" id="titlemodel" value="3D Model" size="35" onchange="update2filename('titlemodel','json_file');vEditor4JSON.aConfig[this.id]=this.value">
+    <input type="text" name="titlemodel" id="titlemodel" value="3D Model" size="35" onchange="update4filename('titlemodel','json_file');vEditor4JSON.aConfig[this.id]=this.value">
     <br>
 
     <b>Global Scale:</b>
@@ -322,11 +322,13 @@
                file:///Users/niehaus/Nextcloud/Javascript/WebVR/JSON3D4Aframe/docs/index.html
             -->
             <b>Map Center:</b>
-            <input type="string" name="mapcenter" id="selectmapcenter" size="30" value="-1.81185, 52.443141">
+            <input type="string" name="mapcenter" id="selectmapcenter" size="30" value="-1.81185, 52.443141"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
             &nbsp;
+            <b>Simulated GPS:</b>
+             <input type="checkbox" id="simulate4gps" name="simulate4gps"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
             <b>Zoom:</b>
             <!-- <input type="string" name="zoom" id="myzoom" size="3" value="5"> -->
-            <select name="zoom" id="selectzoom">
+            <select name="zoom" id="selectzoom" onchange="vEditor4JSON.aConfig[this.id]=this.value">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -477,7 +479,7 @@
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
       <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.0.0</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/18 18:58:22</div>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/20 18:09:37</div>
           <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.0.0</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
