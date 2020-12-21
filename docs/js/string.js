@@ -131,6 +131,7 @@ function title2filename(pName) {
   var vFilename = pName || "Model 3D";
   if (isString(pName)) {
     if (pName != "") {
+      pName = pName.replace(/[\s]+$/g,"");
       pName = pName.replace(/[\s]+/g,"_");
       pName = pName.replace(/[^A-Za-z0-9_]/g,"");
       pName = pName.toLowerCase();
@@ -144,7 +145,7 @@ function title2filename(pName) {
 
 function update4filename(pTitleID,pFilenameID) {
   var vTitle = getValueDOM(pTitleID) || "Model 3D";
-  write2value(pFilenameID,title2filename(vTitle));
+  write2value(pFilenameID,title2filename(vTitle)+".json");
 }
 
 function reduceIDName(pName) {
