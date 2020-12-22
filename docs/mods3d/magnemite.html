@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <!--
+    <script src="js/aframe.min.js"></script>
+    <script src='js/aframe-ar-nft.js'></script>
+    -->
+    <script src="js/aframe1_1_0.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+  <a-scene>
+      <a-marker id="mymarker" preset="kanji">
+        <a-assets>
+          <a-asset-item id="magnemite" src="assets/magnemite/scene.gltf" rotation="180 180 180"></a-asset-item>
+        </a-assets>
+        <!--  <a-entity gltf-model="balloonAni.gltf" rotation="0 0 0" scale="0.05 0.05 0.05" gps-entity-place="longitude:33.16; latitude:-96.07;" animation-mixer/>-->
+        <a-entity gltf-model="#magnemite" animation-mixer/>
+  </a-scene>
+</body>
