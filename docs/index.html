@@ -183,7 +183,7 @@
     <select id="arselect" onchange="displaySettings(this.value);vEditor4JSON.aConfig[this.id]=this.value">
       <option selected="selected" value="aframe">AFrame 3D</option>
       <option value="ar">AR Marker 3D</option>
-      <option value="argeo" style="display:none">AR Geolocation</option>
+      <option class="devhidden" id="option4argeo" value="argeo" style="display:none">AR Geolocation</option>
     </select>
 
     &nbsp;
@@ -231,6 +231,9 @@
     <b>Global Move:</b>
     <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
     &nbsp;
+    <b class="devhidden">Global Move:</b>
+    <input class="devhidden" type="text" name="globalrotate" id="globalrotate" value="x:0.0 y:0.0 z:0.0" size="20"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+    &nbsp;
     <b>File:</b>
     <input type="text" name="json_file" id="json_file" value="3d_model.json" size="25" onchange="vEditor4JSON.aConfig[this.id]=this.value">
 
@@ -242,7 +245,7 @@
     <button id='bARSettings' style="color: white;background-color: #225988"  onclick="displaySettings('ar','toggle');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AR Marker Settings
 		</button>
-    <button id='bARGEOSettings' style="display:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
+    <button class="devhidden" id='bARGEOSettings' style="display:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AR Geolocation Settings
 		</button>
     <button id='bExamples3D' style="color: white;background-color: #225988"  onclick="displaySettings('examples3d','toggle');return false">
@@ -325,7 +328,10 @@
             <input type="string" name="mapcenter" id="selectmapcenter" size="30" value="-1.81185, 52.443141"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
             &nbsp;
             <b>Simulated GPS:</b>
-             <input type="checkbox" id="simulate4gps" name="simulate4gps"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+            <select name="simulate4gps" id="simulate4gps" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+              <option value="Y" selected>Yes</option>
+              <option value="N"  >No</option>
+            </select>
             <b>Zoom:</b>
             <!-- <input type="string" name="zoom" id="myzoom" size="3" value="5"> -->
             <select name="zoom" id="selectzoom" onchange="vEditor4JSON.aConfig[this.id]=this.value">
@@ -344,6 +350,11 @@
               <option>13</option>
               <option>14</option>
               <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
             </select>
             &nbsp;
             <button type="submit"  style="color: #000000;background-color: #DFDFDF">
@@ -564,6 +575,13 @@
       if (vLinkParam.exists("marker")) {
         write2value("mymarker",vLinkParam.getValue("marker"));
       };
+      if (vLinkParam.exists("simulate4gps")) {
+        write2value("simulate4gps",vLinkParam.getValue("simulate4gps"));
+      };
+      //$('#option4argeo').show();
+      //$('#argeo_settings').show();
+      //$('#').show();
+      //$('.devhidden').show();
     </script>
     <script src="js/datetime4json.js"></script>
   </body>

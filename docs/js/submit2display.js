@@ -114,7 +114,7 @@ function populateGeoJSON(pTextareaID) {
     {
       "time": Date.now(),
       "geolocation":[vLongitude,vLatitude],
-      "name": "The marker defines the geographic reference for the Augmented Reality model at geolocation Latitude: "+getValueDOM("ar_latitude")+ " and Longitude "+ getValueDOM("ar_longitude")+"."
+      "name": "The marker defines the geographic reference for the Augmented Reality model '" + getValueDOM("titlemodel")+ "' at geolocation Latitude: "+getValueDOM("ar_latitude")+ " and Longitude "+ getValueDOM("ar_longitude")+"."
     }
   ];
   //document.getElementById('jsondata').value = vOut;
