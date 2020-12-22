@@ -1,0 +1,27 @@
+      <!doctype HTML>
+      <html>
+        <head>
+          <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+          <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
+          <title>
+            AR.js for kanji Marker
+          </title>
+        </head>
+        <body style='margin : 0px; overflow: hidden;'>
+          <a-scene>
+              <a-marker id="mymarker" preset="kanji">
+      <!-- Comment for a-sphere: Oxygen (red) -->
+      <a-sphere position="0.00 0.90 0.00" material="color: #d81b21;opacity:0.5" rotation="0 0 0"  radius="0.75" ></a-sphere>
+         <!-- Comment for a-sphere: Hydrogen 1 -->
+      <a-sphere position="1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+         <!-- Comment for a-sphere: Hydrogen 2 -->
+      <a-sphere position="-1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+         <!-- Comment for a-text: Water Molecule -->
+      <a-text position="0.00 0.50 1.50" material="color: #4545aa;opacity:0.5" rotation="0 0 0"  value="Water Molecule" color="#4545aa" height="1.00" ></a-text>
+
+      <a-sky src="https://niebert.github.io/HuginSample/img/eusserthal.jpg" rotation="0 -130 0"></a-sky>
+             </a-marker>
+              <a-entity camera></a-entity>
+         </a-scene>
+        </body>
+      </html>

@@ -1,5 +1,5 @@
 # JSON3D4Aframe
-The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist. 
+The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
 This repository provides a generator for a 3D scene in [AFrame](https://www.aframe.io) with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to [`AFrame`](https://aframe.io) and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/)
 
@@ -51,6 +51,22 @@ Molecule Models can be turn and viewed from all sides. With AR.js you need to pl
 * [Molecule Model Water - AFrame 3D Model](https://niebert.github.io/SampleAR/water_aframe.html) create with [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe/index.html) this 3D-Model does not need mobile phone camera or marker to viewing the 3D model.
 * [Molecule Model Water - Kanji-Marker](https://niebert.github.io/SampleAR/water_hiro.html) place a printed paper version of the  [Kanji-Marker](https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Kanji%20pattern.pdf) in front of you mobile phone camera or webcam. Size of print-out 6cm x 6cm of black box.
 * Created with [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe)
+
+## Images for the AFrame Sky
+The following equirectangular images are used as 360 degree sky background:
+* [Cloud/Grass](https://niebert.github.io/HuginSample/img/cloud_grass.jpg) - Part of the [HuginSample GitHub-Repository](https://www.github.com/niebert/HuginSample/)
+* [Aldara Park - WikiCommons](https://upload.wikimedia.org/wikipedia/commons/d/d8/Aldara_parks.jpg) - WikiCommon Info: [Aldara Park](https://commons.wikimedia.org/wiki/File:Aldara_parks.jpg)
+<!-- Low Resolution Amphiteater Berlin
+[](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg/1280px-Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg)Amphiteater - Berlin
+-->
+* [Amphiteater_im_Mauerpark - Berlin - Wiki Commons](https://upload.wikimedia.org/wikipedia/commons/8/8d/Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg)Amphiteater - Berlin](https://commons.wikimedia.org/wiki/File:Amphiteater_im_Mauerpark,_Berlin,_360x180,_1705280617,_ako.jpg)
+* [Magpupungko Beach 1 -  WikiCommons](https://upload.wikimedia.org/wikipedia/commons/5/56/Magpupungko_beach_area_spherical_360-degree_08-23-2017.jpg) - WikiCommons Info:
+* [Magpupungko Beach 2](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Magpupungko_beach_area_02_spherical_360-degree_08-23-2017.jpg/1024px-Magpupungko_beach_area_02_spherical_360-degree_08-23-2017.jpg) - WikiCommons Info: (https://commons.wikimedia.org/wiki/File:Magpupungko_beach_area_02_spherical_360-degree_08-23-2017.jpg)
+[River Rhine 1 - Cologne](https://niebert.github.io/HuginSample/img/rhein1_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
+[River Rhine 2 - Cologne](https://niebert.github.io/HuginSample/img/rhein2_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
+[River Rhine 3 - Cologne](https://niebert.github.io/HuginSample/img/rhein3_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
+[River Rhine 4 - Cologne](https://niebert.github.io/HuginSample/img/rhein4_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
+
 
 ## Lesson Result of 3D Geometry
 This tool was developed as support tool for a learning resource about 3D modelling in Wikiversity. Think of using 3D models in a seasonal context:

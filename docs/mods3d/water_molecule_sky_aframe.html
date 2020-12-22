@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>A-Frame Demo</title>
-    <meta name="description" content="A-Frame Demo">
+    <title>A-Frame Water Molecule with Sky </title>
+    <meta name="description" content="A-Frame Water Molecule with Sky">
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
   </head>
   <body>
     <a-scene>
       <!-- Comment for a-sphere: Oxygen (red) -->
-      <a-sphere position="0.00 0.90 0.00" material="color: #d81b21;opacity:0.5" rotation="0 0 0"  radius="0.75" ></a-sphere>
+      <a-sphere position="0.00 0.90 -4.00" material="color: #d81b21;opacity:0.5" rotation="0 0 0"  radius="0.75" ></a-sphere>
          <!-- Comment for a-sphere: Hydrogen 1 -->
-      <a-sphere position="1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+      <a-sphere position="1.00 1.70 -4.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
          <!-- Comment for a-sphere: Hydrogen 2 -->
-      <a-sphere position="-1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+      <a-sphere position="-1.00 1.70 -4.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
          <!-- Comment for a-text: Water Molecule -->
-      <a-text position="0.00 0.50 1.50" material="color: #4545aa;opacity:0.5" rotation="0 0 0"  value="Water Molecule" color="#4545aa" height="1.00" ></a-text>
+      <a-text position="0.00 0.50 -2.50" material="color: #4545aa;opacity:0.5" rotation="0 0 0"  value="Water Molecule" color="#4545aa" height="1.00" ></a-text>
 
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
       <a-sky src="https://niebert.github.io/HuginSample/img/rhein1_rodenkirchen.jpg" rotation="0 -130 0"></a-sky>
