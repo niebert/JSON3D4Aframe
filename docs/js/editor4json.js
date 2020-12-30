@@ -324,7 +324,7 @@ Editor4JSON.prototype.initModel3D = function () {
 		"water_molecule":"Water Molecule",
 		"cristal_lattice":"Cristal Lattice",
 		"snowman":"Snowman",
-		"candle4torus":"4 Candles on Torus"
+		"candles4torus":"4 Candles on Torus"
 	}
 	var vInitID = getValueDOM("init_3d_select");
 	if (vInitID == "-") {

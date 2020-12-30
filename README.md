@@ -74,6 +74,12 @@ This tool was developed as support tool for a learning resource about 3D modelli
 * The mathematical learning objective is to plan and organize geometric primitives like spheres, boxes, cones, planes, triangle in a 3D coordinate system and see how a special target 3D model evolves.
 * start with an initialize model and explore the **Save 3D** export options for the pre-loaded 3D models. You can also press **Examples 3D** to explore the basic concept of using [`AFrame`](https://aframe.io) models and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/) in [JSON3D4Aframe](](https://niebert.github.io/JSON3D4Aframe)
 
+### See also
+* [HuginSample](https://www.github.com/niebert/HuginSample) for example of 360 degree images that can be used as sky `a-sky` in AFrame.
+* See [WikiCommons2AFrame](https://www.github.com/niebert/WikiCommons2AFrame) for generating 360 degree image views for a geo location.
+* This repository was created for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling). 
+
+
 ## UML Diagram of Editor4JSON Class
 
 ![UML Diagram of JS Class Editor4JSON](https://niebert.github.io/JSON3D4Aframe/Editor4JSON_UML.png)

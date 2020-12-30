@@ -1,4 +1,4 @@
-vDataJSON.models["candle4torus"] = [
+vDataJSON.models["candles4torus"] = [
     {
         "id": "78123791239",
         "tagname": "a-torus",
