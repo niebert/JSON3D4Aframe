@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 13.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 14948)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px"
+	 width="23px"
+	 height="23px"
+	 viewBox="0 0 23 23"
+	 wikicommons="https://upload.wikimedia.org/wikipedia/commons/d/de/Remove_font_awesome.svg"
+   enable-background="new 0 0 23 23" xml:space="preserve">
+<g>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="4.5356" y1="-0.5625" x2="18.4644" y2="23.5627">
+		<stop  offset="0" style="stop-color:#EEAE7B"/>
+		<stop  offset="0.1065" style="stop-color:#E88F58"/>
+		<stop  offset="0.309" style="stop-color:#DD471D"/>
+		<stop  offset="0.7135" style="stop-color:#CC5D18"/>
+		<stop  offset="0.884" style="stop-color:#B84921"/>
+		<stop  offset="1" style="stop-color:#AD3F23"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" stroke="#FFFFFF" d="M22.5,19.5c0,1.657-1.344,3-3,3h-16c-1.656,0-3-1.343-3-3v-16c0-1.657,1.344-3,3-3
+		h16c1.656,0,3,1.343,3,3V19.5z"/>
+	<polygon fill='#FFFFFF' stroke="#FFFFFF" points="18.547,17.797 13,12.25 18.411,6.837 17.271,5.697 11.858,11.109 6.446,5.697
+		5.306,6.837 10.717,12.25 5.17,17.797 6.312,18.939 11.858,13.392 17.404,18.939 	"/>
+</g>
+</svg>

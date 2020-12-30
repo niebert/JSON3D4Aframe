@@ -8,7 +8,7 @@ vDataJSON["initdata"] = [
         "opacity": 0.7,
         "sizexyz": "0.8 ",
         "rotation": "0 0 0 ",
-        "scale": 1,
+        "scale": 0.8,
         "repeat": "0 0 0",
         "repeatsteps": "1.0 1.0 1.0"
     },

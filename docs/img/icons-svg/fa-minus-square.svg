@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 448 512"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   width="14px"
+   height="14px"
+   wikicommons="https://upload.wikimedia.org/wikipedia/commons/7/72/Font_Awesome_5_solid_minus-square.svg"
+   sodipodi:docname="fa-minus-square.svg">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="688"
+     inkscape:window-height="480"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.4609375"
+     inkscape:cx="224"
+     inkscape:cy="256"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <path
+     d="m 400,34.169492 -352,0 c -26.5,0 -48,21.395883 -48,47.767554 L 0,432.23245 C 0,458.60412 21.5,480 48,480 l 352,0 c 26.5,0 48,-21.39588 48,-47.76755 L 448,81.937046 C 448,55.565375 426.5,34.169492 400,34.169492 Z M 92,296.89104 c -6.6,0 -12,-5.37385 -12,-11.94189 l 0,-55.72881 c 0,-6.56804 5.4,-11.94189 12,-11.94189 l 264,0 c 6.6,0 12,5.37385 12,11.94189 l 0,55.72881 c 0,6.56804 -5.4,11.94189 -12,11.94189 l -264,0 z"
+     id="path4"
+     inkscape:connector-curvature="0"
+     style="fill:currentColor" />
+</svg>
+<!--
+Font Awesome Free 5.2.0 by @fontawesome - https://fontawesome.com
+License - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+-->

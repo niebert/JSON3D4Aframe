@@ -34,6 +34,7 @@
      var vDataJSON = {};
      vDataJSON["initdata"] = {};
      vDataJSON["schema"] = {};
+     vDataJSON["models"] = {};
      var vSchemaID =  "object3d"; // file defined in schema/object3d.schema
      // Set the default CSS theme and icon library globally
      JSONEditor.defaults.theme = 'bootstrap3';
@@ -43,6 +44,10 @@
     </script>
    <!-- BEGIN: load JSON data -->
     <script src="db/initdata.js"></script>
+    <script src="db/water_molecule.js"></script>
+    <script src="db/cristal_lattice.js"></script>
+    <script src="db/.js"></script>
+    <script src="db/snowman.js"></script>
     <!-- END:  load JSON data -->
     <!-- BEGIN: load JSON schema -->
     <script src="schema/object3d.schema"></script>
@@ -154,7 +159,7 @@
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
-    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">1.0.2</div>
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">1.0.3</div>
     </h2>
     <div data-role="fieldcontain" style="display:none">
          <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
@@ -163,13 +168,20 @@
   	<div id="divNavigate"  align="center">
     <!-- the button vOpenJSON generates an onclick event for the fileJSON input file element in the DOM -->
  	 	<button id='bOpenJSON' style="color: white;background-color: #225988"  onclick="$( '#fileJSON' ).trigger('click');return false">
-			<i class="fa fa-folder-open-o" aria-hidden="true"></i> Load
+			<!-- <i class="fa fa-folder-open-o" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/fa-folder-open-white.svg">
+    Load
 		</button>
     <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save();return false">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/fa-file-save-white.svg">
+      Save
 		</button>
     <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(document.getElementById('arselect').value);return false">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save 3D
+      <!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/fa-file-save-white.svg">
+      <img src="img/icons-svg/fa-picture-white.svg">
+      Save 3D
 		</button>
     <!--
     <button id='bExportAframeHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML('aframe');return false">
@@ -190,32 +202,45 @@
 		&nbsp;
 
 		<button id='bFastBackward' onclick="vEditor4JSON.first();return false">
-			<i class="fa fa-fast-backward" aria-hidden="true"></i>
-		</button>
+			<!-- <i class="fa fa-fast-backward" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/fa-audio-backward-black.svg">
+  	</button>
 		<button id='bStepBackward' onclick="vEditor4JSON.prev();return false">
-			<i class="fa fa-step-backward" aria-hidden="true"></i>
-		</button>
+			<!-- <i class="fa fa-step-backward" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/carat-l-black.svg">
+  	</button>
 		<input type="text" id="array_index" value="0" size="2" onchange="vEditor4JSON.goto(this.value);return false">
 		/<label id="array_length">0</label>
 		<button id='bStepForward'  onclick="vEditor4JSON.next();return false">
-			<i class="fa fa-step-forward" aria-hidden="true"></i>
-		</button>
+			<!-- <i class="fa fa-step-forward" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/carat-r-black.svg">
+  	</button>
 	   <button id='bFastForward' onclick="vEditor4JSON.last();return false">
-			<i class="fa fa-fast-forward" aria-hidden="true"></i>
+			<!-- <i class="fa fa-fast-forward" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/fa-audio-forward-black.svg">
 		</button>
 		&nbsp;
 		&nbsp;
     <button id='bAddRecord' style="color: white;background-color: #225988"  onclick="vEditor4JSON.add();return false">
-			<i class="fa fa-plus-square" aria-hidden="true"></i> Add
+			<!-- <i class="fa fa-plus-square" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/fa-plus-square-white.svg">
+		  Add
 		</button>
     <button id='bCloneRecord' style="color: white;background-color: #225988"  onclick="vEditor4JSON.cloneObject3D();return false">
-			<i class="fa fa-copy" aria-hidden="true"></i> Clone
+			<!-- <i class="fa fa-copy" aria-hidden="true"></i> Clone -->
+      <img src="img/icons-svg/fa-copy-white.svg">
+      Clone
 		</button>
 		<button id='bDeleteRecord' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.deleteAsk();return false">
-			<i class="fa fa-minus-square" aria-hidden="true"></i> Delete
+			<!--<i class="fa fa-minus-square" aria-hidden="true"></i> -->
+      <!-- <img src="img/icons-svg/fa-trash-white.svg"> -->
+      <img src="img/icons-svg/fa-minus-square-white.svg">
+	    Delete
 		</button>
-    <button id='bInitDB' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.initAsk();return false">
-      <i class="fa fa-minus-square" aria-hidden="true"></i> Init DB
+    <button id='bInitDB' style="display:none;color: white;background-color: #c10303"  onclick="vEditor4JSON.initAsk();return false">
+      <!-- <i class="fa fa-minus-square" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/fa-picture-white.svg">
+      Init DB
     </button>
     <i id='valid_indicator' style="width:50px;display:none">valid or not valid</i>
 
@@ -223,6 +248,21 @@
 
     <b>Title 3D Model:</b>
     <input type="text" name="titlemodel" id="titlemodel" value="3D Model" size="35" onchange="update4filename('titlemodel','json_file');vEditor4JSON.aConfig[this.id]=this.value">
+    &nbsp;
+		&nbsp;
+    <button id='bInit3D' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.initModel3D();return false">
+      <!-- <i class="fa fa-minus-square" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/fa-picture-white.svg">
+	    Init 3D
+    </button>
+    <select id="init_3d_select" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+      <option selected value="-">-</option>
+      <option value="water_molecule">Water Molecule</option>
+      <option value="cristal_lattice">Cristal Lattice</option>
+      <option value="snowman">Snowman</option>
+      <option value="candle4torus">4 Candles on Torus</option>
+    </select>
+
     <br>
 
     <b>Global Scale:</b>
@@ -441,7 +481,7 @@
 	</div>
   <div id="examples3d" style="display:none">
     <hr>
-    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">1.0.2</div></h3>
+    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">1.0.3</div></h3>
     <ul>
       <li>
         <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
@@ -474,7 +514,13 @@
         <a href="mods3d/snowman_ar_hiro.html" target="_blank">Snowman - AR.js Hiro Marker</a>
       </li>
       <li>
+        <a href="mods3d/snowman_sky_ar_hiro.html" target="_blank">Snowman - AR.js - Sky - Hiro Marker</a>
+      </li>
+      <li>
         <a href="mods3d/snowman_ar_kanji.html" target="_blank">Snowman - AR.js Kanji Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/snowman_sky_ar_kanji.html" target="_blank">Snowman - AR.js - Sky - Kanji Marker</a>
       </li>
     </ul>
     <hr>
@@ -489,9 +535,9 @@
     </div>
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
-      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.0.2</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/21 13:10:27</div>
-          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.0.2</div>)</a><br/>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.0.3</div> </a>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/30 21:48:44</div>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.0.3</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>

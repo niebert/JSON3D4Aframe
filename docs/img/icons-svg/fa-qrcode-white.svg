@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 -256 1792 1792"
+   id="svg2989"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   width="14px"
+   height="14px"
+   wikicommons="https://upload.wikimedia.org/wikipedia/commons/b/bb/Qrcode_font_awesome.svg"
+   sodipodi:docname="qrcode_font_awesome.svg">
+  <metadata
+     id="metadata2999">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2997" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview2995"
+     showgrid="false"
+     inkscape:zoom="0.13169643"
+     inkscape:cx="896"
+     inkscape:cy="896"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2989" />
+  <g
+     transform="matrix(1,0,0,-1,197.42373,1353.7627)"
+     id="g2991">
+    <path
+       d="M 384,384 V 256 H 256 v 128 h 128 z m 0,768 V 1024 H 256 v 128 h 128 z m 768,0 v -128 h -128 v 128 h 128 z M 128,129 H 512 V 512 H 128 V 129 z m 0,767 h 384 v 384 H 128 V 896 z m 768,0 h 384 v 384 H 896 V 896 z M 640,640 V 0 H 0 V 640 H 640 z M 1152,128 V 0 h -128 v 128 h 128 z m 256,0 V 0 h -128 v 128 h 128 z m 0,512 V 256 H 1024 V 384 H 896 V 0 H 768 v 640 h 384 V 512 h 128 v 128 h 128 z M 640,1408 V 768 H 0 v 640 h 640 z m 768,0 V 768 H 768 v 640 h 640 z"
+       id="path2993"
+       inkscape:connector-curvature="0"
+       style="fill:#EEE" />
+  </g>
+</svg>

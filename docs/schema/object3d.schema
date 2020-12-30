@@ -22,7 +22,7 @@ vDataJSON[vSchemaID] = {
             "type": "string",
             "id": "/properties/id",
             "title": "ID",
-            "default": "",
+            "default": "78912379812",
             "format": "text",
 						"propertyOrder": 10,
 						"description": "Unique ID for 3D Object"
@@ -41,7 +41,8 @@ vDataJSON[vSchemaID] = {
             "id": "/properties/tagname",
             "title": "Type of Object:",
   		    	"enum": [
-        			"a-box",
+							"-",
+          		"a-box",
           		"a-sphere",
           		"a-cylinder",
 							"a-cone",
@@ -52,21 +53,22 @@ vDataJSON[vSchemaID] = {
 							"a-ring",
 							"a-text"
           	],
-          	 "options": {
-       		   "enum_titles": [
-            		"Box",
-            		"Sphere",
-            		"Cylinder",
-								"Cone",
-								"Plane",
-								"Triangle",
-								"Circle",
-								"Torus",
-								"Ring",
-								"Text"
-            	]
-       		},
-            "default": "a-box",
+          	"options": {
+       		   		"enum_titles": [
+							 		"-",
+							 		"Box",
+            			"Sphere",
+            			"Cylinder",
+									"Cone",
+									"Plane",
+									"Triangle",
+									"Circle",
+									"Torus",
+									"Ring",
+									"Text"
+            		]
+       			},
+            "default": "-",
             "format": "text",
 						"propertyOrder": 30,
 						"description": "Select the 3D object you want to add to the scene."

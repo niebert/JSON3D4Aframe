@@ -68,13 +68,16 @@ function Editor4JSON () {
 	this.aDOMID = null;
 	//---PUBLIC: aConfig (Hash): the attribute 'aConfig' stores the configuration variables of the editor
 	this.aConfig = {
-		  "json_file": "object3d.json",
+		  "json_file": "model3d.json",
 			"globalscale": "1.0",
-			"globalemove": "0.0 0.0 0.0",
+			"globalmove": "0.0 0.0 0.0",
+			"globalrotate": "0.0 0.0 0.0",
+			"marker": "hiro",
+			"titlemodel": "Model 3D",
 			"dataid": vSchemaID
 	};
 	this.aConfigIDs = {
-		"DOMID": ["globalscale","globalmove","json_file","aframe_sky","use_aframe_sky","use_aframe_plane"],
+		"DOMID": ["titlemodel","marker","globalscale","globalmove","globalrotate","json_file","aframe_sky","use_aframe_sky","use_aframe_plane"],
 		"InnerHTMLID": [],
 		"CheckBoxID": []
 	}
@@ -271,9 +274,10 @@ Editor4JSON.prototype.initAsk = function () {
   //    vMyInstance.initAsk();
   //-------------------------------------------------------
 
-  var vOK = confirm("Do you really want to initialize the JSON-DB '"+this.aConfig["dataid"]+"'?");
+  var vOK = confirm("Do you really want to initialize the JSON-DB '"+this.aConfig["titlemodel"]+"'?");
   if (vOK == true) {
-		var vSampleOK = confirm("Do you want to initialize the JSON-DB '"+this.aConfig["dataid"]+"' with sample data?");
+		/*
+		var vSampleOK = confirm("Do you want to initialize the JSON-DB '"+this.aConfig["titlemodel"]+"' with sample data?");
 		if (vSampleOK == true) {
 			//this.aData = vDataJSON[this.aConfig["dataid"]];
 			this.aData = vDataJSON["initdata"]; // defined in /db/data.js
@@ -283,6 +287,9 @@ Editor4JSON.prototype.initAsk = function () {
 			this.aData = [];
 			alert("All data deleted in JSON-DB!");
 		};
+		*/
+		this.aData = [];
+		alert("All data deleted in JSON-DB!");
 		this.first();
 		//save changes to Local Storage
 		this.saveLS();
@@ -292,6 +299,55 @@ Editor4JSON.prototype.initAsk = function () {
 };
 //----End of Method initAsk Definition
 
+
+//#################################################################
+//# PUBLIC Method: initModel3D()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    initModel3D() asks the user if deleteRecord() should be performed
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.initModel3D = function () {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: initModel3D()");
+  // alert("js/editor4json.js - Call: initModel3D()");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.initModel3D();
+  //-------------------------------------------------------
+	var vTitle4ID = {
+		"water_molecule":"Water Molecule",
+		"cristal_lattice":"Cristal Lattice",
+		"snowman":"Snowman",
+		"candle4torus":"4 Candles on Torus"
+	}
+	var vInitID = getValueDOM("init_3d_select");
+	if (vInitID == "-") {
+		this.initAsk();
+	} else {
+		var vOK = confirm("Do you really want to initialize the JSON-DB '"+this.aConfig["titlemodel"]+"' with the 3D Demo '" + vInitID + "'?");
+		if (vOK == true) {
+				//this.aData = vDataJSON[this.aConfig["dataid"]];
+				this.aData = vDataJSON.models[vInitID]; // defined in Select "init_3d_select"
+				//write2value("titlemodel",vTitle4ID[vInitID]);
+				this.aConfig["titlemodel"] = vTitle4ID[vInitID]; // defined in Select "init_3d_select"
+				this.aConfig["json_file"] = vInitID + ".json"; // defined in Select "init_3d_select"
+				console.log("JSON-DB: " +JSON.stringify(this.aData,null,2));
+				alert("JSON-DB initalized with model '" + this.aConfig["titlemodel"] + "'!");
+				this.first();
+				//save changes to Local Storage
+				this.saveLS();
+		} else {
+			console.log("initialize JSON-DB cancelled")
+		};
+	}
+};
+//----End of Method initModel3D Definition
 
 //#################################################################
 //# PUBLIC Method: prev()
@@ -710,11 +766,13 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	var vDataArr = [];
 	for (var i = 0; i < this.aData.length; i++) {
 		// the repeat count defines the number of repetitions of an 3D object
-		vDataArr = get3DRepeatedArray(this.aData[i]);
-		for (var k = 0; k < vDataArr.length; k++) {
-			//create all repeated 3D objects
-			vARobjects += objectScript(vDataArr[k]);
-		};
+		if (this.aData[i].tagname !== "-") {
+			vDataArr = get3DRepeatedArray(this.aData[i]);
+			for (var k = 0; k < vDataArr.length; k++) {
+				//create all repeated 3D objects
+				vARobjects += objectScript(vDataArr[k]);
+			};
+		}
 	};
 	//----- Camera Position -----
 	var vCamPosJSON = {
