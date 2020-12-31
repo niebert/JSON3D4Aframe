@@ -1,52 +1,30 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
-<title>AFrame - LinkParam</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
-<script src="js/handlebars.js"></script>
-<script src="js/linkparam.js"></script>
-<script src="js/viewar.js"></script>
-<!-- Load the handlebars-template form DB file - templates stored in JSON format loaded into vDataJSON -->
-<script>
-  var vDataJSON = {};
-</script>
-<script src="db/handlebars_tpl.js"></script>
-<!-- the following default data is loaded into JSON id "initdata" in vDataJSON -->
-<script src="db/data.js"></script>
-<script>
-//-------------------------------------------------------
-// LINK PARAMETER: Evaluation link parameter in JSON Path
-var vLinkParam = new LinkParam();
-vLinkParam.init(document);
-//----MARKER load ------
-var vID = "marker";
-if (vLinkParam.exists(vID)) {
-  console.log("Parameter '"+vID+"' exists");
-  //--- Overwrite the default value in marker, jsondata ---
-  var vMarker = vLinkParam.getValue(vID);
-  // a Marker may consist of characters only - remove all other chars for security
-  vMarker = vMarker.replace(/[^A-Za-z]/g,"");
-  vDataJSON[vID] = vMarker;
-};
-//----JSONDATA load into "initdata"------
-vID = "jsondata";
-if (vLinkParam.exists(vID)) {
-    console.log("Parameter '"+vID+"' exists");
-    //--- Overwrite the default value in marker, jsondata ---
-    vDataJSON["jsondata"] = parseJSON3D(vLinkParam.getValue(vID));
-} else {
-    console.log("Use initdata of 3D objects for '"+vID+"'");
-    vDataJSON["jsondata"] = vDataJSON["initdata"];
-};
-//-------------------------------------------------------
-</script>
-<body id="htmlbody" style='margin : 0px; overflow: hidden;' onload="inject3Dmodel('aframetpl')">
-    <!--
+  <head>
+    <title>A-Frame - Model 3D </title>
+    <meta name="description" content="A-Frame Model 3D">
+    <meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe">
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  </head>
+  <body>
     <a-scene>
-  	<a-marker id="mymarker" preset="hiro">
-      <a-box position='0 0.5 0' material='color: blue;opacity:0.5'></a-box>
-  	</a-marker>
-  	<a-entity camera></a-entity>
+      <!-- Comment for a-sphere: Oxygen  -->
+      <a-sphere position="0.00 0.50 0.00" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.90" ></a-sphere>
+         <!-- Comment for a-sphere: Hydrogen 1 -->
+      <a-sphere position="1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+         <!-- Comment for a-sphere: Hydrogen 2 -->
+      <a-sphere position="-1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+         <!-- Comment for a-text: Water Molecule -->
+      <a-text position="0.00 0.50 1.50" material="color: #4545aa;opacity:0.5" rotation="0 0 0"  value="TEST Water Molecule" color="#4545aa" height="1.00" ></a-text>
+
+
+      <a-sky color="#ECECEC"></a-sky>
+
+    <a-entity id="myCameraPosition" position="0 2 4">
+        <a-entity id="myCamera" camera look-controls look-controls wasd-controls keyboard-controls>
+        </a-entity>
+    </a-entity>
+
     </a-scene>
-    -->
   </body>
 </html>
