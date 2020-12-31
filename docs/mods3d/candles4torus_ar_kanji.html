@@ -1,0 +1,48 @@
+<!doctype HTML>
+<html>
+    <head>
+      <meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe">
+      <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+      <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
+      <title>
+            AR kanji Marker - Candles4Torus
+      </title>
+    </head>
+    <body style='margin : 0px; overflow: hidden;'>
+      <a-scene>
+          <a-marker id="mymarker" preset="kanji">
+      <!-- Comment for a-torus: Gruener Kranz -->
+      <a-torus position="-1.00 -0.70 -1.38" material="color: #4a9a4d;opacity:0.5" rotation="90 0 0"  radius="1.29" radius-tubular="0.28" ></a-torus>
+         <!-- Comment for a-text: Adventskranz -->
+      <a-text position="-3.80 0.35 -0.05" material="color: #f8dd3b;opacity:0.5" rotation="0 0 0"  value="Adventskranz" color="#f8dd3b" height="0.70" ></a-text>
+         <!-- Comment for a-cylinder: Red Candles -->
+      <a-cylinder position="-1.70 0.70 -1.80" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+         <!-- Comment for a-cylinder: Red Candles -->
+      <a-cylinder position="-1.70 0.70 -0.26" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+         <!-- Comment for a-cylinder: Red Candles -->
+      <a-cylinder position="-0.16 0.70 -1.80" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+         <!-- Comment for a-cylinder: Red Candles -->
+      <a-cylinder position="-0.16 0.70 -0.26" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+         <!-- Comment for a-cone: Fire on Candles -->
+      <a-cone position="-1.70 2.73 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+         <!-- Comment for a-cone: Fire on Candles -->
+      <a-cone position="-1.70 2.73 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+         <!-- Comment for a-cone: Fire on Candles -->
+      <a-cone position="-0.16 2.73 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+         <!-- Comment for a-cone: Fire on Candles -->
+      <a-cone position="-0.16 2.73 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+         <!-- Comment for a-sphere: Fire on Candles -->
+      <a-sphere position="-1.70 2.45 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+         <!-- Comment for a-sphere: Fire on Candles -->
+      <a-sphere position="-1.70 2.45 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+         <!-- Comment for a-sphere: Fire on Candles -->
+      <a-sphere position="-0.16 2.45 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+         <!-- Comment for a-sphere: Fire on Candles -->
+      <a-sphere position="-0.16 2.45 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+   
+          </a-marker>
+          <a-entity camera ></a-entity>
+      </a-scene>
+    </body>
+</html>
+    

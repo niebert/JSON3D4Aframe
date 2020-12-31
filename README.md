@@ -59,13 +59,13 @@ The following equirectangular images are used as 360 degree sky background:
 <!-- Low Resolution Amphiteater Berlin
 [](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg/1280px-Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg)Amphiteater - Berlin
 -->
-* [Amphiteater_im_Mauerpark - Berlin - Wiki Commons](https://upload.wikimedia.org/wikipedia/commons/8/8d/Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg)Amphiteater - Berlin](https://commons.wikimedia.org/wiki/File:Amphiteater_im_Mauerpark,_Berlin,_360x180,_1705280617,_ako.jpg)
+* [Amphiteater im Mauerpark - Berlin - Wiki Commons](https://upload.wikimedia.org/wikipedia/commons/8/8d/Amphiteater_im_Mauerpark%2C_Berlin%2C_360x180%2C_1705280617%2C_ako.jpg) - WikiCommons Info: [Amphiteater - Berlin](https://commons.wikimedia.org/wiki/File:Amphiteater_im_Mauerpark,_Berlin,_360x180,_1705280617,_ako.jpg)
 * [Magpupungko Beach 1 -  WikiCommons](https://upload.wikimedia.org/wikipedia/commons/5/56/Magpupungko_beach_area_spherical_360-degree_08-23-2017.jpg) - WikiCommons Info:
 * [Magpupungko Beach 2](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Magpupungko_beach_area_02_spherical_360-degree_08-23-2017.jpg/1024px-Magpupungko_beach_area_02_spherical_360-degree_08-23-2017.jpg) - WikiCommons Info: (https://commons.wikimedia.org/wiki/File:Magpupungko_beach_area_02_spherical_360-degree_08-23-2017.jpg)
-[River Rhine 1 - Cologne](https://niebert.github.io/HuginSample/img/rhein1_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
-[River Rhine 2 - Cologne](https://niebert.github.io/HuginSample/img/rhein2_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
-[River Rhine 3 - Cologne](https://niebert.github.io/HuginSample/img/rhein3_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
-[River Rhine 4 - Cologne](https://niebert.github.io/HuginSample/img/rhein4_rodenkirchen.jpg) - GitHub [HuginSample](https://www.github.com/niebert/HuginSample)
+* [River Rhine 1 - Cologne](https://niebert.github.io/HuginSample/img/rhein1_rodenkirchen.jpg) - GitHub Repository [HuginSample](https://www.github.com/niebert/HuginSample)
+* [River Rhine 2 - Cologne](https://niebert.github.io/HuginSample/img/rhein2_rodenkirchen.jpg) - GitHub Repository [HuginSample](https://www.github.com/niebert/HuginSample)
+* [River Rhine 3 - Cologne](https://niebert.github.io/HuginSample/img/rhein3_rodenkirchen.jpg) - GitHub Repository [HuginSample](https://www.github.com/niebert/HuginSample)
+* [River Rhine 4 - Cologne](https://niebert.github.io/HuginSample/img/rhein4_rodenkirchen.jpg) - GitHub Repository [HuginSample](https://www.github.com/niebert/HuginSample)
 
 
 ## Lesson Result of 3D Geometry
@@ -77,7 +77,7 @@ This tool was developed as support tool for a learning resource about 3D modelli
 ### See also
 * [HuginSample](https://www.github.com/niebert/HuginSample) for example of 360 degree images that can be used as sky `a-sky` in AFrame.
 * See [WikiCommons2AFrame](https://www.github.com/niebert/WikiCommons2AFrame) for generating 360 degree image views for a geo location.
-* This repository was created for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling). 
+* This repository was created for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling).
 
 
 ## UML Diagram of Editor4JSON Class

@@ -52,6 +52,8 @@ function Editor4JSON () {
     //---------------------------------------------------------------------
 	//---PUBLIC: aEditor (JSONEditor): is the instance of the JSON editor developed by Jeremy Dorn
 	this.aEditor = null;
+	//---PUBLIC: previewWin (Window): is the preview instance of Window object - null if closed.
+	this.previewWin = null;
 	//---PUBLIC: aName (String): the attribute 'aName' stores the base name of the JSON file. it used for base name for export files.
 	this.aName = "myjson";
 	//---PUBLIC: aLoadedFile (String): the attribute 'aLoadedFile' stores the base name of the JSON file. it used for base name for export files.
@@ -253,6 +255,8 @@ Editor4JSON.prototype.init = function (pDOMID,pData,pSchema) {
         });
 	this.check();
 	this.updateDOM();
+	this.updateConfigDOM();
+	this.first();
 };
 //----End of Method init Definition
 
@@ -711,10 +715,26 @@ Editor4JSON.prototype.exportData = function () {
 Editor4JSON.prototype.previewHTML = function (pTplID) {
 	var vHTML = this.generateHTML(pTplID);
 	var vTimeStamp = Date.now();
-	var newWin = open('url','newWin'+vTimeStamp,'height=600,width=600');
-	newWin.document.write(vHTML);
-	//var vBase64 = btoa(vHTML);
-	//var vDataURL = "data:text/html," + vBase64;
+	var vThis = this;
+	if (this.previewWin) {
+		if (this.previewWin.hasOwnProperty('close')) {
+			this.previewWin.close();
+			console.log("preview Window closed");
+		} else {
+			console.warn("preview Window does not have close-method");
+		}
+	} else {
+		console.log("Preview Window does not exist!");
+	}
+	/*
+	var vBase64 = btoa(vHTML);
+	var vDataURL = "data:text/html," + vBase64;
+	console.log("DataURL written to src of preview window");
+	this.previewWin = open(vDataURL,'newWin'+vTimeStamp,'height=600,width=600');
+	*/
+	this.previewWin = open(null,'newWin'+vTimeStamp,'height=600,width=600');
+	//waitTime(2000);
+	this.previewWin.document.write(vHTML);
 	//document.getElementById("previewlink").open(vDataURL);
 };
 //----End of Method previewHTML() Definition

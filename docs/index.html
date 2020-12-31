@@ -29,6 +29,7 @@
      <script src="js/editor4json.js"></script>
      <script src="js/predbedit.js"></script>
      <script src="js/submit2display.js"></script>
+     <script src="js/waittime.js"></script>
      <script src="js/writedom.js"></script>
      <script>
      var vDataJSON = {};
@@ -184,11 +185,6 @@
       <img src="img/icons-svg/fa-picture-white.svg">
       Save 3D
 		</button>
-    <button id='bPrevieweJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.previewHTML(getValueDOM('arselect'));return false">
-			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
-      <img src="img/icons-svg/fa-picture-white.svg">
-      Preview 3D
-		</button>
      &nbsp;
     <select id="arselect" onchange="displaySettings(this.value);vEditor4JSON.aConfig[this.id]=this.value">
       <option selected="selected" value="aframe">AFrame 3D</option>
@@ -197,7 +193,13 @@
     </select>
 
     &nbsp;
-		&nbsp;
+    <button id='bPrevieweJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.previewHTML('aframe');return false">
+			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/fa-picture-white.svg">
+      Preview 3D
+		</button>
+    &nbsp;
+    &nbsp;
 
 		<button id='bFastBackward' onclick="vEditor4JSON.first();return false">
 			<!-- <i class="fa fa-fast-backward" aria-hidden="true"></i> -->
@@ -277,7 +279,7 @@
 
     <br>
 
-    <button id='bAframeSettings' style="color: white;background-color: #225988"  onclick="displaySettings('aframe');return false">
+    <button id='bAframeSettings' style="color: white;background-color: #225988"  onclick="displaySettings('aframe','toggle');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AFrame Settings
 		</button>
     <button id='bARSettings' style="color: white;background-color: #225988"  onclick="displaySettings('ar','toggle');return false">
@@ -537,7 +539,7 @@
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
       <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.1.0</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/31 10:20:02</div>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/31 16:06:12</div>
           <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.1.0</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 

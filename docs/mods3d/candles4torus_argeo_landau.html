@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR - 4 Candles on Torus </title>
+    <meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe">
+    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <a-scene
+        vr-mode-ui="enabled: false"
+		embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+
+     <!-- Comment for a-torus: Gruener Kranz with reference location Lat:49.2042,Long:8.10773 -->
+     <a-torus  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.00 -0.70 -1.38" material="color: #4a9a4d;opacity:0.5" rotation="90 0 0"  radius="1.29" radius-tubular="0.28" ></a-torus>
+       <!-- Comment for a-text: Adventskranz with reference location Lat:49.2042,Long:8.10773 -->
+     <a-text  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-3.80 0.35 -0.05" material="color: #f8dd3b;opacity:0.5" rotation="0 0 0"  value="Adventskranz" color="#f8dd3b" height="0.70" ></a-text>
+       <!-- Comment for a-cylinder: Red Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cylinder  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.70 0.70 -1.80" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+       <!-- Comment for a-cylinder: Red Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cylinder  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.70 0.70 -0.26" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+       <!-- Comment for a-cylinder: Red Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cylinder  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-0.16 0.70 -1.80" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+       <!-- Comment for a-cylinder: Red Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cylinder  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-0.16 0.70 -0.26" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.35" height="2.80" ></a-cylinder>
+       <!-- Comment for a-cone: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cone  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.70 2.73 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+       <!-- Comment for a-cone: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cone  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.70 2.73 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+       <!-- Comment for a-cone: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cone  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-0.16 2.73 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+       <!-- Comment for a-cone: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-cone  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-0.16 2.73 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius-bottom="0.35" radius-top="0.07" height="0.35" ></a-cone>
+       <!-- Comment for a-sphere: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.70 2.45 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+       <!-- Comment for a-sphere: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.70 2.45 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+       <!-- Comment for a-sphere: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-0.16 2.45 -1.80" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+       <!-- Comment for a-sphere: Fire on Candles with reference location Lat:49.2042,Long:8.10773 -->
+     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-0.16 2.45 -0.26" material="color: #fbf253;opacity:0.5" rotation="0 0 0"  radius="0.35" ></a-sphere>
+  
+
+        <a-camera gps-camera rotation-reader></a-camera>
+	</a-scene>
+</body>
+</html>
+    

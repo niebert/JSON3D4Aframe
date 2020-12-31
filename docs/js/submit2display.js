@@ -5,6 +5,10 @@
 
 function displaySettings(vExportID,pToggle) {
   console.log("Display Settings for Export Mode '" + vExportID + "'");
+  var vCurrentExport = getValueDOM("arselect");
+  if (vCurrentExport !== vExportID) {
+    write2value("arselect",vExportID);
+  }
   switch (vExportID) {
     case "aframe":
       if (pToggle) {
