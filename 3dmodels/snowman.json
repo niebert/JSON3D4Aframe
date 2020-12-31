@@ -145,12 +145,13 @@
         }
     ],
     "config": {
+        "titlemodel": "Snowman",
         "json_file": "snowman.json",
         "globalscale": "0.4",
         "globalemove": "0.0 0.0 0.0",
+        "globalrotate": "0 0 0",
         "dataid": "object3d",
         "marker": "hiro",
-        "globalmove": "0 0 0",
         "use_aframe_sky": null,
         "aframe_sky_file": "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
         "use_aframe_plane": null,

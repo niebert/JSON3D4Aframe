@@ -67,12 +67,13 @@
         }
     ],
     "config": {
+        "titlemodel":" 4 Candles on Torus",
         "json_file": "candles4torus.json",
         "globalscale": "0.7",
-        "globalemove": "0.0 0.0 0.0",
+        "globalmove": "-3.8 0.0 -1.8",
+        "globalrotate": "0 0 0",
         "dataid": "object3d",
         "marker": "hiro",
-        "globalmove": "-3.8 0.0 -1.8",
         "use_aframe_sky": "Y",
         "aframe_sky_file": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Aldara_parks.jpg",
         "use_aframe_plane": null,

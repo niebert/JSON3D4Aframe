@@ -79,7 +79,7 @@
           &lt;a-marker id="mymarker" preset="{{marker}}"&gt;
 {{{arobjects}}}
           &lt;/a-marker&gt;
-          &lt;a-entity camera&gt;&lt;/a-entity&gt;
+          &lt;a-entity camera &gt;&lt;/a-entity&gt;
       &lt;/a-scene&gt;
     &lt;/body&gt;
 &lt;/html&gt;
@@ -135,7 +135,7 @@
     </textarea>
     <textarea id="camera-position-template" rows="10" cols="120" style="display:none">
     &lt;a-entity id="myCameraPosition" position="{{{camposxyz}}}"&gt;
-        &lt;a-entity id="myCamera" camera look-controls keyboard-controls&gt;
+        &lt;a-entity id="myCamera" camera look-controls look-controls wasd-controls keyboard-controls&gt;
         &lt;/a-entity&gt;
     &lt;/a-entity&gt;
   </textarea>
@@ -159,7 +159,7 @@
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
-    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">1.0.4</div>
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">1.1.0</div>
     </h2>
     <div data-role="fieldcontain" style="display:none">
          <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
@@ -177,20 +177,18 @@
       <img src="img/icons-svg/fa-file-save-white.svg">
       Save
 		</button>
-    <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(document.getElementById('arselect').value);return false">
+
+    <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(getValueDOM('arselect'));return false">
       <!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
       <img src="img/icons-svg/fa-file-save-white.svg">
       <img src="img/icons-svg/fa-picture-white.svg">
       Save 3D
 		</button>
-    <!--
-    <button id='bExportAframeHTML' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML('aframe');return false">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AFrame
+    <button id='bPrevieweJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.previewHTML(getValueDOM('arselect'));return false">
+			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/fa-picture-white.svg">
+      Preview 3D
 		</button>
-    <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(getValueDOM('arselect'));return false">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i> Save AR Select
-		</button>
-    -->
      &nbsp;
     <select id="arselect" onchange="displaySettings(this.value);vEditor4JSON.aConfig[this.id]=this.value">
       <option selected="selected" value="aframe">AFrame 3D</option>
@@ -247,7 +245,7 @@
     <br>
 
     <b>Title 3D Model:</b>
-    <input type="text" name="titlemodel" id="titlemodel" value="3D Model" size="35" onchange="update4filename('titlemodel','json_file');vEditor4JSON.aConfig[this.id]=this.value">
+    <input type="text" name="titlemodel" id="titlemodel" value="3D Model" size="35" onchange="vEditor4JSON.aConfig[this.id]=this.value;vEditor4JSON.aConfig['title']=this.value;vEditor4JSON.aConfig['json_file']=title2filename(this.value)+'.json';vEditor4JSON.updateConfigDOM()">
     &nbsp;
 		&nbsp;
     <button id='bInit3D' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.initModel3D();return false">
@@ -260,7 +258,7 @@
       <option value="water_molecule">Water Molecule</option>
       <option value="cristal_lattice">Cristal Lattice</option>
       <option value="snowman">Snowman</option>
-      <option value="candle4torus">4 Candles on Torus</option>
+      <option value="candles4torus">4 Candles on Torus</option>
     </select>
 
     <br>
@@ -481,7 +479,7 @@
 	</div>
   <div id="examples3d" style="display:none">
     <hr>
-    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">1.0.4</div></h3>
+    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">1.1.0</div></h3>
     <ul>
       <li>
         <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
@@ -525,6 +523,9 @@
     </ul>
     <hr>
   </div>
+  <h2 id="html-titlemodel" style="align:center">
+    3D Model
+  </h2>
     <div id='editor_holder' style="margin-right: 30px; margin-left: 30px"></div>
     <div id='button_holder' style="margin:20px">
       <button id='bExportJSON' onclick="vEditor4JSON.exportData();return false">Export JSON</button>
@@ -535,9 +536,9 @@
     </div>
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
-      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.0.4</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/30 22:01:33</div>
-          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.0.4</div>)</a><br/>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.1.0</div> </a>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2020/12/31 10:20:02</div>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.1.0</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>

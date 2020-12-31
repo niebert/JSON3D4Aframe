@@ -68,7 +68,8 @@ function Editor4JSON () {
 	this.aDOMID = null;
 	//---PUBLIC: aConfig (Hash): the attribute 'aConfig' stores the configuration variables of the editor
 	this.aConfig = {
-		  "json_file": "model3d.json",
+			"title": "Title of 3D Model",
+			"json_file": "model3d.json",
 			"globalscale": "1.0",
 			"globalmove": "0.0 0.0 0.0",
 			"globalrotate": "0.0 0.0 0.0",
@@ -76,9 +77,11 @@ function Editor4JSON () {
 			"titlemodel": "Model 3D",
 			"dataid": vSchemaID
 	};
+	// the ids "InnerHTMLID" write to inner HTML of tags with the id-prefix "html-"
+	// e.g. the content of titlemodel will be written to innerHTML of "html-titlemodel"
 	this.aConfigIDs = {
 		"DOMID": ["titlemodel","marker","globalscale","globalmove","globalrotate","json_file","aframe_sky","use_aframe_sky","use_aframe_plane"],
-		"InnerHTMLID": [],
+		"InnerHTMLID": ["titlemodel"],
 		"CheckBoxID": []
 	}
   //---------------------------------------------------------------------
@@ -333,14 +336,17 @@ Editor4JSON.prototype.initModel3D = function () {
 		var vOK = confirm("Do you really want to initialize the JSON-DB '"+this.aConfig["titlemodel"]+"' with the 3D Demo '" + vInitID + "'?");
 		if (vOK == true) {
 				//this.aData = vDataJSON[this.aConfig["dataid"]];
-				this.aData = vDataJSON.models[vInitID]; // defined in Select "init_3d_select"
+				this.storeJSON(vDataJSON.models[vInitID]); // defined in Select "init_3d_select"
 				//write2value("titlemodel",vTitle4ID[vInitID]);
-				this.aConfig["titlemodel"] = vTitle4ID[vInitID]; // defined in Select "init_3d_select"
-				this.aConfig["json_file"] = vInitID + ".json"; // defined in Select "init_3d_select"
+				//this.aConfig["titlemodel"] = vTitle4ID[vInitID]; // defined in Select "init_3d_select"
+				//this.aConfig["json_file"] = vInitID + ".json"; // defined in Select "init_3d_select"
 				console.log("JSON-DB: " +JSON.stringify(this.aData,null,2));
 				alert("JSON-DB initalized with model '" + this.aConfig["titlemodel"] + "'!");
 				this.first();
-				//save changes to Local Storage
+				this.edit();
+				this.updateDOM(); // updateDOM()-call necessary because length and current index changed due to add-click of user
+				this.updateConfigDOM();
+			  //save changes to Local Storage
 				this.saveLS();
 		} else {
 			console.log("initialize JSON-DB cancelled")
@@ -690,6 +696,30 @@ Editor4JSON.prototype.exportData = function () {
 //----End of Method exportData Definition
 
 //#################################################################
+//# PUBLIC Method: previewHTML()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    previewHTML() previews the HTML File
+//#    and opens a new window with a base64 encoded HTML file
+//#    generated with this.generateHTML()
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.previewHTML = function (pTplID) {
+	var vHTML = this.generateHTML(pTplID);
+	var vTimeStamp = Date.now();
+	var newWin = open('url','newWin'+vTimeStamp,'height=600,width=600');
+	newWin.document.write(vHTML);
+	//var vBase64 = btoa(vHTML);
+	//var vDataURL = "data:text/html," + vBase64;
+	//document.getElementById("previewlink").open(vDataURL);
+};
+//----End of Method previewHTML() Definition
+
+//#################################################################
 //# PUBLIC Method: exportHTML()
 //#    used in Class: Editor4JSON
 //# Parameter:
@@ -702,6 +732,58 @@ Editor4JSON.prototype.exportData = function () {
 //#################################################################
 
 Editor4JSON.prototype.exportHTML = function (pTplID) {
+	var vTplID = pTplID || "aframe";
+	var vFilename = getName4Filename(this.aConfig.json_file);
+	var vMarker = getValueDOM("marker");  //document.getElementById("marker").value;
+	switch (vTplID) {
+		case "ar":
+			vFilename += "_ar_"+vMarker+".html";
+		break;
+		case "aframe":
+			vFilename += "_aframe.html";
+		break;
+		case "argeo":
+			vFilename += "_argeo.html";
+		break;
+		default:
+			vTplID = "aframe";
+			vFilename += "_aframe.html"
+	};
+	var vHTML = this.generateHTML(pTplID);
+	this.saveFile(vFilename,vHTML);
+};
+
+
+//#################################################################
+//# PUBLIC Method: getTemplate(pTplID4DOM)
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    getTemplate() fetch the HTML Template
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.getTemplate = function (pTplID4DOM) {
+	//return document.getElementById("object-template").value;
+	return getValueDOM(pTplID4DOM);
+};
+
+//#################################################################
+//# PUBLIC Method: generateHTML()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    generatetHTML() generates the HTML content according to JSON definition
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.generateHTML = function (pTplID) {
   //----Debugging------------------------------------------
   // console.log("js/editor4json.js - Call: exporFileHTML()");
   // alert("js/editor4json.js - Call: exportData()");
@@ -710,8 +792,8 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
   //    vMyInstance.exportHTML();
   //-------------------------------------------------------
 	var vTplID = pTplID || "aframe";
-	var vMarker = document.getElementById("marker").value;
-	var vFilename = getName4Filename(this.aConfig.json_file);
+	var vMarker = getValueDOM("marker"); //document.getElementById("marker").value;
+	//var vFilename = getName4Filename(this.aConfig.json_file);
 	var vMoveXYZstr = $("#globalmove").val();
 	var vMoveXYZ = getGlobalMove();
 	var vCameraPosition = "";
@@ -720,9 +802,9 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	switch (vTplID) {
 		case "ar":
 
-			vFilename += "_ar_"+vMarker+".html";
+			//vFilename += "_ar_"+vMarker+".html";
 			// load the 3D object template
-			objecttpl = document.getElementById("object-template").value;
+			objecttpl = this.getTemplate("object-template");
 			// correctHandleBarsTemplate() defined in string.hs
 			objecttpl = correctHandleBarsTemplate(objecttpl);
 			console.log(objecttpl);
@@ -731,12 +813,13 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 
 		break;
 		case "aframe":
-			vFilename += "_aframe.html";
+			//vFilename += "_aframe.html";
+
 			//vMoveXYZ[2] -= 0.0; // move backward for better inital 3D scenario
 			//$("#globalmove").val(floatArr2String(vMoveXYZ));
 
 			// load the 3D object template
-			objecttpl = document.getElementById("object-template").value;
+			objecttpl = this.getTemplate("object-template");
 			// correctHandleBarsTemplate() defined in string.hs
 			objecttpl = correctHandleBarsTemplate(objecttpl);
 			console.log(objecttpl);
@@ -745,8 +828,8 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 
 		break;
 		case "argeo":
-			vFilename += "_argeo.html";
-			objecttpl = document.getElementById("object-geo-template").value;
+			//vFilename += "_argeo.html";
+			objecttpl = this.getTemplate("object-geo-template");
 			// correctHandleBarsTemplate() defined in string.hs
 			objecttpl = correctHandleBarsTemplate(objecttpl);
 			console.log(objecttpl);
@@ -757,7 +840,7 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 
 		default:
 			vTplID = "aframe";
-			vFilename += "_aframe.html"
+			//vFilename += "_aframe.html"
 	};
 
 
@@ -780,7 +863,7 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	};
 
 	if (vTplID == "aframe") {
-		var campostpl = document.getElementById("camera-position-template").value;
+		var campostpl = this.getTemplate("camera-position-template");
 		// correctHandleBarsTemplate() defined in string.hs
 		campostpl = correctHandleBarsTemplate(campostpl);
 		console.log(campostpl);
@@ -790,10 +873,10 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	}
 
 	// load the main Handlebars template and replace
-	var template = document.getElementById(vTplID +"-template").value;
+	var template = this.getTemplate(vTplID +"-template");
 	//alert("Template:"+template);
 	// identify the selected marker
-	// Add Sky to Aframe
+	// Add Sky to Aframe - depending on select-tag set to "Yes" or "No"
 	var vSimulate4GPS = getValueDOM("simulate4gps");
 	var context = {
 		"titlemodel": getValueDOM("titlemodel"),
@@ -826,11 +909,12 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 	// Compile the template data into a function
 	var templateScript = Handlebars.compile(template);
 	var vHTML = templateScript(context);
-	this.saveFile(vFilename,vHTML);
+	//this.saveFile(vFilename,vHTML);
 	// restore old move setting
 	//$("#globalmove").val(vMoveXYZstr);
+	return vHTML;
 };
-//----End of Method exportData Definition
+//----End of Method generateHTML Definition
 
 //#################################################################
 //# PUBLIC Method: exportSchema()
@@ -923,17 +1007,17 @@ Editor4JSON.prototype.loadLS = function () {
           try {
               this.setEditorData(JSON.parse(vJSONstring));
           } catch(e) {
-              alert(e)
-          };
+              alert(e);
+          }
 
   	  }
       } else {
         console.log("loadLS('"+vLSID+"') is undefined in Local Storage.\nSave default as JSON");
         localStorage.setItem(vLSID, JSON.stringify(this.aData));
-      };
+      }
   }	 else {
       console.log("WARNING: Sorry, your browser does not support Local Storage of JSON Database. Use Firefox ...");
-  };
+  }
 
 };
 //----End of Method loadLS Definition
@@ -1267,7 +1351,7 @@ Editor4JSON.prototype.updateConfigDOM = function () {
 		for (var i = 0; i < vArrID.length; i++) {
 			iID = vArrID[i];
 			if (this.aConfig.hasOwnProperty(iID)) {
-				write2innerHTML(iID,this.aConfig[iID]);
+				write2innerHTML("html-"+iID,this.aConfig[iID]);
 			};
 		};
 		vType = 'CheckBoxID';
@@ -1488,6 +1572,38 @@ Editor4JSON.prototype.cloneObject3D = function () {
 };
 //----End of Method cloneObject3D Definition
 
+
+//#################################################################
+//# PUBLIC Method: storeJSON()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#    pStringJSON:String
+//# Comment:
+//#    importJSON() parses the JSON string in pStringJSON and stores the JSON in this.aData
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/07/06 15:30:10
+//#################################################################
+
+Editor4JSON.prototype.storeJSON = function (pJSON) {
+	var vData = pJSON || {};
+	if (vData.hasOwnProperty("data")) {
+		// JSON is a Hash with attributes "data" (array) "config" (hash)
+		this.aData = vData["data"];
+		if (vData.hasOwnProperty("config")) {
+			// load the config from file
+			this.aConfig = vData["config"];
+			//this.aConfig["json_file"] = vFilename;
+		};
+		console.log("File JSON '"+this.aConfig["json_file"]+"' stored successfully as JSON!")
+	} else if (isArray(vData)) {
+		this.aData = vData;
+		console.log("Store data JSON '"+this.aConfig["json_file"]+"' successfully into 3D elements without configs!")
+	} else {
+		alert("ERROR: JSON is not an array of hashes!")
+	};
+}
+
 //#################################################################
 //# PUBLIC Method: importJSON()
 //#    used in Class: Editor4JSON
@@ -1510,25 +1626,10 @@ Editor4JSON.prototype.importJSON = function (pStringJSON) {
   //-------------------------------------------------------
 
   console.log("importJSON('"+this.aConfig["json_file"]+"')");
-	var vFilename = this.aConfig["json_file"];
-  if (pStringJSON) {
+	if (pStringJSON) {
       try {
 				var vData = JSON.parse(pStringJSON);
-				if (vData.hasOwnProperty("data")) {
-					// JSON is a Hash with attributes "data" (array) "config" (hash)
-					this.aData = vData["data"];
-					if (vData.hasOwnProperty("config")) {
-						// load the config from file
-						this.aConfig = vData["config"];
-						this.aConfig["json_file"] = vFilename;
-					};
-					alert("File JSON '"+this.aConfig["json_file"]+"' loaded successfully as JSON!")
-				} else if (isArray(vData)) {
-					this.aData = vData;
-					alert("File JSON '"+this.aConfig["json_file"]+"' loaded successfully!")
-				} else {
-					alert("ERROR: JSON is not an array of hashes!")
-				};
+				this.storeJSON(vData);
       } catch(e) {
           alert(e); // error in the above string (in this case, yes)!
       }

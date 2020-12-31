@@ -3,7 +3,7 @@
         {
             "id": "23432423",
             "tagname": "a-sphere",
-            "comment": "Green big 1 - with Global Scale '0.35' and Global Move '-1.0 0.0 -1.0'",
+            "comment": "Green big 1",
             "position": "0.0 1.0 0.0",
             "color": "#5b9c58",
             "opacity": 0.8,
@@ -106,11 +106,11 @@
         }
     ],
     "config": {
-        "titlemodel": "Model 3D",
+        "titlemodel": "Cristal Lattice",
         "json_file": "cristal_lattice.json",
         "globalscale": "0.35",
-        "globalmove": "-1.0 0.0 -1.0"
-        "globalrotate": "0.0 0.0 0.0",
+        "globalmove": "-1.0 0.0 -1.0",
+        "globalrotate": "0 0 0",
         "dataid": "object3d",
         "marker": "hiro"
     }

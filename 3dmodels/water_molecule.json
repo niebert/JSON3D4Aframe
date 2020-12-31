@@ -54,9 +54,11 @@
         }
     ],
     "config": {
-        "json_file": "object3d.json",
-        "globalscale": "",
+        "titlemodel": "Water Molecule",
+        "json_file": "water_molecule.json",
+        "globalscale": "1.0",
         "globalemove": "0.0 0.0 0.0",
+        "globalrotate": "0 0 0",
         "dataid": "object3d",
         "marker": "hiro",
         "globalmove": "",
