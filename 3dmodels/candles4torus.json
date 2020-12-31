@@ -4,12 +4,12 @@
             "id": "78123791239",
             "tagname": "a-torus",
             "comment": "Gruener Kranz",
-            "position": "4.0 -1.0 0.3",
+            "position": "4.0 -1.0 0.6",
             "color": "#4a9a4d",
             "opacity": 0.5,
-            "sizexyz": "2.8 0.5 1.0",
+            "sizexyz": "2.3 0.5 1.0",
             "rotation": "90 0 0",
-            "scale": 1,
+            "scale": 0.8,
             "repeat": "0 0 0",
             "repeatsteps": "1.0 1.0 1.0"
         },
@@ -67,17 +67,17 @@
         }
     ],
     "config": {
-        "titlemodel":" 4 Candles on Torus",
+        "title": "4 Candles on Torus",
         "json_file": "candles4torus.json",
         "globalscale": "0.7",
         "globalmove": "-3.8 0.0 -1.8",
-        "globalrotate": "0 0 0",
-        "dataid": "object3d",
+        "globalrotate": "0.0 0.0 0.0",
         "marker": "hiro",
+        "titlemodel": "Candles4Torus",
+        "dataid": "object3d",
         "use_aframe_sky": "Y",
-        "aframe_sky_file": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Aldara_parks.jpg",
+        "aframe_sky_file": "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
         "use_aframe_plane": null,
-        "aframe_plane_color": "#7BC8A4",
-        "arselect": "ar"
+        "aframe_plane_color": "#7BC8A4"
     }
 }
