@@ -61,7 +61,6 @@
         "globalrotate": "0 0 0",
         "dataid": "object3d",
         "marker": "hiro",
-        "globalmove": "",
         "use_aframe_sky": null,
         "aframe_sky_file": "",
         "use_aframe_plane": null,
