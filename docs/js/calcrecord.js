@@ -117,10 +117,12 @@ function calcRecordJSON(pData) {
       vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
     break;
     case "a-ellipsoid":
-      vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
       vAttribs += getAttribAframe("width",vSizeXYZ,0,vScale);
       vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
       vAttribs += getAttribAframe("depth",vSizeXYZ,2,vScale);
+      vSizeXYZ[0] = 1.0; 
+      vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
+
     break;
     case "a-circle":
       vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);

@@ -1,0 +1,51 @@
+<!doctype HTML>
+<html>
+<title>View Local Storage</title>
+<body>
+  <textarea id="lsview" rows=10 cols="120">
+  </textarea>
+  <script type="text/javascript">
+  function loadLS (pLSID) {
+    //----Debugging------------------------------------------
+    console.log("js/loadls.js - Call: loadLS()");
+    // alert("js/editor4json.js - Call: loadLS()");
+    //----Create Object/Instance of Editor4JSON----
+    //    var vMyInstance = new Editor4JSON();
+    //    vMyInstance.loadLS();
+    //-------------------------------------------------------
+
+    if (typeof(Storage) != "undefined") {
+        // load selected marker
+        var vLSID = pLSID || "json3d4aframe";
+        if (typeof(localStorage.getItem(vLSID)) !== undefined) {
+          console.log("JSON-DB '"+vLSID+"' try loading from Local Storage");
+          var vJSONstring = localStorage.getItem(vLSID);
+        if (!vJSONstring) {
+            console.log("JSON-DB '"+vLSID+"' undefined in Local Storage.\nSave default as JSON");
+            localStorage.setItem(vLSID, JSON.stringify(this.getEditorData()));
+        } else {
+            //console.log("loadLS('"+this.aName+"') JSONstring='"+vJSONstring.substr(0,120)+"...'");
+            //console.log("loadLS('Mapper4SDG') JSONstring='"+vJSONstring+"'");
+            try {
+                var vJSON = JSON.parse(vJSONstring);
+                document.getElementById("lsview").value = JSON.stringify(vJSON,null,4);
+            } catch(e) {
+                alert(e);
+            }
+
+        }
+        } else {
+          console.log("loadLS('"+vLSID+"') is undefined in Local Storage.\nSave default as JSON");
+          localStorage.setItem(vLSID, JSON.stringify(this.aData));
+        }
+    }	 else {
+        console.log("WARNING: Sorry, your browser does not support Local Storage of JSON Database. Use Firefox ...");
+    }
+
+  };
+
+
+  loadLS("json3d4aframe");
+  </script>
+</body>
+</html>

@@ -43,6 +43,30 @@ function saveConfigLS(pConfig) {
 
 
 
+function savePreviewLS(pID,pJSON) {
+  console.log("savePreviewLS('" + pID +"' )\n"+JSON.stringify(pJSON,null,4));
+  localStorage.setItem(pID,JSON.stringify(pJSON));
+}
+
+function loadPreviewLS(pID) {
+  var vJSON = null;
+  if (typeof(localStorage.getItem(pID)) !== undefined) {
+    var vJSONstring = localStorage.getItem(pID);
+    try {
+        var vJSONtest = JSON.parse(vJSONstring);
+        if (vJSONtest) {
+          vJSON = vJSONtest;
+        }
+    } catch(e) {
+        alert(e);
+    }
+  } else {
+    console.error("ERROR: Local Storage content for '" + pID + "' does not exist!");
+  }
+  return vJSON;
+}
+
+
 function loadDOMLS(pConfig,pID,pDefault) {
   if (typeof(localStorage.getItem(pID)) !== undefined) {
     var vValue = localStorage.getItem(pID);

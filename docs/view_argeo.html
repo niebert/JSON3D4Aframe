@@ -1,10 +1,17 @@
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>A-Frame - Model 3D </title>
-    <meta name="description" content="A-Frame Model 3D">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR - Preview</title>
     <meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe">
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
     <script type="text/javascript">
 
         function loadModel3D (pLSID,render) {
@@ -53,22 +60,21 @@
 
     //console.log(loadModel3D("json3d4aframe"));
     console.log(loadModel3D("preview3d"));
-    </script>
-  </head>
-  <body>
-    <a-scene>
-      <script type="text/javascript">
-        var vJSON = loadModel3D("preview3d");
-        document.write(vJSON.arobjects);
-        document.write(vJSON.sky);
-      </script>
-    <!--  <a-sky color="#ECECEC"></a-sky> -->
+  </script>
+</head>
 
-    <a-entity id="myCameraPosition" position="0 2 4">
-        <a-entity id="myCamera" camera look-controls look-controls wasd-controls keyboard-controls>
-        </a-entity>
-    </a-entity>
+<body style='margin: 0; overflow: hidden;'>
+    <a-scene
+        vr-mode-ui="enabled: false"
+		    embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
 
-    </a-scene>
-  </body>
+        <script type="text/javascript">
+          var vJSON = loadModel3D("preview3d");
+          document.write(vJSON.arobjects);
+        </script>
+
+        <a-camera gps-camera rotation-reader></a-camera>
+	</a-scene>
+</body>
 </html>

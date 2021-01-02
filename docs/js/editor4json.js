@@ -47,9 +47,10 @@
 function Editor4JSON () {
 	// no superclass defined
 
-    //---------------------------------------------------------------------
-    //---Attributes of Class "Editor4JSON()"
-    //---------------------------------------------------------------------
+  //---------------------------------------------------------------------
+  //---Attributes of Class "Editor4JSON()"
+  //---------------------------------------------------------------------
+
 	//---PUBLIC: aEditor (JSONEditor): is the instance of the JSON editor developed by Jeremy Dorn
 	this.aEditor = null;
 	//---PUBLIC: previewWin (Window): is the preview instance of Window object - null if closed.
@@ -77,7 +78,7 @@ function Editor4JSON () {
 			"globalrotate": "0.0 0.0 0.0",
 			"marker": "hiro",
 			"titlemodel": "Model 3D",
-			"dataid": vSchemaID
+			"dataid": "json3d4aframe"
 	};
 	// the ids "InnerHTMLID" write to inner HTML of tags with the id-prefix "html-"
 	// e.g. the content of titlemodel will be written to innerHTML of "html-titlemodel"
@@ -716,6 +717,7 @@ Editor4JSON.prototype.previewHTML = function (pTplID) {
 	var vHTML = this.generateHTML(pTplID);
 	var vTimeStamp = Date.now();
 	var vThis = this;
+	/*
 	if (this.previewWin) {
 		if (this.previewWin.hasOwnProperty('close')) {
 			this.previewWin.close();
@@ -726,15 +728,18 @@ Editor4JSON.prototype.previewHTML = function (pTplID) {
 	} else {
 		console.log("Preview Window does not exist!");
 	}
+	*/
 	/*
 	var vBase64 = btoa(vHTML);
 	var vDataURL = "data:text/html," + vBase64;
 	console.log("DataURL written to src of preview window");
 	this.previewWin = open(vDataURL,'newWin'+vTimeStamp,'height=600,width=600');
 	*/
-	this.previewWin = open(null,'newWin'+vTimeStamp,'height=600,width=600');
+	//this.previewWin = open(null,'newWin'+vTimeStamp,'height=600,width=600');
+	//this.previewWin =
+	window.open("view_"+pTplID+".html",'newWin'+vTimeStamp,'height=600,width=600');
 	//waitTime(2000);
-	this.previewWin.document.write(vHTML);
+	//this.previewWin.document.write(vHTML);
 	//document.getElementById("previewlink").open(vDataURL);
 };
 //----End of Method previewHTML() Definition
@@ -927,7 +932,9 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 	};
 	// Perform the replacement with the "templateScript()"
 	// Compile the template data into a function
+
 	var templateScript = Handlebars.compile(template);
+	savePreviewLS("preview3d",context);
 	var vHTML = templateScript(context);
 	//this.saveFile(vFilename,vHTML);
 	// restore old move setting
@@ -1241,7 +1248,7 @@ Editor4JSON.prototype.deleteAsk = function () {
   if(vOK == true) {
       this.deleteRecord();
   } else {
-      console.log("Delete Record cancelled")
+      console.log("Delete Record cancelled");
   };
 
 };
