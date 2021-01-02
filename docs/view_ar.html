@@ -9,7 +9,7 @@
       </title>
       <script type="text/javascript">
 
-          function loadModel3D (pLSID,render) {
+          function loadModel3D(pLSID) {
             //----Debugging------------------------------------------
             console.log("js/loadls.js - Call: loadLS()");
             // alert("js/editor4json.js - Call: loadLS()");
@@ -20,7 +20,7 @@
             var vJSON = null;
             if (typeof(Storage) != "undefined") {
                 // load selected marker
-                var vLSID = pLSID || "json3d4aframe";
+                var vLSID = pLSID || "json3d4aframe";
                 if (typeof(localStorage.getItem(vLSID)) !== undefined) {
                   console.log("JSON-DB '"+vLSID+"' try loading from Local Storage");
                   var vJSONstring = localStorage.getItem(vLSID);
