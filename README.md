@@ -1,3 +1,28 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [JSON3D4Aframe](#json3d4aframe)
+  - [Online Demo](#online-demo)
+  - [Main Library for Large Arrays](#main-library-for-large-arrays)
+  - [Screenshots Examples](#screenshots-examples)
+  - [Example 3D Output of JSON3D4Aframe](#example-3d-output-of-json3d4aframe)
+    - [AFrame 3D - Standard](#aframe-3d---standard)
+    - [AFrame 3D - with Sky and 360 Degree Image](#aframe-3d---with-sky-and-360-degree-image)
+    - [Marker Print Out](#marker-print-out)
+    - [Hiro Marker](#hiro-marker)
+    - [Kanji Marker](#kanji-marker)
+  - [Molecule Models](#molecule-models)
+  - [Images for the AFrame Sky](#images-for-the-aframe-sky)
+  - [Lesson Result of 3D Geometry](#lesson-result-of-3d-geometry)
+    - [See also](#see-also)
+  - [UML Diagram of Editor4JSON Class](#uml-diagram-of-editor4json-class)
+  - [JSON to Schema Generator](#json-to-schema-generator)
+  - [Python Web-Server for Testing from shell](#python-web-server-for-testing-from-shell)
+  - [Acknowledgement](#acknowledgement)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # JSON3D4Aframe
 The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
