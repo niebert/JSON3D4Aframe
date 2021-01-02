@@ -43,7 +43,7 @@ vDataJSON[vSchemaID] = {
   		    	"enum": [
 							"-",
           		"a-box",
-          		"a-sphere",
+							"a-sphere",
           		"a-cylinder",
 							"a-cone",
 							"a-plane",
@@ -56,8 +56,8 @@ vDataJSON[vSchemaID] = {
           	"options": {
        		   		"enum_titles": [
 							 		"-",
-							 		"Box",
-            			"Sphere",
+									"Box",
+									"Sphere",
             			"Cylinder",
 									"Cone",
 									"Plane",
@@ -80,8 +80,26 @@ vDataJSON[vSchemaID] = {
             "default": "0.0 0.5 0.0",
             "format": "text",
 						"propertyOrder": 40,
-						"description": "e.g. '0.5 2 3' means 0.5 marker units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension)"
+						"description": "e.g. '0.5 2 3' means 0.5 units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension) z=-3 behind screen z=3 before screen"
         },
+				"sizexyz": {
+						"type": "string",
+				  	"id": "/properties/sizexyz",
+            "title": "Size x (width/radius), Size y (height), Size z (depth)",
+            "default": "1.5 1.0 0.5",
+            "format": "text",
+						"propertyOrder": 43,
+						"description": "Sizes: BOX(x,y,z)=(width,height,depth)   SPHERE(x,y,z)=(radius,-,-)   CONE(x,y,z)=(radius-botton,radius-top,height),   TORUS(x,y,z)y=(radius-outer,tubular-radius,-), PLANE(x,y,z)=(width,height,-),  TRIANGLE(x,y,z)=(x-width,x-3-point,y-3-point)"
+        },
+				"rotation": {
+						"type": "string",
+						"id": "/properties/rotation",
+						"title": "Rotation in degree in xyz-direction",
+						"default": "0 0 0",
+						"format": "text",
+						"propertyOrder": 46,
+						"description": "Defines the rotation around x-axis (horizontal), y-axis (depth), z-axis (height). For some objects rotation does not make sense to apply rotation around an axis (e.g. sphere, torus)"
+				},
 				"color": {
             "type": "string",
             "id": "/properties/color",
@@ -108,24 +126,6 @@ vDataJSON[vSchemaID] = {
 						"propertyOrder": 70,
 						"description": "Basic size is determined by the marker size. With this factor you can scale the object"
         },
-				"sizexyz": {
-						"type": "string",
-				  	"id": "/properties/scale",
-            "title": "Size x (width/radius), Size y (height), Size z (depth)",
-            "default": "1.5 1.0 0.5",
-            "format": "text",
-						"propertyOrder": 80,
-						"description": "Defines the extension x=width/radius/cone-radius-botton-cone, y=height/con-radius-top, z=depth/cone-height. For some objects y-Size and/or z-Size are not used (e.g. sphere x, plain xy, z used for cone-height)"
-        },
-				"rotation": {
-						"type": "string",
-						"id": "/properties/rotation",
-						"title": "Rotation in degree in xyz-direction",
-						"default": "0 0 0",
-						"format": "text",
-						"propertyOrder": 90,
-						"description": "Defines the rotation in x-direction (width), y-direction (depth), z-direction (height). For some objects rotation does not make sense in some direction (e.g. sphere)"
-				},
 				"repeat": {
 						"type": "string",
 						"id": "/properties/repeat",
