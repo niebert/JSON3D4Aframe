@@ -163,7 +163,7 @@
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
-    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">1.2.1</div>
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">2.0.1</div>
     </h2>
     <div data-role="fieldcontain" style="display:none">
          <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
@@ -176,6 +176,10 @@
       <img src="img/icons-svg/fa-folder-open-white.svg">
     Load
 		</button>
+    <select  class="devhidden" id="loadselect" onchange="vEditor4JSON.aConfig[this.id]=this.value"  style="display:none">
+      <option selected="selected" value="json">JSON</option>
+      <option value="csv">CSV</option>
+    </select>
     <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save();return false">
 			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
       <img src="img/icons-svg/fa-file-save-white.svg">
@@ -192,17 +196,17 @@
     <select id="arselect" onchange="displaySettings(this.value);vEditor4JSON.aConfig[this.id]=this.value">
       <option selected="selected" value="aframe">AFrame 3D</option>
       <option value="ar">AR Marker 3D</option>
-      <option class="devhidden" id="option4argeo" value="argeo" style="display:none">AR Geolocation</option>
+      <option class="devhidden" id="option4argeo" value="argeo" style="Xdisplay:none">AR Geolocation</option>
     </select>
 
-    &nbsp;
-    <button id='bPrevieweJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.previewHTML('aframe');return false">
+    <button id='bPrevieweJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.previewHTML(getValueDOM('arselect'));return false">
 			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
       <img src="img/icons-svg/fa-picture-white.svg">
       Preview 3D
 		</button>
     &nbsp;
     &nbsp;
+    <br>
 
 		<button id='bFastBackward' onclick="vEditor4JSON.first();return false">
 			<!-- <i class="fa fa-fast-backward" aria-hidden="true"></i> -->
@@ -288,7 +292,7 @@
     <button id='bARSettings' style="color: white;background-color: #225988"  onclick="displaySettings('ar','toggle');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AR Marker Settings
 		</button>
-    <button class="devhidden" id='bARGEOSettings' style="display:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
+    <button class="devhidden" id='bARGEOSettings' style="Xdisplay:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
 			<i class="fa fa-cog" aria-hidden="true"></i> AR Geolocation Settings
 		</button>
     <button id='bExamples3D' style="color: white;background-color: #225988"  onclick="displaySettings('examples3d','toggle');return false">
@@ -352,10 +356,10 @@
     <hr>
 
   </div>
-  <br>
   <div id="argeo_settings" style="display:none">
   <!-- ============================================ -->
   <!-- BEGIN: Default Plane and AR.js Sky Settings -->
+  <hr>
   <table>
     <tr>
       <td>
@@ -367,8 +371,8 @@
                https://niebert.github.io/JSON3D4Aframe/index.html
                file:///Users/niehaus/Nextcloud/Javascript/WebVR/JSON3D4Aframe/docs/index.html
             -->
-            <b>Map Center:</b>
-            <input type="string" name="mapcenter" id="selectmapcenter" size="30" value="-1.81185, 52.443141"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+            <b class="devhidden" style="display:none">Map Center:</b>
+            <input class="devhidden" style="display:none" type="string" name="mapcenter" id="selectmapcenter" size="30" value="-1.81185, 52.443141"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
             &nbsp;
             <b>Simulated GPS:</b>
             <select name="simulate4gps" id="simulate4gps" onchange="vEditor4JSON.aConfig[this.id]=this.value">
@@ -400,7 +404,9 @@
               <option>20</option>
             </select>
             &nbsp;
-            <button type="submit"  style="color: #000000;background-color: #DFDFDF">
+
+            <!-- <button type="submit"  style="color: #000000;background-color: #DFDFDF"> -->
+            <button type="submit" style="color: white;background-color: #225988">
                 <i class="fa fa-globe" aria-hidden="true"></i> Select Geolocation
             </button>
 
@@ -414,13 +420,13 @@
           <!-- Set the Callback URL for the OpenLayers location selector here: -->
           &nbsp;
           &nbsp;
-          <input type="string" name="callback" value="../index.html" style="display:none">
-          <input type="text" id="viewmapcenter" name="mapcenter" value="-1.81185, 52.443141" Xstyle="display:none">
-          <input type="text" id="viewzoom" name="zoom" value="5" style="display:none">
+          <input class="devhidden" type="string" name="callback" value="../index.html" style="display:none">
+          <input class="devhidden" type="text" id="viewmapcenter" name="mapcenter" value="-1.81185, 52.443141" style="display:none">
+          <input class="devhidden" type="text" id="viewzoom" name="zoom" value="5" style="display:none">
           <button type="submit"  style="color: white;background-color: #225988">
               <i class="fa fa-globe" aria-hidden="true"></i> Display Map
           </button>
-          <textarea rows="5" cols="80" id="viewjsondata" name="jsondata" Xstyle="display:none"> </textarea>
+          <textarea class="devhidden" rows="5" cols="80" id="viewjsondata" name="jsondata" style="display:none"> </textarea>
         </form>
       </td>
   </tr>
@@ -435,8 +441,12 @@
   <b>Longitude:</b>
   <input type="text" name="ar_longitude" id="ar_longitude" value="8.10773" size="14" onchange="vEditor4JSON.aConfig[this.id]=this.value">
   &nbsp;&nbsp;
-  <b>Location based AR Unit Length:</b>
-  <input type="text" name="ar_unit_length" id="ar_unit_length" value="0.000000898311175" size="45" onchange="vEditor4JSON.aConfig[this.id]=this.value"> Degrees (Latitude) per Meter Distance
+  <div id="unit4argeo" class="devhidden" style="display:none">
+    <b>Location based AR Unit Length:</b>
+    <input type="text" name="ar_unit_length" id="ar_unit_length" value="0.000000898311175" size="45" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+    Degrees (Latitude) per Meter Distance
+  </div>
+  <hr>
   <script type="text/javascript">
     //document.getElementById('ar_unit_length').value =  (1 + 1/1113200)
   </script>
@@ -484,7 +494,7 @@
 	</div>
   <div id="examples3d" style="display:none">
     <hr>
-    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">1.2.1</div></h3>
+    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">2.0.1</div></h3>
     <ul>
       <li>
         <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
@@ -541,9 +551,9 @@
     </div>
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
-      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">1.2.1</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/01/02 13:59:17</div>
-          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">1.2.1</div>)</a><br/>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">2.0.1</div> </a>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/01/02 18:04:33</div>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">2.0.1</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>

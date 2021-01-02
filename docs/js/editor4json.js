@@ -714,6 +714,7 @@ Editor4JSON.prototype.exportData = function () {
 //#################################################################
 
 Editor4JSON.prototype.previewHTML = function (pTplID) {
+	pTplID = pTplID || "aframe";
 	var vHTML = this.generateHTML(pTplID);
 	var vTimeStamp = Date.now();
 	var vThis = this;

@@ -1,11 +1,11 @@
 /* ---------------------------------------
  Exported Module Variable: JSON3D4Aframe
  Package:  json3d4aframe
- Version:  1.2.1  Date: 2021/01/02 14:19:43
+ Version:  2.0.1  Date: 2021/01/02 18:06:17
  Homepage: https://github.com/niebert/JSON3D4Aframe#readme
  Author:   Engelbert Niehaus
  License:  MIT
- Date:     2021/01/02 14:19:43
+ Date:     2021/01/02 18:06:17
  Require Module with:
     const JSON3D4Aframe = require('json3d4aframe');
  JSHint: installation with 'npm install jshint -g'
@@ -133,10 +133,12 @@ function calcRecordJSON(pData) {
       vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
     break;
     case "a-ellipsoid":
-      vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
       vAttribs += getAttribAframe("width",vSizeXYZ,0,vScale);
       vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
       vAttribs += getAttribAframe("depth",vSizeXYZ,2,vScale);
+      vSizeXYZ[0] = 1.0; 
+      vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
+
     break;
     case "a-circle":
       vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
