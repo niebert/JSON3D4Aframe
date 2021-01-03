@@ -1,6 +1,6 @@
 {
   "name": "json3d4aframe",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "JSON Editor for creating 3D models in AFrame and AR.js - tool is support tool for the Wikiversity learning resource for 3D modelling",
   "main": "src/main.js",
   "exportvar": "JSON3D4Aframe",
