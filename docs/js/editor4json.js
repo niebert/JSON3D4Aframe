@@ -665,9 +665,11 @@ Editor4JSON.prototype.saveFile = function (pFilename,pContent) {
   //-------------------------------------------------------
 	console.log("Editor4JSON.saveFile('"+pFilename+"',pContent)-Call");
   // class 'File' is a Javascript Class defined in FileSaver.js
-  var file = new File([pContent], {type: "text/plain;charset=utf-8"});
+  // var file = new File([pContent], {type: "text/plain;charset=utf-8"});
   // method saveAs() is defined in FileSaver.js so import filesaver.js and blob.js to your Javascript project
-  saveAs(file,pFilename);
+  //saveAs(file,pFilename);
+	saveFile2HDD(pFilename,pContent)
+	// defined in "filesaver/savefile.js"
 };
 //----End of Method saveFile Definition
 
