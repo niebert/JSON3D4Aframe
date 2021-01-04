@@ -165,7 +165,7 @@
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
-    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">2.0.2</div>
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">2.0.3</div>
     </h2>
     <div data-role="fieldcontain" style="display:none">
          <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
@@ -289,16 +289,24 @@
     <br>
 
     <button id='bAframeSettings' style="color: white;background-color: #225988"  onclick="displaySettings('aframe','toggle');return false">
-			<i class="fa fa-cog" aria-hidden="true"></i> AFrame Settings
+			<!-- <i class="fa fa-cog" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/gear-white.svg">
+      AFrame Settings
 		</button>
     <button id='bARSettings' style="color: white;background-color: #225988"  onclick="displaySettings('ar','toggle');return false">
-			<i class="fa fa-cog" aria-hidden="true"></i> AR Marker Settings
+			<!-- <i class="fa fa-cog" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/gear-white.svg">
+      AR Marker Settings
 		</button>
     <button class="devhidden" id='bARGEOSettings' style="Xdisplay:none;color: white;background-color: #225988"  onclick="displaySettings('argeo','toggle');return false">
-			<i class="fa fa-cog" aria-hidden="true"></i> AR Geolocation Settings
+			<!-- <i class="fa fa-cog" aria-hidden="true"></i>  -->
+      <img src="img/icons-svg/gear-white.svg">
+      AR Geolocation Settings
 		</button>
     <button id='bExamples3D' style="color: white;background-color: #225988"  onclick="displaySettings('examples3d','toggle');return false">
-      <i class="fa fa-file" aria-hidden="true"></i> Examples 3D
+      <!-- <i class="fa fa-file" aria-hidden="true"></i> -->
+      <img src="img/icons-svg/grid-white.svg">
+    Examples 3D
     </button>
 
     <br>
@@ -409,7 +417,9 @@
 
             <!-- <button type="submit"  style="color: #000000;background-color: #DFDFDF"> -->
             <button type="submit" style="color: white;background-color: #225988">
-                <i class="fa fa-globe" aria-hidden="true"></i> Select Geolocation
+                <!-- <i class="fa fa-globe" aria-hidden="true"></i>  -->
+                <img src="img/icons-svg/fa-globe-white.svg">
+                Select Geolocation
             </button>
 
           </form>
@@ -438,9 +448,15 @@
       </td>
     </tr>
   </table>
-  <b>Latitude:</b>
+  <b>
+    <img src="img/icons-svg/fa-globe-black.svg">
+    Latitude:
+  </b>
   <input type="text" name="ar_latitude" id="ar_latitude" value="49.20420" size="14" onchange="vEditor4JSON.aConfig[this.id]=this.value">
-  <b>Longitude:</b>
+  <b>
+    <img src="img/icons-svg/fa-globe-black.svg">
+    Longitude:
+  </b>
   <input type="text" name="ar_longitude" id="ar_longitude" value="8.10773" size="14" onchange="vEditor4JSON.aConfig[this.id]=this.value">
   &nbsp;&nbsp;
   <div id="unit4argeo" class="devhidden" style="display:none">
@@ -496,7 +512,10 @@
 	</div>
   <div id="examples3d" style="display:none">
     <hr>
-    <h3>Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">2.0.2</div></h3>
+    <h3>
+      <img src="img/icons-svg/grid-white.svg">
+      Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">2.0.3</div>
+    </h3>
     <ul>
       <li>
         <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
@@ -553,9 +572,9 @@
     </div>
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
-      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">2.0.2</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/01/03 11:34:58</div>
-          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">2.0.2</div>)</a><br/>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">2.0.3</div> </a>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/01/04 8:55:16</div>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">2.0.3</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>
