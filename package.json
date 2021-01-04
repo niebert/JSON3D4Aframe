@@ -8,7 +8,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "build": "node ./build4docs.js;doctoc README.md;node ./src/bin4build/create_index_n.js;node ./version4index.js",
+    "build": "node ./build4docs.js;doctoc README.md;node ./src/bin4build/create_index_n.js;node ./version4index.js;node ./version4readme.js",
     "doctoc": "doctoc ./README.md",
     "version4index": "node ./version4index.js",
     "test": "node src/main.js"

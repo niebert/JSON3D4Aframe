@@ -1,11 +1,11 @@
 /* ---------------------------------------
  Exported Module Variable: JSON3D4Aframe
  Package:  json3d4aframe
- Version:  2.0.3  Date: 2021/01/04 8:55:13
+ Version:  2.0.3  Date: 2021/01/04 9:47:50
  Homepage: https://github.com/niebert/JSON3D4Aframe#readme
  Author:   Engelbert Niehaus
  License:  MIT
- Date:     2021/01/04 8:55:13
+ Date:     2021/01/04 9:47:50
  Require Module with:
     const JSON3D4Aframe = require('json3d4aframe');
  JSHint: installation with 'npm install jshint -g'
