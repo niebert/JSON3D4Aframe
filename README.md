@@ -1,4 +1,4 @@
-## JSON3D4Aframe
+## JSON3D4Aframe <div id4marker="version" style="display: inline-block">2.0.3</div>
 The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
 This repository provides a generator for a 3D scene in [AFrame](https://www.aframe.io) with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to [`AFrame`](https://aframe.io) and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/)
@@ -113,7 +113,7 @@ This tool was developed as support tool for a learning resource about 3D modelli
 Used the following tool that creates a [JSON schema](http://json-schema.org/) for a provided JSON file. Used the given JSON file to create the JSON Schema with [JSON2schema.html](https://niebert.github.io/json-editor/plugins/json2schema.html).
 
 ## Python Web-Server for Testing from shell
-Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a web server (duer to cross-site scripting security feature). E.g. text elements with fonts will not be displayed. To check the Aframe 3D scene with all feature start a webserver with python from shell. the current directory is used as root directory for the web server.
+Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a web server (due to cross-site scripting security feature). E.g. text elements with fonts will not be displayed. To check the Aframe 3D scene with all feature start a webserver with python from shell. the current directory is used as root directory for the web server.
 * Linux/Mac:  `python -m SimpleHTTPServer 8000`
 * Windows (install python): `python -m http.server 8000`
 * Check Aframe scene with: `http://localhost:8000`
