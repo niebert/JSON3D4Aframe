@@ -30,17 +30,17 @@ function getDateTime() {
 
 
 function replace_date_modified(data) {
-
 	data = data.replace(/<div\s+id="datetime"\s+style[^<]+<\/div>/g,"<div id4marker=\"datetime\" style=\"display: inline-block\">"+getDateTime()+"</div>");
 	data = data.replace(/<div\s+id4marker="datetime"\s+style[^<]+<\/div>/g,"<div id4marker=\"datetime\" style=\"display: inline-block\">"+getDateTime()+"</div>");
-  return data;
+	data = data.replace(/<span\s+id="datetime"\s+style[^<]+<\/div>/g,"<span id4marker=\"datetime\">"+getDateTime()+"</span>");
+	return data;
 }
 
 function replace_version(data) {
   data = replace_date_modified(data);
-  data = data.replace(/<div\s+id="version"\s+style[^<]+<\/div>/g,"___PKG_");
   data = data.replace(/<div\s+id="version">[^<]+<\/div>/g,"<div id4marker=\"version\">"+pkg.version+"</div>");
   data = data.replace(/<div\s+id4marker="version"[^<]+<\/div>/g,"<div id4marker=\"version\" style=\"display: inline-block\">"+pkg.version+"</div>");
+	data = data.replace(/<span\s+id="version">[^<]+<\/span>/g,"<span id4marker=\"version\">"+pkg.version+"</span>");
   return data;
 }
 

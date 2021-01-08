@@ -1,0 +1,45 @@
+{
+    "data": [
+        {
+            "id": "1513093288575",
+            "tagname": "a-cylinder",
+            "comment": "Zylinder",
+            "position": "0.0 0.0 0",
+            "color": "#af732e",
+            "opacity": 0.5,
+            "sizexyz": "1.0 4.0 1.0",
+            "rotation": "0 0 0",
+            "scale": 1,
+            "repeat": "1 0 1",
+            "repeatsteps": "4.0 1.0 -4.0"
+        },
+        {
+            "id": "1610101742496",
+            "tagname": "a-cone",
+            "comment": "Dach des Zylinders",
+            "position": "0.0 3.5 0.0",
+            "color": "#7d4e2e",
+            "opacity": 0.5,
+            "sizexyz": "1.5 0.0 3",
+            "rotation": "0 0 0",
+            "scale": 1,
+            "repeat": "1 0 1",
+            "repeatsteps": "4.0 1.0 -4.0"
+        }
+    ],
+    "config": {
+        "title": "Castle",
+        "json_file": "castle.json",
+        "globalscale": "",
+        "globalmove": "",
+        "globalrotate": "0.0 0.0 0.0",
+        "marker": "hiro",
+        "titlemodel": "Castle",
+        "dataid": "json3d4aframe",
+        "use_aframe_sky": "Y",
+        "aframe_sky_file": "https://upload.wikimedia.org/wikipedia/commons/5/56/Magpupungko_beach_area_spherical_360-degree_08-23-2017.jpg",
+        "use_aframe_plane": null,
+        "aframe_plane_color": "",
+        "arselect": "argeo"
+    }
+}
