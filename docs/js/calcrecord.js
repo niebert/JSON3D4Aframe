@@ -15,8 +15,11 @@ function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
 }
 
 function getGeoLocationHash() {
-  var vLatitude = parseFloat(getValueDOM("ar_latitude"));
-  var vLongitude = parseFloat(getValueDOM("ar_longitude"));
+  //var vLatitude = parseFloat(getValueDOM("ar_latitude"));
+  //var vLongitude = parseFloat(getValueDOM("ar_longitude"));
+  //math.js  see https://mathjs.org/docs/datatypes/bignumbers.html
+  var vLatitude = math.bignumber(getValueDOM("ar_latitude"));
+  var vLongitude = math.bignumber(getValueDOM("ar_longitude"));
   if (isNaN(vLatitude)) {
     console.error("ERROR: getGeoLocationHash() - Float for ar_latitude is not a number!");
   } else {
@@ -27,13 +30,14 @@ function getGeoLocationHash() {
   } else {
     console.log("CALL: getGeoLocationHash() - Longitude="+vLongitude);
   }
-  var vUnit = parseFloat(getValueDOM("ar_unit_length"));
+  var vUnit = math.bignumber(getValueDOM("ar_unit_length"));
+  // vGeoHash contains math.js bignumber for highter precision
   var vGeoHash = {
     "longitude":vLongitude,
     "latitude":vLatitude,
     "unit":vUnit
   };
-  return vGeoHash
+  return vGeoHash;
 }
 
 function get3DRepeatedArray(pData) {
@@ -46,7 +50,9 @@ function get3DRepeatedArray(pData) {
     vPositionArr.push(vDefaultValue);
   }
   var vPosIteration = [0.0,0.0,0.0];
+  // vGeoHash contains math.js bignumber for highter precision
   var vGeoHash = getGeoLocationHash();
+  // vLatitude and vLongitude are of math.js bignumber type
   var vLatitude = vGeoHash.latitude;
   var vLongitude = vGeoHash.longitude;
   var vData = null;
@@ -62,8 +68,10 @@ function get3DRepeatedArray(pData) {
         // Global scaling will be performed in calcRecordJSON
         vData = expandGeoLocation(vData,vGeoHash,vPosIteration,getValueDOM("arselect"));
         // set reference geolocation for the coordinate system.
-        vData.ar_latitude = vLatitude;
-        vData.ar_longitude = vLongitude;
+        // see math.js - https://mathjs.org/docs/datatypes/bignumbers.html
+        vData.ar_latitude  = vLatitude.toString();
+        vData.ar_longitude = vLongitude.toString();
+        // vLatitude and vLongitude are of math.js bignumber type
 
         v3DOutArr.push(calcRecordJSON(vData));
       }
@@ -120,7 +128,7 @@ function calcRecordJSON(pData) {
       vAttribs += getAttribAframe("width",vSizeXYZ,0,vScale);
       vAttribs += getAttribAframe("height",vSizeXYZ,1,vScale);
       vAttribs += getAttribAframe("depth",vSizeXYZ,2,vScale);
-      vSizeXYZ[0] = 1.0; 
+      vSizeXYZ[0] = 1.0;
       vAttribs += getAttribAframe("radius",vSizeXYZ,0,vScale);
 
     break;
@@ -317,12 +325,43 @@ function string2FloatArray(pString) {
       vFloatArr.push(vDefaultValue);
     } else {
       vFloatArr.push(parseFloat(vStringArr[i]));
+      //var x = math.bignumber('0.2222222222222222222')
+      //vFloatArr.push(math.bignumber(vStringArr[i]));
     }
   }
   //console.log("string2FloatArray() Array of Floats: ["+vFloatArr.join(",")+"] result!");
 
   return vFloatArr;
 }
+
+function string2PrecisionFloatArray(pString) {
+  //console.log("string2FloatArray('" + pString + "')");
+  var vString = pString || "3.0 2.0 1.0";
+  //remove ledading and tailing white spaces
+  vString = vString.replace(/^\s+|\s+$/g,'');
+  // replace german comma "," by a decimal point "."
+  vString = vString.replace(/,/g,'.');
+  // split String into array at whitespace
+  var vStringArr = vString.split(/\s+/);
+  var vFloatArr = [];
+  var vDefaultValue = 1.0;
+  for (var i = 0; i < vStringArr.length; i++) {
+    if (isNaN(vStringArr[i])) {
+      console.warn("WARNING: string2FloatArray() parsing Float for '"+vStringArr[i]+"' undefined");
+      vDefaultValue = 3-i;
+      vFloatArr.push(vDefaultValue);
+    } else {
+      //vFloatArr.push(parseFloat(vStringArr[i]));
+      //var x = math.bignumber('0.2222222222222222222')
+      vFloatArr.push(math.bignumber(vStringArr[i]));
+    }
+  }
+  //console.log("string2FloatArray() Array of Floats: ["+vFloatArr.join(",")+"] result!");
+
+  return vFloatArr;
+}
+
+
 
 function getAttribAframe(pAtt,pSizeXYZ,i,pScale) {
   var vScale = pScale || 1.0;
