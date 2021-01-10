@@ -11,7 +11,7 @@
     <!-- Bootstrap Core CSS -->
      <link href="css/bootstrap.min.css" rel="stylesheet">
      <!-- Font-Awesome CSS -->
-     <link href="css/font-awesome.min.css" rel="stylesheet">
+     <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
      <!-- ACE Editor -->
      <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
      <!-- JQuery -->
@@ -647,6 +647,8 @@
         var vGeoArr = vGeoLoc.split(",");
         write2value("ar_latitude",vGeoArr[1]);
         write2value("ar_longitude",vGeoArr[0]);
+        console.log("LinkParam: geolocation - show 'argeo_settings'");
+        $("#argeo_settings").show();
       };
       if (vLinkParam.exists("zoom")) {
         write2value("viewzoom",vLinkParam.getValue("zoom"));
