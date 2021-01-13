@@ -1,4 +1,4 @@
-## JSON3D4Aframe <div id4marker="version" style="display: inline-block">2.0.5</div>
+## JSON3D4Aframe <span id4marker="version" style="display: inline-block">2.0.5</span>
 
 The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
@@ -32,6 +32,15 @@ https://niebert.github.io/JSON3D4Aframe
 - [Acknowledgement](#acknowledgement)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Demo Files
+Demo 3D files are provided to you in the folder `json3d/`. The files can be loaded with [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) and you can use them for a quick start, modifiy the 3D models and export them to
+* [Aframe](https://aframe.io),
+* [Marker based AR](https://ar-js-org.github.io/AR.js-Docs/) or
+* [Location based AR](https://ar-js-org.github.io/AR.js-Docs/)
+
+## Location based AR
+[JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to generate a location based AR, i.e. you can place the generated 3D model a specific geolocation (e.g. the school yard or at a [Real World Lab](https://en.wikiversity.org/wiki/Real_World_Lab). The exported GeoAR files (e.g. `snowman_argeo.html`) can be placed on a web server with `https://` and then you display the website with your browser on you mobile device e.g. with the URL `https://www.example.com/snowman_argeo.html`. For testing you can store your 3D models on GitHub [pages](https://pages.github.com/) or [GitLab](https://www.gitlab.com) repository and host your files there for testing purpose.
 
 ## Main Library for Large Arrays
 

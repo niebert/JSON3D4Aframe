@@ -8,6 +8,7 @@ function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
     //pPosArray[2] = 0.0;
     pData.latitude  = pGeoHash.latitude;
     pData.longitude = pGeoHash.longitude;
+    // position is the (x.y.z) positions in your coordinate system.
     pData.position  = floatArr2String(pPosArray);
     console.log("CALL: expandGeoLocation() - "+JSON.stringify(pData,null,4));
   }

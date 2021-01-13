@@ -11,7 +11,7 @@
     <!-- Bootstrap Core CSS -->
      <link href="css/bootstrap.min.css" rel="stylesheet">
      <!-- Font-Awesome CSS -->
-     <link href="css/font-awesome.min.css" rel="stylesheet">
+     <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
      <!-- ACE Editor -->
      <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
      <!-- JQuery -->
@@ -574,7 +574,7 @@
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
       <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">2.0.5</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/01/10 21:38:20</div>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/01/10 21:38:36</div>
           <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">2.0.5</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
@@ -647,6 +647,8 @@
         var vGeoArr = vGeoLoc.split(",");
         write2value("ar_latitude",vGeoArr[1]);
         write2value("ar_longitude",vGeoArr[0]);
+        console.log("LinkParam: geolocation - show 'argeo_settings'");
+        $("#argeo_settings").show();
       };
       if (vLinkParam.exists("zoom")) {
         write2value("viewzoom",vLinkParam.getValue("zoom"));
