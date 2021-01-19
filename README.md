@@ -109,7 +109,10 @@ This tool was developed as support tool for a learning resource about 3D modelli
 * start with an initialize model and explore the **Save 3D** export options for the pre-loaded 3D models. You can also press **Examples 3D** to explore the basic concept of using [`AFrame`](https://aframe.io) models and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/) in [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe)
 
 ## GeoAR Example
-* [Snow Man - Located on School Yard](docs/mods3d/snowman_mws_argeo.html)
+Keep in mind that the following geolocated example will work if and only if you are close to the encoded geolocation in the file. Please create you own geolocation based example with  [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) by selecting a predefined 3D model and select a geolocation on the map where you want to place the 3D model. See [location based Augmented Reality with AR.js for further details](https://ar-js-org.github.io/AR.js-Docs/).
+
+* [File for Snow Man - Located on School Yard](docs/mods3d/snowman_mws_argeo.html)
+* [Preview of Snow Man - Located on School Yard](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_mws_argeo.html) 
 
 ## See also
 * [HuginSample](https://www.github.com/niebert/HuginSample) for example of 360 degree images that can be used as sky `a-sky` in AFrame.
@@ -134,6 +137,8 @@ Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a we
 
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
+* [AFrame](https://aframe.io) - is the foundation for 3D models on the web and on [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/).
+* [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/) - for Marker and Locationbased Augmented Reality.
 * [JSON-Editor](https://github.com/jdorn/json-editor) by Jeremy Dorn. The JSON Editor takes a JSON Schema and uses it to generate an HTML form. The JSON-Editor is partially used to edit JSON file of the Javascript Project in `JSCC` . The schemes of the JSON subtree are stored in the folder `/tpl` of the JavascriptClassCreator. The full potential of the JSON-Editor was not used in `JSCC` . This can be approved in the future.
 The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 and can integrate with several popular CSS frameworks (bootstrap, foundation, and jQueryUI). This would lead to major code reduction of `JSCC` . Refactoring of `JSCC` would make more use of the JSON-Editor features. Check out an interactive demo (demo.html): http://jeremydorn.com/json-editor/
 * Developer [Mihai Bazon](http://lisperator.net/) create UglifyJS, a great tool to handle and parse Javascript Code and minify the Javascript code (see [Source Code of UglifyJS](https://github.com/mishoo/UglifyJS2)).
