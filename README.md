@@ -112,6 +112,7 @@ This tool was developed as support tool for a learning resource about 3D modelli
 * [HuginSample](https://www.github.com/niebert/HuginSample) for example of 360 degree images that can be used as sky `a-sky` in AFrame.
 * See [WikiCommons2AFrame](https://www.github.com/niebert/WikiCommons2AFrame) for generating 360 degree image views for a geo location.
 * This repository was created for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling).
+* See also [Link Traversal Example in Aframe][Repository on GitHub](https://www.github.com/niebert/aframe360navigation)
 
 
 ## UML Diagram of Editor4JSON Class
