@@ -1,3 +1,3 @@
 vDataJSON.tpl.skydefault = `
-     <a-sky color="#ECECEC"></a-sky>
+     <a-sky id="skydefault892347929" color="#ECECEC"></a-sky>
 `;

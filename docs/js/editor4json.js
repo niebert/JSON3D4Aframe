@@ -616,6 +616,62 @@ Editor4JSON.prototype.getSchema = function () {
 };
 //----End of Method getSchema Definition
 
+//#################################################################
+//# PUBLIC Method: getSchema()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    getSchema() just return the JSON schema this.aSchemaJSON
+//# Return: Hash
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.getValue = function () {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: getSchema():Hash");
+  // alert("js/editor4json.js - Call: getSchema():Hash");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.getSchema();
+  //-------------------------------------------------------
+
+  return this.aData;
+// this.aData
+};
+//----End of Method getSchema Definition
+
+//#################################################################
+//# PUBLIC Method: getSchema()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    getSchema() just return the JSON schema this.aSchemaJSON
+//# Return: Hash
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.setValue = function (pData) {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: getSchema():Hash");
+  // alert("js/editor4json.js - Call: getSchema():Hash");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.getSchema();
+  //-------------------------------------------------------
+	if (pData) {
+		  this.aData = pData;
+			this.first();
+	} else {
+		console.error("ERROR: Editor4JSON.setValue(pData) pData undefined!");
+	}
+};
+//----End of Method getSchema Definition
+
+
 
 //#################################################################
 //# PUBLIC Method: exportJSON()
@@ -796,7 +852,18 @@ Editor4JSON.prototype.exportHTML = function (pTplID) {
 
 Editor4JSON.prototype.getTemplate = function (pTplID4DOM) {
 	//return document.getElementById("object-template").value;
-	return getValueDOM(pTplID4DOM);
+	pTplID4DOM = pTplID4DOM || "object-template";
+	//return getValueDOM(pTplID4DOM);
+	var vTplID = pTplID4DOM.replace(/template/g,"");
+	vTplID = vTplID.replace(/[^A-Za-z0-9]/g,"");
+	console.log("Template: [" + vTplID + "]");
+	var vTemplate = getValueDOM(pTplID4DOM);
+	if (vDataJSON.tpl[vTplID]) {
+		vTemplate = vDataJSON.tpl[vTplID];
+	} else {
+		console.error("ERROR: vDataJSON.tpl." + vTplID + " does not exist!");
+	}
+	return vTemplate;
 };
 
 //#################################################################
@@ -835,7 +902,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 			objecttpl = this.getTemplate("object-template");
 			// correctHandleBarsTemplate() defined in string.hs
 			objecttpl = correctHandleBarsTemplate(objecttpl);
-			console.log(objecttpl);
+			//console.log(objecttpl);
 			//compile the template text into a function for replacing JSON content
 			objectScript = Handlebars.compile(objecttpl);
 
@@ -850,7 +917,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 			objecttpl = this.getTemplate("object-template");
 			// correctHandleBarsTemplate() defined in string.hs
 			objecttpl = correctHandleBarsTemplate(objecttpl);
-			console.log(objecttpl);
+			//console.log(objecttpl);
 			//compile the template text into a function for replacing JSON content
 			objectScript = Handlebars.compile(objecttpl);
 
@@ -860,7 +927,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 			objecttpl = this.getTemplate("object-geo-template");
 			// correctHandleBarsTemplate() defined in string.hs
 			objecttpl = correctHandleBarsTemplate(objecttpl);
-			console.log(objecttpl);
+			//console.log(objecttpl);
 			//compile the template text into a function for replacing JSON content
 			objectScript = Handlebars.compile(objecttpl);
 
@@ -870,6 +937,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 			vTplID = "aframe";
 			//vFilename += "_aframe.html"
 	};
+	console.log("Editor4JSON.generateHTML() - Template [" + vTplID + "]=" + objecttpl);
 
 
 	var vARobjects = "";
@@ -879,6 +947,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 		// the repeat count defines the number of repetitions of an 3D object
 		if (this.aData[i].tagname !== "-") {
 			vDataArr = get3DRepeatedArray(this.aData[i]);
+			console.log("Editor4JSON.generateHTML() vDataArr[0]="+JSON.stringify(vDataArr[0],null,4));
 			for (var k = 0; k < vDataArr.length; k++) {
 				//create all repeated 3D objects
 				vARobjects += objectScript(vDataArr[k]);
@@ -945,6 +1014,94 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 	return vHTML;
 };
 //----End of Method generateHTML Definition
+
+//#################################################################
+//# PUBLIC Method: updateAframeScene()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    updateAframeScene() updates the embedded aframe scene
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+Editor4JSON.prototype.updateAframeScene = function (pScene,doc) {
+	//console.log("js/editor4json.js - Call: updateAframeScene()");
+	console.log("js/editor4json.js - Call: clearAframeScene()");
+	var scene = pScene || doc.querySelector('a-scene');
+	if (scene) {
+		var vDataArr = [];
+			for (var i = 0; i < this.aData.length; i++) {
+				// the repeat count defines the number of repetitions of an 3D object
+				if (this.aData[i].tagname !== "-") {
+					vDataArr = get3DRepeatedArray(this.aData[i]);
+					console.log("Editor4JSON.generateHTML() vDataArr[0]="+JSON.stringify(vDataArr[0],null,4));
+					for (var k = 0; k < vDataArr.length; k++) {
+						//create all repeated 3D objects
+						//vARobjects += objectScript(vDataArr[k]);
+						var vList3D = vDataArr[k].domnodes;
+						var v3D = null;
+						for (var j = 0; j < vList3D.length; j++) {
+							v3D = vList3D[j];
+							var vEl3D = doc.createElement(v3D.tagName);
+							//vEl3D.setAttribute("id",vDataArr[k].id);
+							//vEl3D.setAttribute("position",vDataArr[k].position);
+							//vEl3D.setAttribute("rotation",vDataArr[k].rotation);
+							//vEl3D.setAttribute("material","color:" + vDataArr[k].color + ";opacity:" + vDataArr[k].opacity);
+							var vAttList = v3D.attributes;
+							for (var att = 0; att < vAttList.length; att++) {
+								vEl3D.setAttribute(vAttList[att].name,vAttList[att].value);
+							};
+							scene.appendChild(vEl3D);
+							console.log("Added "+v3D.tagName+" to AFrame Scene!");
+						}
+					};
+				}
+			};
+	} else {
+		console.warn("WARNING: Embedded Aframe Scene does not exist.");
+	}
+};
+//----End of Method updateAframeScene() Definition
+
+//#################################################################
+//# PUBLIC Method: clearAframeScene()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    clearAframeScene() updates the embedded aframe scene
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+Editor4JSON.prototype.clearAframeScene = function () {
+	console.log("js/editor4json.js - Call: clearAframeScene()");
+	var scene = document.querySelector('a-scene');
+	if (scene) {
+		//----Clear Scene ----
+		var max = scene.children.length;
+		while (max > 0) {
+			max--;
+			var vTagName = scene.children[max].tagName;
+			vTagName = vTagName.toUpperCase();
+			if (vTagName.indexOf("A-") >= 0) {
+				if (vTagName.indexOf("A-ENTITY") >= 0) {
+					console.log("Tag-Name [" + max + "]='" + vTagName + "' kept.");
+				} else {
+					console.log("Tag-Name [" + max + "]='" + vTagName + "' deleted.");
+					scene.removeChild(scene.children[max]);
+				}
+			} else {
+				console.log("Tag-Name [" + max + "]='" + vTagName + "' kept.");
+			}
+		}
+	} else {
+		console.warn("WARNING: Embedded Aframe Scene does not exist.");
+	}
+};
+//----End of Method clearAframeScene() Definition
 
 //#################################################################
 //# PUBLIC Method: exportSchema()
@@ -1184,7 +1341,8 @@ Editor4JSON.prototype.onChange = function () {
   if (this.current > -1) {
       if (this.current < this.aData.length) {
       	this.aData[this.current] = this.aEditor.getValue();
-      };
+      }
+			previewEmbbeded();
   };
   this.saveLS();
 

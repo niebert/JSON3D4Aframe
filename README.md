@@ -114,6 +114,16 @@ This tool was developed as support tool for a learning resource about 3D modelli
 * This repository was created for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling).
 * See also [Link Traversal Example in Aframe][Repository on GitHub](https://www.github.com/niebert/aframe360navigation)
 
+## Rapid prototype
+This is an rapid prototype as proof of concept for a learning resource. Some information about the code:
+
+### Editor4JSON
+The Javascript class `Editor4JSON` is a JSON editor for large arrays. 3D models can have a large number of 3D primitives. The JSON editor create by Jeremy Dorn is great library, but the browsers will run out of memory if the JSON is too large.
+
+`Editor4JSON` is specially design for large arrays.
+
+Generation of HTML code for Aframe is created by a method of the JSON Editor `Editor4JSON` and only the editing of a single Object will be performed in the underlying JSON editor. The function of the library is defined with method `generateHTML()` in the file `docs/js/editor4json.js`.
+
 
 ## UML Diagram of Editor4JSON Class
 
@@ -131,6 +141,7 @@ Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a we
 
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
+* [AFrame](https://aframe.io) is the WebVR framework that renders the geometric primitives on HTML canvas handles the 3D operations in the space for the defined 3D elements in the `Aframe` scene.
 * [JSON-Editor](https://github.com/jdorn/json-editor) by Jeremy Dorn. The JSON Editor takes a JSON Schema and uses it to generate an HTML form. The JSON-Editor is partially used to edit JSON file of the Javascript Project in `JSCC` . The schemes of the JSON subtree are stored in the folder `/tpl` of the JavascriptClassCreator. The full potential of the JSON-Editor was not used in `JSCC` . This can be approved in the future.
 The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 and can integrate with several popular CSS frameworks (bootstrap, foundation, and jQueryUI). This would lead to major code reduction of `JSCC` . Refactoring of `JSCC` would make more use of the JSON-Editor features. Check out an interactive demo (demo.html): http://jeremydorn.com/json-editor/
 * Developer [Mihai Bazon](http://lisperator.net/) create UglifyJS, a great tool to handle and parse Javascript Code and minify the Javascript code (see [Source Code of UglifyJS](https://github.com/mishoo/UglifyJS2)).

@@ -4,7 +4,14 @@ vDataJSON[vSchemaID] = {
 	"headerTemplate": "3D: {{self.tagname}} - {{self.comment}}",
 	"type": "object",
     "id": "https://niebert.github.io/json-editor",
-    "defaultProperties": [
+		"options": {
+        "disable_collapse": false,
+        "disable_edit_json": false,
+        "disable_properties": false,
+        "collapsed": false,
+        "hidden": false
+    },
+		"defaultProperties": [
         "id",
 				"tagname",
 				"comment",
@@ -25,16 +32,23 @@ vDataJSON[vSchemaID] = {
             "default": "78912379812",
             "format": "text",
 						"propertyOrder": 10,
-						"description": "Unique ID for 3D Object"
+						"description": "Unique ID for 3D Object",
+						"options": {
+        			"disable_collapse": false,
+        			"disable_edit_json": false,
+        			"disable_properties": false,
+        			"collapsed": false,
+        			"hidden": true
+    				},
         },
         "comment": {
             "type": "string",
             "id": "/properties/comment",
-            "title": "Comment:",
+            "title": "Name Comment:",
             "default": "",
             "format": "text",
 						"propertyOrder": 20,
-						"description": "Short comment about the 3D object."
+						"x_description": "Short comment about the 3D object."
         },
 				"tagname": {
             "type": "string",
@@ -43,35 +57,39 @@ vDataJSON[vSchemaID] = {
   		    	"enum": [
 							"-",
           		"a-box",
-							"a-sphere",
-          		"a-cylinder",
 							"a-cone",
-							"a-plane",
-							"a-triangle",
+							"a-cylinder",
+							"a-ellipsoid",
+							"a-pyramid",
+							"a-sphere",
+          		"a-torus",
 							"a-circle",
-							"a-torus",
+							"a-plane",
 							"a-ring",
+							"a-triangle",
 							"a-text"
           	],
           	"options": {
        		   		"enum_titles": [
 							 		"-",
 									"Box",
-									"Sphere",
-            			"Cylinder",
 									"Cone",
-									"Plane",
-									"Triangle",
-									"Circle",
+									"Cylinder",
+									"Ellipsoid",
+									"Pyramid",
+									"Sphere",
 									"Torus",
+									"Circle",
+									"Plane",
 									"Ring",
+									"Triangle",
 									"Text"
             		]
        			},
             "default": "-",
             "format": "text",
 						"propertyOrder": 30,
-						"description": "Select the 3D object you want to add to the scene."
+						"x_description": "Select the 3D object you want to add to the scene."
         },
 				"position": {
             "type": "string",
@@ -80,7 +98,7 @@ vDataJSON[vSchemaID] = {
             "default": "0.0 0.5 0.0",
             "format": "text",
 						"propertyOrder": 40,
-						"description": "e.g. '0.5 2 3' means 0.5 units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension) z=-3 behind screen z=3 before screen"
+						"x_description": "e.g. '0.5 2 3' means 0.5 units right (x-dimension), 2 marker units up (y-dimension) and 3 marker units depths (z-dimension) z=-3 behind screen z=3 before screen"
         },
 				"sizexyz": {
 						"type": "string",

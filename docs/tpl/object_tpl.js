@@ -1,4 +1,4 @@
 vDataJSON.tpl.object = `
-<!-- Comment for {{tagname}}: {{comment}} -->
-<{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}></{{tagname}}>
+<!-- Comment for {{name4type}}: {{comment}} -->
+<{{tagname}} id="{{id}}" position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}></{{tagname}}>
 `;

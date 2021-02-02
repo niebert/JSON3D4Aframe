@@ -10,6 +10,7 @@
     <link href="jquery/jquery-ui.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
      <link href="css/bootstrap.min.css" rel="stylesheet">
+     <link href="css/aframe4embedded.css" rel="stylesheet">
      <!-- Font-Awesome CSS -->
      <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
      <!-- ACE Editor -->
@@ -36,12 +37,18 @@
      <script src="js/submit2display.js"></script>
      <script src="js/waittime.js"></script>
      <script src="js/writedom.js"></script>
+     <script src="js/aframe-v1.0.4.js"></script>
+     <script src="js/aframe4embedded.js"></script>
 
      <script>
+     // Contains the constructors for composite 3D objects
+     var vCreator3D = {};
+
      var vDataJSON = {};
      vDataJSON["initdata"] = {};
      vDataJSON["schema"] = {};
      vDataJSON["models"] = {};
+     vDataJSON["tpl"] = {};
      var vSchemaID =  "object3d"; // file defined in schema/object3d.schema
      // Set the default CSS theme and icon library globally
      JSONEditor.defaults.theme = 'bootstrap3';
@@ -49,6 +56,11 @@
      JSONEditor.plugins.ace.theme = 'xcode';
 
     </script>
+
+   <!-- BEGIN: Aframe Entities -->
+    <script src="js/aframe-pyramid.js"></script>
+   <!-- END: Aframe Entities -->
+
    <!-- BEGIN: load JSON data -->
     <script src="db/initdata.js"></script>
     <script src="db/water_molecule.js"></script>
@@ -59,6 +71,17 @@
     <!-- BEGIN: load JSON schema -->
     <script src="schema/object3d.schema"></script>
     <!-- END:  load JSON schema -->
+    <!-- BEGIN: load Handlebars4Code Templates -->
+    <script src="tpl/aframe_tpl.js"></script>
+    <script src="tpl/ar_tpl.js"></script>
+    <script src="tpl/argeo_tpl.js"></script>
+    <script src="tpl/cameraposition_tpl.js"></script>
+    <script src="tpl/object_tpl.js"></script>
+    <script src="tpl/objectgeo_tpl.js"></script>
+    <script src="tpl/plane_tpl.js"></script>
+    <script src="tpl/sky_tpl.js"></script>
+    <script src="tpl/skydefault_tpl.js"></script>
+    <!-- END:  load Handlebars4Code Templates -->
     <script>
       //console.log("vDataJSON['initdata']: "+JSON.stringify(vDataJSON['initdata'],null,2));
     </script>
@@ -156,11 +179,11 @@
       &lt;a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="{{{aframe_plane_color}}}" shadow&gt;&lt;/a-plane&gt;
     </textarea>
     <textarea id="object-template" rows="10" cols="120"  style="display:none">
-      &lt;!-- Comment for {{tagname}}: {{comment}} --&gt;
+      &lt;!-- Comment for {{name4type}}: {{comment}} --&gt;
       &lt;{{tagname}} position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}&gt;&lt;/{{tagname}}&gt;
    </textarea>
    <textarea id="object-geo-template" rows="10" cols="120"  style="display:none">
-     &lt;!-- Comment for {{tagname}}: {{comment}} with reference location Lat:{{ar_latitude}},Long:{{ar_longitude}} --&gt;
+     &lt;!-- Comment for {{name4type}}: {{comment}} with reference location Lat:{{ar_latitude}},Long:{{ar_longitude}} --&gt;
      &lt;{{tagname}}  gps-projected-entity-place="latitude: {{latitude}}; longitude: {{longitude}}" position="{{position}}" material="color: {{color}};opacity:{{opacity}}" rotation="{{rotation}}" {{{attributes}}}&gt;&lt;/{{tagname}}&gt;
   </textarea>
 
@@ -276,13 +299,13 @@
     <br>
 
     <b>Global Scale:</b>
-    <input type="text" name="globalscale" id="globalscale" value="1.0" size="5" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+    <input type="text" name="globalscale" id="globalscale" value="1.0" size="5" onchange="vEditor4JSON.aConfig[this.id]=this.value;previewEmbbeded();">
     &nbsp;
     <b>Global Move:</b>
-    <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+    <input type="text" name="globalmove" id="globalmove" value="0.0 0.0 0.0" size="15"  onchange="vEditor4JSON.aConfig[this.id]=this.value;previewEmbbeded();">
     &nbsp;
     <b class="devhidden" style="display:none">Global Rotate:</b>
-    <input class="devhidden"  style="display:none" type="text" name="globalrotate" id="globalrotate" value="x:0.0 y:0.0 z:0.0" size="20"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+    <input class="devhidden"  style="display:none" type="text" name="globalrotate" id="globalrotate" value="0.0 0.0 0.0" size="20"  onchange="vEditor4JSON.aConfig[this.id]=this.value;previewEmbbeded();">
     &nbsp;
     <b>File:</b>
     <input type="text" name="json_file" id="json_file" value="3d_model.json" size="25" onchange="vEditor4JSON.aConfig[this.id]=this.value">
@@ -311,7 +334,17 @@
     </button>
 
     <br>
-
+    <!-- AFRAME EMBEDDED SCENCE -->
+    <!--
+    <button  class="Xdevhiddenaframe" id='bPreview3D' style="color: white;background-color: #225988"  onclick="previewEmbbeded();return false" style="display:none">
+      <img src="img/icons-svg/eye-white.svg">
+    Preview 3D
+    </button>
+    <button  class="Xdevhiddenaframe" id='bClear3D' style="color: white;background-color: #225988"  onclick="clearAframeScene();return false" style="display:none">
+      <img src="img/icons-svg/eye-white.svg">
+    Clear 3D Scene
+    </button>
+     -->
     <div id="aframe_settings" style="display:none">
     <!-- ============================================ -->
     <!-- BEGIN: Default Plane and AFrame Sky Settings -->
@@ -332,7 +365,7 @@
          <option value="https://niebert.github.io/HuginSample/img/rhein4_rodenkirchen.jpg">River Rhine 4 - Cologne</option>
         </select>
         Display Sky:
-        <select id="use_aframe_sky" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+        <select id="use_aframe_sky" onchange="vEditor4JSON.aConfig[this.id]=this.value;previewEmbbeded();">
           <option selected value="N">not used</option>
           <option value="Y">used</option>
         </select>
@@ -344,10 +377,10 @@
           <option selected value="Y">used</option>
         </select>
         &nbsp;&nbsp;
-        Color Plane: <input type="text" name="aframe_plane_color" id="aframe_plane_color" value="#7BC8A4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+        Color Plane: <input type="text" name="aframe_plane_color" id="aframe_plane_color" value="#7BC8A4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value;previewEmbbeded();">
         &nbsp;&nbsp;
         <b>Aframe Camera Position:</b>
-        <input type="text" name="camposxyz" id="camposxyz" value="0 2 4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value">
+        <input type="text" name="camposxyz" id="camposxyz" value="0 2 4" size="8" onchange="vEditor4JSON.aConfig[this.id]=this.value;previewEmbbeded();">
 
         <hr>
     <!-- END: Default Plane and AFrame Sky Settings -->
@@ -517,6 +550,8 @@
       <img src="img/icons-svg/grid-white.svg">
       Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">2.0.5</div>
     </h3>
+
+    <h4>Cristal Lattice</h4>
     <ul>
       <li>
         <a href="mods3d/cristal_lattice_aframe.html" target="_blank">Cristal Lattice - AFrame Model</a>
@@ -530,6 +565,9 @@
       <li>
         <a href="mods3d/cristal_lattice_ar_kanji.html" target="_blank">Cristal Lattice - AR.js Kanji Marker</a>
       </li>
+    </ul>
+    <h4>Water Molecule</h4>
+    <ul>
       <li>
         <a href="mods3d/water_molecule_aframe.html" target="_blank">Water Molecules - AFrame Model</a>
       </li>
@@ -542,6 +580,9 @@
       <li>
         <a href="mods3d/water_molecule_ar_kanji.html" target="_blank">Water Molecules - AR.js Kanji Marker</a>
       </li>
+    </ul>
+    <h4>Snow Man</h4>
+    <ul>
       <li>
         <a href="mods3d/snowman_aframe.html" target="_blank">Snowman - AFrame Model</a>
       </li>
@@ -563,6 +604,20 @@
     </ul>
     <hr>
   </div>
+
+  <!-- AFRAME EMBEDDED SCENCE -->
+  <center>
+    <div id="myEmbeddedScene" style="align:center">
+      <!-- Style for A-SCENE are defined in css/aframe4embedded.css -->
+      <a-scene id="myAframeScene" background="color: #ECECEC" embedded style="height:300px;width:600px">
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+        <a-entity id="myCameraPosition" camera look-controls position="2 3 4"></a-entity>
+      </a-scene>
+    </div>
+  </center>
   <h2 id="html-titlemodel" style="align:center">
     3D Model
   </h2>
@@ -671,6 +726,40 @@
       //$('#argeo_settings').show();
       //$('#').show();
       //$('.devhidden').show();
+
+      // AFRAME
+      $('.devhiddenaframe').show();
+      var scene = document.querySelector('a-scene');
+      //scene.removeChild(scene.children[0]);
+      for (var i = 0; i < scene.children.length; i++) {
+        console.log("Tag-Name [" + i + "]='" + scene.children[i].tagName + "'");
+      }
+
+// append Element to Scene
+function previewEmbbeded() {
+  clearAframeScene();
+  setCameraPosition();
+  //var scene = document.querySelector('a-scene');
+  //vEditor4JSON.updateAframeScene(scene,document);
+  updateAframeScene(vEditor4JSON);
+  //createBlueCube();
+}
+function createBlueCube() {
+    var scene = document.querySelector('a-scene');
+    if (scene) {
+      var cubeEl = document.createElement('a-box');
+      cubeEl.setAttribute('color', 'blue');
+      cubeEl.setAttribute('scale', '2.5');
+      cubeEl.setAttribute('position', '4 3.5 0');
+      scene.appendChild(cubeEl);
+    } else {
+      console.warn("WARNING: Embedded Aframe Scene does not exist.");
+  	}
+
+}
+      //sphere.parentNode.removeChild(sphere);
+      //$("#myAframeScene").html('<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>');
+
     </script>
     <script src="js/datetime4json.js"></script>
     <a href="https://niebert.github.io/JSON3D4Aframe/mods3d/candles4torus_ukl_argeo.html" style="display:none">Candles4Torus UKL ArGeo</a>
