@@ -108,13 +108,7 @@ This tool was developed as support tool for a learning resource about 3D modelli
 * The mathematical learning objective is to plan and organize geometric primitives like spheres, boxes, cones, planes, triangle in a 3D coordinate system and see how a special target 3D model evolves.
 * start with an initialize model and explore the **Save 3D** export options for the pre-loaded 3D models. You can also press **Examples 3D** to explore the basic concept of using [`AFrame`](https://aframe.io) models and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/) in [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe)
 
-## GeoAR Example
-Keep in mind that the following geolocated example will work if and only if you are close to the encoded geolocation in the file. Please create you own geolocation based example with  [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) by selecting a predefined 3D model and select a geolocation on the map where you want to place the 3D model. See [location based Augmented Reality with AR.js for further details](https://ar-js-org.github.io/AR.js-Docs/).
-
-* [File for Snow Man - Located on School Yard](docs/mods3d/snowman_mws_argeo.html)
-* [Preview of Snow Man - Located on School Yard](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_mws_argeo.html)
-
-## See also
+### See also
 * [HuginSample](https://www.github.com/niebert/HuginSample) for example of 360 degree images that can be used as sky `a-sky` in AFrame.
 * See [WikiCommons2AFrame](https://www.github.com/niebert/WikiCommons2AFrame) for generating 360 degree image views for a geo location.
 * This repository was created for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling).
@@ -148,7 +142,6 @@ Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a we
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
 * [AFrame](https://aframe.io) is the WebVR framework that renders the geometric primitives on HTML canvas handles the 3D operations in the space for the defined 3D elements in the `Aframe` scene.
-* [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/) - for Marker and Locationbased Augmented Reality.
 * [JSON-Editor](https://github.com/jdorn/json-editor) by Jeremy Dorn. The JSON Editor takes a JSON Schema and uses it to generate an HTML form. The JSON-Editor is partially used to edit JSON file of the Javascript Project in `JSCC` . The schemes of the JSON subtree are stored in the folder `/tpl` of the JavascriptClassCreator. The full potential of the JSON-Editor was not used in `JSCC` . This can be approved in the future.
 The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 and can integrate with several popular CSS frameworks (bootstrap, foundation, and jQueryUI). This would lead to major code reduction of `JSCC` . Refactoring of `JSCC` would make more use of the JSON-Editor features. Check out an interactive demo (demo.html): http://jeremydorn.com/json-editor/
 * Developer [Mihai Bazon](http://lisperator.net/) create UglifyJS, a great tool to handle and parse Javascript Code and minify the Javascript code (see [Source Code of UglifyJS](https://github.com/mishoo/UglifyJS2)).
@@ -160,3 +153,6 @@ The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 
 * [3 ways to define a JavaScript class](https://www.phpied.com/3-ways-to-define-a-javascript-class/) by Stoyan Stefanov
 * [JQuery](https://jqueryui.com) is used for the theme and standard operations in the Document Object Model (DOM) of HTML-pages. The [JQuery-Themeroller](https://jqueryui.com/themeroller/) was used to create a JQuery theme for JSCC.
 * [FontAwesome](http://fontawesome.io/icons/) by Dave Gandy used for the icons in HTML buttons
+
+
+<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow="" material="" geometry="" scale="1 2 3" rotation=""></a-sphere>

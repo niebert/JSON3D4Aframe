@@ -16,8 +16,8 @@ function readAframeCameraPosition() {
   var vID = "myCameraPosition";
   var vCamera = document.getElementById(vID);
   if (vCamera) {
-    var vCamPosXYZ = getValueDOM("camposxyz");
-    console.log("setCameraPosition(" + vCamPosXYZ + ")");
+    var vCamPosXYZ = vCamera.getAttribute("position");
+    console.log("Aframe Camera Position is '" + vCamPosXYZ + "'");
     vCamera.setAttribute("position",vCamPosXYZ);
   } else {
     console.warn("Cannot read Aframe-Camera: [" + vID + "] is not defined in the aframe-scene");
