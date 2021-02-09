@@ -1,0 +1,70 @@
+{
+    "data": [
+        {
+            "id": "78912379812",
+            "tagname": "a-box",
+            "comment": "Turm ",
+            "position": "2  3 0.0",
+            "color": "#5d260e",
+            "opacity": 1,
+            "sizexyz": "2 6 2",
+            "rotation": "0 0 0",
+            "scale": 1,
+            "repeat": "0 0 0",
+            "repeatsteps": "1.0 1.0 1.0"
+        },
+        {
+            "id": "1611919501463",
+            "tagname": "a-box",
+            "comment": "bogen ohne öffnung ",
+            "position": "6 6 0.0",
+            "color": "#5d260e",
+            "opacity": 1,
+            "sizexyz": "4 1.5 2",
+            "rotation": "0 0 -30",
+            "scale": 1,
+            "repeat": "0 0 0",
+            "repeatsteps": "1.0 1.0 1.0"
+        },
+        {
+            "id": "1611919588063",
+            "tagname": "a-box",
+            "comment": "",
+            "position": "8 3 0.0",
+            "color": "#5d260e",
+            "opacity": 1,
+            "sizexyz": "2 6 2",
+            "rotation": "0 0 0",
+            "scale": 1,
+            "repeat": "0 0 0",
+            "repeatsteps": "1.0 1.0 1.0"
+        },
+        {
+            "id": "1611919637106",
+            "tagname": "a-cylinder",
+            "comment": "",
+            "position": "5 4 0.0",
+            "color": "#5d260e",
+            "opacity": 0.5,
+            "sizexyz": "1.8 2 1",
+            "rotation": "90 0 0",
+            "scale": 1,
+            "repeat": "0 0 0",
+            "repeatsteps": "1.0 1.0 1.0"
+        }
+    ],
+    "config": {
+        "title": "Trifelsbogen noch nicht fertig ",
+        "json_file": "trifelsbogen_aus_Quadern.json",
+        "globalscale": "0.4",
+        "globalmove": "0.0 0.0 0.0",
+        "globalrotate": "0.0 0.0 0.0",
+        "marker": "hiro",
+        "titlemodel": "Trifelsbogen noch nicht fertig ",
+        "dataid": "json3d4aframe",
+        "use_aframe_sky": "N",
+        "aframe_sky_file": "",
+        "use_aframe_plane": null,
+        "aframe_plane_color": ""
+    }
+}

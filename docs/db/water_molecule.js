@@ -54,15 +54,15 @@ vDataJSON.models["water_molecule"] = {
         }
     ],
     "config": {
-        "titlemodel": "Water Molecule",
+        "title": "Water Molecule",
         "json_file": "water_molecule.json",
         "globalscale": "1.0",
         "globalmove": "0.0 0.0 0.0",
         "dataid": "object3d",
         "marker": "hiro",
-        "use_aframe_sky": null,
+        "use_aframe_sky": "N",
         "aframe_sky_file": "",
-        "use_aframe_plane": null,
-        "aframe_plane_color": ""
+        "use_aframe_plane": "N",
+        "aframe_plane_color": "#7BC8A4"
     }
 };

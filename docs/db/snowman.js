@@ -145,16 +145,16 @@ vDataJSON.models["snowman"] = {
         }
     ],
     "config": {
-        "titlemodel": "Snowman",
+        "title": "Snowman",
         "json_file": "snowman.json",
         "globalscale": "0.4",
         "globalemove": "0.0 0.0 0.0",
         "globalrotate": "0 0 0",
         "dataid": "object3d",
         "marker": "hiro",
-        "use_aframe_sky": null,
+        "use_aframe_sky": "N",
         "aframe_sky_file": "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
-        "use_aframe_plane": null,
+        "use_aframe_plane": "N",
         "aframe_plane_color": "#7BC8A4",
         "arselect": "ar"
     }

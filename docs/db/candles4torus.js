@@ -77,7 +77,7 @@ vDataJSON.models["candles4torus"] = {
         "dataid": "object3d",
         "use_aframe_sky": "Y",
         "aframe_sky_file": "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
-        "use_aframe_plane": null,
+        "use_aframe_plane": "N",
         "aframe_plane_color": "#7BC8A4"
     }
 };
