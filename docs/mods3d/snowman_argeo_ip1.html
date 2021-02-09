@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR - Snowman </title>
+    <meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe">
+    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <a-scene
+        vr-mode-ui="enabled: false"
+		embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+
+
+<!-- Comment for SPHERE: Snowball - top - Head with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="1"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="1.10 3.80 0.00" material="color: #ffffff;opacity:0.5" rotation="0 0 0"  radius="0.56" ></a-sphere>
+
+<!-- Comment for SPHERE: Snowball - middle with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="2"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="1.10 2.80 0.00" material="color: #ffffff;opacity:0.5" rotation="0 0 0"  radius="0.96" ></a-sphere>
+
+<!-- Comment for SPHERE: Snowball - bottom with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="3"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="1.00 1.50 0.00" material="color: #ffffff;opacity:0.5" rotation="0 0 0"  radius="1.50" ></a-sphere>
+
+<!-- Comment for SPHERE: Nose with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="4"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="0.92 3.80 0.50" material="color: #d71a20;opacity:0.7" rotation="0 0 0"  radius="0.12" ></a-sphere>
+
+<!-- Comment for SPHERE: Eye - Right  with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="5"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="1.08 4.00 0.40" material="color: #000000;opacity:0.7" rotation="0 0 0"  radius="0.12" ></a-sphere>
+
+<!-- Comment for SPHERE: Eye - left with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="6"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="0.79 4.00 0.30" material="color: #000000;opacity:0.7" rotation="0 0 0"  radius="0.12" ></a-sphere>
+
+<!-- Comment for SPHERE: Snowball - Arm - Right with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="7"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="2.09 3.20 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.56" ></a-sphere>
+
+<!-- Comment for SPHERE: Snowball - Arm - Left with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-sphere id="8"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="-0.13 3.09 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.56" ></a-sphere>
+
+<!-- Comment for CYLINDER: Hat of Snow Man - bottom with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-cylinder id="9"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="1.10 4.20 0.00" material="color: #000000;opacity:0.5" rotation="0 0 0"  radius="0.75" height="0.19" ></a-cylinder>
+
+<!-- Comment for CYLINDER: Hat of Snow Man - top with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-cylinder id="10"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="1.10 4.50 0.00" material="color: #000000;opacity:0.5" rotation="0 0 0"  radius="0.30" height="0.75" ></a-cylinder>
+
+<!-- Comment for TEXT: Snow Man with reference location Lat:51.88145800759537,Long:8.044805411714366 -->
+<a-text id="11"  gps-projected-entity-place="latitude: 51.88145800759537; longitude: 8.044805411714366" position="0.00 0.50 1.50" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  value="Snow Man" color="#d71a20" height="1.00" ></a-text>
+
+
+        <a-camera gps-camera rotation-reader></a-camera>
+	</a-scene>
+</body>
+</html>

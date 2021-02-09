@@ -64,6 +64,17 @@ https://github.com/niebert/JSON3D4Aframe/tree/master/docs
 * [Cristal Lattice - Sky 360 Degree - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_sky_aframe.html)
 * [Snow Man - Sky 360 Degree - AFrame](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_sky_aframe.html)
 
+
+### AR Geolocation 3D - Examples
+Copy the source code of the files and replace the geolocation for latitude and longitude to your geolocation where you want to place the snowman.
+* [Snow Man - AR Geolocation - Durlach Saumarkt](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_saumarkt.html)
+* [Snow Man - AR Geolocation - MB1](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_mb1.html)
+* [Snow Man - AR Geolocation - MB2](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_mb2.html)
+* [Snow Man - AR Geolocation - MWS](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_mws_argeo.html)
+* [Snow Man - AR Geolocation - IP1](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_ip1.html)
+* [Snow Man - AR Geolocation - HL1](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_hl1.html)
+
+
 ### Marker Print Out
 For the following examples you need a printout of markers that are place in front of your webcam of your laptop, tablet or smartphone camera. You can print out the [PDF document](https://niebert.github.io/JSON2Schema/pdf/marker_hiro_kanji_printout.pdf). Instead holding the marker in the web camera image you can place the marker on the table and view the selected marker in the camera image of your tablet or smartphone. You can also use a VR headset  with the following examples:
 
