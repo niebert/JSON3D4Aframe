@@ -89,6 +89,11 @@ function get3DRepeatedArray(pData) {
             vData.name4type = "PYRAMID";
             // vCreator3D.pyramid() defined in js/aframe_pyramid.js
             vCreator3D.pyramid(v3DOutArr,vData,vSizeXYZ);
+        } else if (vData.tagname == "a-ellipsoid") {
+            vData.name4type = "ELLIPSOID";
+            // vCreator3D.ellipsoid() defined in js/aframe_pyramid.js
+            //vCreator3D.ellipsoid(v3DOutArr,vData,vSizeXYZ);
+            v3DOutArr.push(calcRecordJSON(vData));
         } else {
             v3DOutArr.push(calcRecordJSON(vData));
         }
@@ -100,6 +105,9 @@ function get3DRepeatedArray(pData) {
 
 function create3DTag(pTagName) {
   //return document.createElement(pTagName);
+  if (pTagName == "a-ellipsoid") {
+    pTagName = "a-sphere";
+  }
   return {
     "tagName":pTagName,
     "attributes":[],
@@ -180,7 +188,8 @@ function calcRecordJSON(pData) {
       console.log("ELLIPSOID: vSizeXYZ=["+vSizeXYZ.join(",") + "]");
       vAttribs += getAttribAframe(vTag,"radius",[parseFloatBig("1.0")],0,vScale);
       // getAttribAframe() parameter pi=-1 means all components in attribute - blank separated
-      vAttribs += getAttribAframe(vTag,"scale",vSizeXYZ,-1,vScale);
+      // vAttribs += getAttribAframe(vTag,"scale",vSizeXYZ,-1,vScale);
+      vAttribs += getAttribAframeConst(vTag,"scale",real2str(vSizeXYZ[0]*vGlobalScale)+" "+real2str(vSizeXYZ[1]*vGlobalScale)+" "+real2str(vSizeXYZ[2]*vGlobalScale));
       vData.name4type = "ELLIPSOID";
       vData.tagname   = "a-sphere";
   } else if (vTagName == "a-circle") {
