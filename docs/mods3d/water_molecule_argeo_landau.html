@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>GeoAR - Water Molecule </title>
+    <title>GeoAR - Candles4Torus </title>
     <meta name="createdwith" content="https://niebert.githhub.io/JSON3D4Aframe">
     <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
@@ -20,18 +20,21 @@
 		embedded
         arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
 
-     <!-- Comment for a-sphere: Oxygen  with reference location Lat:49.2042,Long:8.10773 -->
-     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="0.00 0.50 0.00" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.90" ></a-sphere>
-       <!-- Comment for a-sphere: Hydrogen 1 with reference location Lat:49.2042,Long:8.10773 -->
-     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
-       <!-- Comment for a-sphere: Hydrogen 2 with reference location Lat:49.2042,Long:8.10773 -->
-     <a-sphere  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="-1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
-       <!-- Comment for a-text: Water Molecule with reference location Lat:49.2042,Long:8.10773 -->
-     <a-text  gps-projected-entity-place="latitude: 49.2042; longitude: 8.10773" position="0.00 0.50 1.50" material="color: #4545aa;opacity:0.5" rotation="0 0 0"  value="Water Molecule" color="#4545aa" height="1.00" ></a-text>
-  
+
+<!-- Comment for SPHERE: Oxygen  with reference location Lat:49.20389682318057,Long:8.108655362110142 -->
+<a-sphere id="902394093242"  gps-projected-entity-place="latitude: 49.20389682318057; longitude: 8.108655362110142" position="0.00 0.50 0.00" material="color: #d71a20;opacity:0.5" rotation="0 0 0"  radius="0.90" ></a-sphere>
+
+<!-- Comment for SPHERE: Hydrogen 1 with reference location Lat:49.20389682318057,Long:8.108655362110142 -->
+<a-sphere id="1510149323702"  gps-projected-entity-place="latitude: 49.20389682318057; longitude: 8.108655362110142" position="1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+
+<!-- Comment for SPHERE: Hydrogen 2 with reference location Lat:49.20389682318057,Long:8.108655362110142 -->
+<a-sphere id="1510235133212"  gps-projected-entity-place="latitude: 49.20389682318057; longitude: 8.108655362110142" position="-1.00 1.70 0.00" material="color: #ffffff;opacity:0.7" rotation="0 0 0"  radius="0.80" ></a-sphere>
+
+<!-- Comment for TEXT: Water Molecule with reference location Lat:49.20389682318057,Long:8.108655362110142 -->
+<a-text id="1513093288575"  gps-projected-entity-place="latitude: 49.20389682318057; longitude: 8.108655362110142" position="0.00 0.50 1.50" material="color: #4545aa;opacity:0.5" rotation="0 0 0"  value="Water Molecule" color="#4545aa" height="1.00" ></a-text>
+
 
         <a-camera gps-camera rotation-reader></a-camera>
 	</a-scene>
 </body>
 </html>
-    
