@@ -156,6 +156,7 @@
         "aframe_sky_file": "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
         "use_aframe_plane": null,
         "aframe_plane_color": "#7BC8A4",
-        "arselect": "ar"
+        "arselect": "ar",
+        "simulate4gps":"N"
     }
 }

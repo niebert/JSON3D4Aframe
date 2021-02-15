@@ -112,6 +112,7 @@
         "globalmove": "-1.0 0.0 -1.0",
         "globalrotate": "0 0 0",
         "dataid": "object3d",
-        "marker": "hiro"
+        "marker": "hiro",
+        "simulate4gps":"N"
     }
 }

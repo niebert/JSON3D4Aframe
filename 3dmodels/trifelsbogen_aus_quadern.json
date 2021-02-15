@@ -65,6 +65,7 @@
         "use_aframe_sky": "N",
         "aframe_sky_file": "",
         "use_aframe_plane": null,
-        "aframe_plane_color": ""
+        "aframe_plane_color": "",
+        "simulate4gps":"N"
     }
 }

@@ -65,6 +65,7 @@
         "use_aframe_sky": "N",
         "aframe_sky_file": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Aldara_parks.jpg",
         "use_aframe_plane": null,
-        "aframe_plane_color": "#7BC8A4"
+        "aframe_plane_color": "#7BC8A4",
+        "simulate4gps":"N"
     }
 }
