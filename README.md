@@ -68,11 +68,6 @@ https://github.com/niebert/JSON3D4Aframe/tree/master/docs
 ### AR Geolocation 3D - Examples
 Copy the source code of the files and replace the geolocation for latitude and longitude to your geolocation where you want to place the snowman.
 * [Snow Man - AR Geolocation - Durlach Saumarkt](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_saumarkt.html)
-* [Snow Man - AR Geolocation - MB1](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_mb1.html)
-* [Snow Man - AR Geolocation - MB2](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_mb2.html)
-* [Snow Man - AR Geolocation - MWS](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_mws_argeo.html)
-* [Snow Man - AR Geolocation - IP1](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_ip1.html)
-* [Snow Man - AR Geolocation - HL1](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_argeo_hl1.html)
 
 
 ### Marker Print Out
