@@ -74,16 +74,18 @@ Copy the source code of the files and replace the geolocation for latitude and l
 For the following examples you need a printout of markers that are place in front of your webcam of your laptop, tablet or smartphone camera. You can print out the [PDF document](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf). Instead holding the marker in the web camera image you can place the marker on the table and view the selected marker in the camera image of your tablet or smartphone. You can also use a VR headset  with the following examples:
 
 ### Hiro Marker
+Print out the [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf) with markers and use the **Hiro marker** in your webcam to display the 3D model.
 **Pattern Source:** [Hiro Pattern from AR-Toolkit](https://github.com/artoolkit/ARToolKit5/blob/master/doc/patterns/Hiro%20pattern.pdf)
-* [Water Molecule - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_ar_hiro.html) - [Marker-PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
-* [Cristal Lattice - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_ar_hiro.html) - [Marker-PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
-* [Snow Man - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_ar_hiro.html) - [Marker-PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Water Molecule - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Cristal Lattice - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Snow Man - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
 
 ### Kanji Marker
+Print out the [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf) with markers and use the **Kanji marker** in your webcam to display the 3D model.
 **Pattern Source:** [Kanji Pattern from AR-Toolkit](https://github.com/artoolkit/ARToolKit5/blob/master/doc/patterns/Kanji%20pattern.pdf)
-* [Water Molecule - Kanji Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_ar_kanji.html) - [Marker-PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
-* [Cristal Lattice - Kanji Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_ar_kanji.html) - [Marker-PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
-* [Snow Man - Kanji Marker](https://niebert.github.io/JJSON3D4Aframe/mods3d/snowman_ar_kanji.html) - [Marker-PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Water Molecule - Kanji Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_ar_kanji.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Cristal Lattice - Kanji Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_ar_kanji.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Snow Man - Kanji Marker](https://niebert.github.io/JJSON3D4Aframe/mods3d/snowman_ar_kanji.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
 
 
 ## Molecule Models
