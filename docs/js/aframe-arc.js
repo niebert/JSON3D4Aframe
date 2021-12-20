@@ -23,7 +23,9 @@ vCreator3D.curved_plane = function (v3DOutArr,vData,fCurveTop,fCurveBottom,pSegm
   var t_step = 1/vSegmentation;
 };
 
-vCreator3D.arc = function (v3DOutArr,vData,vSizeXYZS) {
+vCreator3D.arc = function (v3DOutArr,vData,pSizeXYZS) {
+  var vSizeXYZS = cloneJSON(pSizeXYZS);
+  
   // Global scaling will be performed in calcRecordJSON() with push to v3DOutArr.
   var vGlobalScale = getGlobalScale();
   var vScale = vData.scale || parseFloatBig("1.0");
