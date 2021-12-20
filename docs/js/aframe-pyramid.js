@@ -1,6 +1,7 @@
 //var vCreator3D = {}; Defined in index.html
 
 vCreator3D.pyramid = function (v3DOutArr,vData,vSizeXYZ) {
+  var vSizeXYZ = cloneJSON(pSizeXYZ);
   // Global scaling will be performed in calcRecordJSON() with push to v3DOutArr.
   var vGlobalScale = getGlobalScale();
   var vScale = vData.scale || parseFloatBig("1.0");
