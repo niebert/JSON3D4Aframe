@@ -78,6 +78,7 @@ Print out the [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanj
 **Pattern Source:** [Hiro Pattern from AR-Toolkit](https://github.com/artoolkit/ARToolKit5/blob/master/doc/patterns/Hiro%20pattern.pdf)
 * [Water Molecule - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/water_molecule_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
 * [Cristal Lattice - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/cristal_lattice_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
+* [Planet System - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/planetsystem_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf) - by Ina Shashkova (2021) - see [Wikiversity](https://de.wikiversity.org/wiki/AR_VR_in_der_Grundschule)
 * [Snow Man - Hiro Marker](https://niebert.github.io/JSON3D4Aframe/mods3d/snowman_ar_hiro.html) - Marker: [PDF](https://niebert.github.io/JSON3D4Aframe/pdf/marker_hiro_kanji_printout.pdf)
 
 ### Kanji Marker
