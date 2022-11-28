@@ -1,0 +1,53 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
+    <title>
+      AR.js Planet System for hiro Marker
+      <!-- developed in Bachelor thesis 2021 by Irina Shashkova and tutorial shared on Wikiversity https://de.wikiversity.org/wiki/AR_VR_in_der_Grundschule -->
+    </title>
+  </head>
+  <body style='margin : 0px; overflow: hidden;'>
+    <a-scene>
+      <a-marker id="mymarker" preset="hiro">
+        <!-- Sun -->
+        <a-sphere radius="0.5"  
+                  material="color: yellow;opacity:0.8"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Solarsystemscope_texture_2k_sun.jpg/320px-Solarsystemscope_texture_2k_sun.jpg">
+        </a-sphere>
+        <a-entity animation="property:rotation; 
+                       to:0 360 0; 
+                       dur:100000; 
+                       loop:true; 
+                       easing:linear">
+            <a-entity position="1 0 0"
+              animation="property:rotation; 
+                         to:0 360 0; 
+                         dur:10000; 
+                         loop:true; 
+                         easing:linear">
+                <!-- Earth --> 
+                <a-sphere radius="0.125"
+                   material="color: blue;opacity:0.8"
+                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solarsystemscope_texture_2k_earth_daymap.jpg/320px-Solarsystemscope_texture_2k_earth_daymap.jpg"       
+                  animation="property:rotation; 
+                           to:0 360 0; 
+                           dur:1000; 
+                           loop:true; 
+                           easing:linear">
+                </a-sphere>
+                <a-entity position="0.3 0 0">
+                  <!-- Moon -->
+                  <a-sphere  material="color: #C0C0C0;opacity:0.8"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Solarsystemscope_texture_2k_moon.jpg/320px-Solarsystemscope_texture_2k_moon.jpg" 
+                            radius="0.0525">
+              </a-sphere> 
+            </a-entity>
+        </a-entity>
+      </a-entity>
+    </a-marker>
+      <a-camera position="0 0 0"> </a-camera>
+   </a-scene>
+  </body>
+</html>
