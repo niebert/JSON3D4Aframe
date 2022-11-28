@@ -110,6 +110,8 @@ The following equirectangular images are used as 360 degree sky background:
 * [River Rhine 3 - Cologne](https://niebert.github.io/HuginSample/img/rhein3_rodenkirchen.jpg) - GitHub Repository [HuginSample](https://www.github.com/niebert/HuginSample)
 * [River Rhine 4 - Cologne](https://niebert.github.io/HuginSample/img/rhein4_rodenkirchen.jpg) - GitHub Repository [HuginSample](https://www.github.com/niebert/HuginSample)
 
+## Images for Earth Surface 
+* [Earth Surface equirectangular](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Color_etopo1_ice_low.jpg/2560px-Color_etopo1_ice_low.jpg) Creative Commons on [WikiCommons](https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Land_shallow_topo_2048.jpg/2560px-Land_shallow_topo_2048.jpg)
 
 ## Lesson Result of 3D Geometry
 This tool was developed as support tool for a learning resource about 3D modelling in Wikiversity. Think of using 3D models in a seasonal context:
