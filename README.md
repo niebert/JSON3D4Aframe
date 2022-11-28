@@ -126,8 +126,9 @@ Equirectangular images can be used in [AFrame](https://aframe.io) for a 360-degr
 * [**Aldara Park**](https://niebert.github.io/HuginSample/Aldara_parks.html) - [WikiCommons Source File](https://commons.wikimedia.org/wiki/File:Aldara_parks.jpg) - Uldins Bardins (2011) image is licensed under the [Creative Commons](https://en.wikipedia.org/wiki/en:Creative_Commons) [Attribution-Share Alike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/deed.en). [GeoLoc](https://commons.wikimedia.org/wiki/File:Aldara_parks.jpg#/maplink/0)
 
 
-## Images for Earth Surface 
+## Images for Planet Surface 
 * [Earth Surface equirectangular](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Color_etopo1_ice_low.jpg/2560px-Color_etopo1_ice_low.jpg) Creative Commons on [WikiCommons](https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Land_shallow_topo_2048.jpg/2560px-Land_shallow_topo_2048.jpg)
+* [Moon Surface - equirectangular](https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Solarsystemscope_texture_2k_moon.jpg/320px-Solarsystemscope_texture_2k_moon.jpg)
 
 ## Lesson Result of 3D Geometry
 This tool was developed as support tool for a learning resource about 3D modelling in Wikiversity. Think of using 3D models in a seasonal context:
