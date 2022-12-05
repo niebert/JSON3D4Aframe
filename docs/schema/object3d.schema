@@ -4,14 +4,14 @@ vDataJSON[vSchemaID] = {
 	"headerTemplate": "3D: {{self.tagname}} - {{self.comment}}",
 	"type": "object",
 	"format":"grid",
-    "id": "https://niebert.github.io/json-editor",
-		"options": {
-        "disable_collapse": false,
-        "disable_edit_json": false,
-        "disable_properties": false,
-        "collapsed": false,
-        "hidden": false
-    },
+    	"id": "https://niebert.github.io/json-editor",
+	"options": {
+        	"disable_collapse": false,
+       		"disable_edit_json": false,
+        	"disable_properties": false,
+        	"collapsed": false,
+        	"hidden": false
+    	},
 		"defaultProperties": [
         "id",
 				"tagname",
