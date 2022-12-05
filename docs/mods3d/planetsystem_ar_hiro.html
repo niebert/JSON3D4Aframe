@@ -13,8 +13,13 @@
       <a-marker id="mymarker" preset="hiro">
         <!-- Sun -->
         <a-sphere radius="0.5"  
-                  material="color: yellow;opacity:0.8"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Solarsystemscope_texture_2k_sun.jpg/320px-Solarsystemscope_texture_2k_sun.jpg">
+                  material="color: yellow;opacity:0.8" 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Solarsystemscope_texture_2k_sun.jpg/320px-Solarsystemscope_texture_2k_sun.jpg" 
+                  animation="property:rotation; 
+                           to:0 360 0; 
+                           dur:1000; 
+                           loop:true; 
+                           easing:linear">
         </a-sphere>
         <a-entity animation="property:rotation; 
                        to:0 360 0; 
@@ -30,7 +35,7 @@
                 <!-- Earth --> 
                 <a-sphere radius="0.125"
                    material="color: blue;opacity:0.8"
-                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solarsystemscope_texture_2k_earth_daymap.jpg/320px-Solarsystemscope_texture_2k_earth_daymap.jpg"       
+                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Color_etopo1_ice_low.jpg/2560px-Color_etopo1_ice_low.jpg" 
                   animation="property:rotation; 
                            to:0 360 0; 
                            dur:1000; 
