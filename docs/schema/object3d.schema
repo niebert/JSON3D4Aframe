@@ -3,6 +3,7 @@ vDataJSON[vSchemaID] = {
 	"title": "3D Objects",
 	"headerTemplate": "3D: {{self.tagname}} - {{self.comment}}",
 	"type": "object",
+	"format":"grid",
     "id": "https://niebert.github.io/json-editor",
 		"options": {
         "disable_collapse": false,
