@@ -3,15 +3,15 @@ vDataJSON[vSchemaID] = {
 	"title": "3D Objects",
 	"headerTemplate": "3D: {{self.tagname}} - {{self.comment}}",
 	"type": "object",
-	"format":"grid",
-    	"id": "https://niebert.github.io/json-editor",
-	"options": {
-        	"disable_collapse": false,
-       		"disable_edit_json": false,
-        	"disable_properties": false,
-        	"collapsed": false,
-        	"hidden": false
-    	},
+		"format":"grid",
+    "id": "https://niebert.github.io/json-editor",
+		"options": {
+        "disable_collapse": false,
+        "disable_edit_json": false,
+        "disable_properties": false,
+        "collapsed": false,
+        "hidden": false
+    },
 		"defaultProperties": [
         "id",
 				"tagname",
@@ -23,7 +23,8 @@ vDataJSON[vSchemaID] = {
 				"rotation",
 				"scale",
 				"repeat",
-				"repeatsteps"
+				"repeatsteps",
+				"animation"
     ],
 	"properties": {
 		"id": {
@@ -64,6 +65,7 @@ vDataJSON[vSchemaID] = {
 							"a-pyramid",
 							"a-sphere",
           		"a-torus",
+							"a-arc",
 							"a-circle",
 							"a-plane",
 							"a-ring",
@@ -80,6 +82,7 @@ vDataJSON[vSchemaID] = {
 									"Pyramid",
 									"Sphere",
 									"Torus",
+									"Arc",
 									"Circle",
 									"Plane",
 									"Ring",
@@ -163,6 +166,7 @@ vDataJSON[vSchemaID] = {
 						"propertyOrder": 110,
 						"description": "Defines the step width (vector length) of additional copies/repetitions of the 3D object in x-direction (width), y-direction (height), z-direction (depth). Default vector length of copies/repitiions is 1.0"
 				}
+
  	},
   	"definitions": {
   	}
