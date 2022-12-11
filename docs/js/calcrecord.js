@@ -1,5 +1,35 @@
 // HTML Code is generated with the method Editor4JSON.generateHTML() in file js/editor4json.js
+function getCameraLocationHash(pCamPosXYZ) {
+  var vPositionArr = string2BigFloatArray(pCamPosXYZ);
+  var vGeoHash = getGeoLocationHash();
+  /*
+  var vGeoHash = {
+    "longitude":vLongitude,
+    "latitude":vLatitude,
+    "unit":vUnit
+  };
+  */
+  var vUnit = vGeoHash.unit;
+  var vCamHash = getGeoLocationHash();   //--cloneJSON(vGeoHash);
+  // addition/substraction to x and z coordinates in vGeoHash
+  vCamHash.latitude = addBig(vGeoHash.Latitude,multBig(vUnit,vPositionArr[0]));
+  vCamHash.longitude = addBig(vGeoHash.Longitude,multBig(vUnit,vPositionArr[2]));
+  console.log("vCamHash.latitude="+vCamHash.latitude+" vCamHash.longitude="+vCamHash.longitude);
+  return vCamHash;
+}
 
+function getSimulatedLongitude(pCamPosXYZ) {
+  var vCamHash = getCameraLocationHash(pCamPosXYZ);
+
+  return vCamHash.longitude;
+}
+
+function getSimulatedLatitude(pCamPosXYZ) {
+  var vCamHash = getCameraLocationHash(pCamPosXYZ);
+
+  return vCamHash.latitude;
+
+}
 
 function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
   if (pARSelect == "argeo") {
@@ -19,19 +49,19 @@ function expandGeoLocation(pData,pGeoHash,pPosArray,pARSelect) {
 }
 
 function getGeoLocationHash() {
-  //var vLatitude = parseFloat(getValueDOM("ar_latitude"));
-  //var vLongitude = parseFloat(getValueDOM("ar_longitude"));
+  var vLatitude = parseFloat(getValueDOM("ar_latitude"));
+  var vLongitude = parseFloat(getValueDOM("ar_longitude"));
   //math.js  see https://mathjs.org/docs/datatypes/bignumbers.html
-  var vLatitude = math.bignumber(getValueDOM("ar_latitude"));
-  var vLongitude = math.bignumber(getValueDOM("ar_longitude"));
   if (isNaN(vLatitude)) {
     console.error("ERROR: getGeoLocationHash() - Float for ar_latitude is not a number!");
   } else {
+    vLatitude = math.bignumber(vLatitude);
     console.log("CALL: getGeoLocationHash() - Latitude="+vLatitude);
   }
   if (isNaN(vLongitude)) {
     console.error("ERROR: getGeoLocationHash() - Float for ar_longitude is not a number!");
   } else {
+    vLatitude = math.bignumber(vLongitude);
     console.log("CALL: getGeoLocationHash() - Longitude="+vLongitude);
   }
   var vUnit = math.bignumber(getValueDOM("ar_unit_length"));
@@ -85,10 +115,14 @@ function get3DRepeatedArray(pData) {
         vData.ar_longitude = vLongitude.toString();
         // vLatitude and vLongitude are of math.js bignumber type
         console.log("SWITCH get3DRepeatedArray(): "+vData.tagname);
-        if (vData.tagname == "a-pyramid") {
+        if (vData.tagname == "a-arc") {
+            vData.name4type = "ARC";
+            // vCreator3D.pyramid() defined in js/aframe_pyramid.js
+            v3DOutArr = vCreator3D.arc(v3DOutArr,vData,vSizeXYZ);
+        } else if (vData.tagname == "a-pyramid") {
             vData.name4type = "PYRAMID";
             // vCreator3D.pyramid() defined in js/aframe_pyramid.js
-            vCreator3D.pyramid(v3DOutArr,vData,vSizeXYZ);
+            v3DOutArr = vCreator3D.pyramid(v3DOutArr,vData,vSizeXYZ);
         } else if (vData.tagname == "a-ellipsoid") {
             vData.name4type = "ELLIPSOID";
             // vCreator3D.ellipsoid() defined in js/aframe_pyramid.js
@@ -168,6 +202,8 @@ function calcRecordJSON(pData) {
 
   vData.domnodes = vData.domnodes || [];
   console.log("calcRecordJSON(pData) - Tag:<" + vTagName + ">");
+  // aggregated objects of primitives are created
+  // in switch of function get3DRepeatedArray(pData)
   if (vTagName == "a-box") {
     vData.name4type = "BOX";
     vAttribs += getAttribAframe(vTag,"width",vSizeXYZ,0,vScale);
@@ -288,6 +324,12 @@ function getRepeatSteps(pData) {
   }
   return vStepsXYZ;
 }
+
+function parseIntBig(pString) {
+  //return math.bignumber(pString);
+  return parseInt(pString);
+}
+
 
 function parseFloatBig(pString) {
   //return math.bignumber(pString);
@@ -449,6 +491,34 @@ function string2FloatArray(pString) {
 
   return vFloatArr;
 }
+
+function string2BigFloatArray(pString) {
+  //console.log("string2FloatArray('" + pString + "')");
+  var vString = pString || "3.0 2.0 1.0";
+  //remove ledading and tailing white spaces
+  vString = vString.replace(/^\s+|\s+$/g,'');
+  // replace german comma "," by a decimal point "."
+  vString = vString.replace(/,/g,'.');
+  // split String into array at whitespace
+  var vStringArr = vString.split(/\s+/);
+  var vFloatArr = [];
+  var vDefaultValue = 1.0;
+  for (var i = 0; i < vStringArr.length; i++) {
+    if (isNaN(vStringArr[i])) {
+      console.warn("WARNING: string2BigFloatArray() parsing Float for '"+vStringArr[i]+"' undefined");
+      vDefaultValue = 3-i;
+      vFloatArr.push(vDefaultValue);
+    } else {
+      vFloatArr.push(parseFloatBig(vStringArr[i]));
+      //var x = math.bignumber('0.2222222222222222222')
+      //vFloatArr.push(math.bignumber(vStringArr[i]));
+    }
+  }
+  //console.log("string2FloatArray() Array of Floats: ["+vFloatArr.join(",")+"] result!");
+
+  return vFloatArr;
+}
+
 
 function string2PrecisionFloatArray(pString) {
   //console.log("string2FloatArray('" + pString + "')");
