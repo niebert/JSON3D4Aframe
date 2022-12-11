@@ -202,6 +202,11 @@ Editor4JSON.prototype.init = function (pDOMID,pData,pSchema) {
   //    vMyInstance.init(pID4DOM,pData,pSchema);
   //-------------------------------------------------------
 	console.log("Editor4JSON.init()-Call");
+	if (window.CSV4JSON) {
+		this.csv4json = new CSV4JSON();
+	} else {
+		console.warn("import js/csv4json.js into '"+document.location.href+"'");
+	}
 	//console.log("Schmema JSON\n"+JSON.stringify(pSchema,null,4));
   this.aSchema = pSchema;
 	if (pData) {
@@ -672,7 +677,6 @@ Editor4JSON.prototype.setValue = function (pData) {
 //----End of Method getSchema Definition
 
 
-
 //#################################################################
 //# PUBLIC Method: exportJSON()
 //#    used in Class: Editor4JSON
@@ -696,6 +700,164 @@ Editor4JSON.prototype.exportJSON = function (pFilename,pJSON) {
 	console.log("Editor4JSON.exportJSON('"+pFilename+"')-Call");
   var vStringJSON = JSON.stringify(pJSON,null,4);
 	this.saveFile(pFilename,vStringJSON);
+};
+//----End of Method export Definition
+//#################################################################
+//# PUBLIC Method: getJSON4CSV()
+//#    used in Class: Editor4JSON
+//#
+//# Comment:
+//#    getJSON4JSON() convert the JSON data into a CSV-confrom JSON
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2021/07/12 12:32:12
+//#################################################################
+
+Editor4JSON.prototype.getJSON4CSV = function () {
+	var out = [];
+	var vJSON = this.aData;
+	//alert("getJSON4CSV() "+JSON.stringify(vJSON,null,4));
+	if (this.csv4json) {
+		var headers = this.csv4json.get_json_headers(vJSON);
+		if (headers.length > 0) {
+			var headers4anim = [];
+			if ((vJSON.length > 0) ) {
+				var rec0 = vJSON[0];
+				if(rec0.animation) {
+					headers4anim = this.csv4json.get_json_headers([ vJSON[0].animation]);
+				}
+			}
+			//alert("getJSON4CSV() headers4anim="+JSON.stringify(headers4anim,null,4));
+			for (var i = 0; i < vJSON.length; i++) {
+				var outjson = {};
+				for (var k = 0; k < headers.length; k++) {
+					if (headers[k] == "animation") {
+						var vRec = vJSON[i];
+						if (!vRec.animation) {
+							vRec.animation = {}
+						}
+						for (var j = 0; j < headers4anim.length; j++) {
+							outjson[headers4anim[j]] = vRec.animation[headers4anim[j]] || " ";
+						}
+					} else {
+						outjson[headers[k]] = vJSON[i][headers[k]];
+					}
+				}
+				out.push(outjson);
+			}
+		}
+	} else {
+		console.error("import CSV4JSON in '"+document.location.href+"'");
+	}
+	return out;
+}
+
+Editor4JSON.prototype.convertJSON4CSV = function (pJSON4CSV) {
+	var out = [];
+	var vJSON = pJSON4CSV || [];
+	//alert("getJSON4CSV() "+JSON.stringify(vJSON,null,4));
+	if (this.csv4json) {
+		//var headers = this.csv4json.get_json_headers(this.aData);
+			for (var i = 0; i < vJSON.length; i++) {
+				var outjson = {
+					"animation": {}
+				};
+				var vRec = vJSON[i];
+				for (var key in vRec) {
+					if (key.indexOf("4anim") > 0) {
+						outjson.animation[key] = vRec[key] || " ";
+					} else {
+						outjson[key] = vRec[key]
+					}
+				}
+				out.push(outjson);
+			}
+	} else {
+		console.error("import CSV4JSON in '"+document.location.href+"'");
+	}
+	return out;
+}
+
+//#################################################################
+//# PUBLIC Method: exportCSV()
+//#    used in Class: Editor4JSON
+//# Parameter: pFilename, pJSON
+//#
+//# Comment:
+//#    exportJSON() uses the FileSaver.js to create a download of exported JSON pJSON after the JSON was stringified
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.importCSV = function (pCSV,pSep) {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: exportJSON(pFilename,pJSON)");
+  // alert("js/editor4json.js - Call: exportJSON(pFilename,pJSON)");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.exportJSON(pFilename,pJSON);
+  //-------------------------------------------------------
+	pSep = pSep || ",";
+	console.log("Editor4JSON.importCSV()-Call separator='"+pSep+"'");
+	if (pCSV) {
+		var options = {
+			"separator": pSep
+		}
+		var vJSON4CSV = this.csv4json.toJSON(pCSV, options);
+		if (vJSON4CSV) {
+			//alert("importCSV() - vJSON4CSV="+JSON.stringify(vJSON4CSV,null,4));
+			var vJSON = this.convertJSON4CSV(vJSON4CSV);
+			//alert("importCSV() - vJSON="+JSON.stringify(vJSON,null,4));
+			this.storeJSON(vJSON);
+		} else {
+			console.error("ERROR: pJSON.data.length = 0 - No data to export");
+		}
+	} else {
+		console.error("ERROR: pJSON.data was not defined");
+	}
+};
+//----End of Method export Definition
+
+//#################################################################
+//# PUBLIC Method: exportCSV()
+//#    used in Class: Editor4JSON
+//# Parameter: pFilename, pJSON
+//#
+//# Comment:
+//#    exportJSON() uses the FileSaver.js to create a download of exported JSON pJSON after the JSON was stringified
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.exportCSV = function (pSep) {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: exportJSON(pFilename,pJSON)");
+  // alert("js/editor4json.js - Call: exportJSON(pFilename,pJSON)");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.exportJSON(pFilename,pJSON);
+  //-------------------------------------------------------
+	var vFilename = getName4Filename(this.aConfig.json_file);
+	var csv_file = vFilename + ".csv";
+	pSep = pSep || ",";
+	console.log("Editor4JSON.exportCSV('"+csv_file+"')-Call separator='"+pSep+"'");
+	if (this.aData) {
+		if (this.aData.length >= 0) {
+			var options = {
+				"separator": pSep
+			};
+			var vJSON4CSV = this.getJSON4CSV();
+			//alert("exportCSV() - vJSON4CSV="+JSON.stringify(vJSON4CSV,null,4));
+			var vStringCSV = this.csv4json.toCSV(vJSON4CSV,options);
+			this.saveFile(csv_file,vStringCSV);
+		} else {
+			console.error("ERROR: pJSON.data.length = 0 - No data to export");
+		}
+	} else {
+		console.error("ERROR: pJSON.data was not defined");
+	}
 };
 //----End of Method export Definition
 
@@ -796,7 +958,8 @@ Editor4JSON.prototype.previewHTML = function (pTplID) {
 	*/
 	//this.previewWin = open(null,'newWin'+vTimeStamp,'height=600,width=600');
 	//this.previewWin =
-	window.open("view_"+pTplID+".html",'newWin'+vTimeStamp,'height=600,width=600');
+	var vPreviewWin = window.open("view_"+pTplID+".html",'newWin'+vTimeStamp,'height=600,width=600');
+	vPreviewWin.document.write(vHTML);
 	//waitTime(2000);
 	//this.previewWin.document.write(vHTML);
 	//document.getElementById("previewlink").open(vDataURL);
@@ -860,6 +1023,12 @@ Editor4JSON.prototype.getTemplate = function (pTplID4DOM) {
 	var vTemplate = getValueDOM(pTplID4DOM);
 	if (vDataJSON.tpl[vTplID]) {
 		vTemplate = vDataJSON.tpl[vTplID];
+		if (vTplID == "argeo") {
+			if (getValueDOM("simulate4gps") == "Y") {
+				console.log("Use template for simulated GPS:");
+				vTemplate = vDataJSON.tpl.argeo4simulategps;
+			}
+		}
 	} else {
 		console.error("ERROR: vDataJSON.tpl." + vTplID + " does not exist!");
 	}
@@ -900,7 +1069,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 			//vFilename += "_ar_"+vMarker+".html";
 			// load the 3D object template
 			objecttpl = this.getTemplate("object-template");
-			// correctHandleBarsTemplate() defined in string.hs
+			// correctHandleBarsTemplate() defined in string.js
 			objecttpl = correctHandleBarsTemplate(objecttpl);
 			//console.log(objecttpl);
 			//compile the template text into a function for replacing JSON content
@@ -915,7 +1084,7 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 
 			// load the 3D object template
 			objecttpl = this.getTemplate("object-template");
-			// correctHandleBarsTemplate() defined in string.hs
+			// correctHandleBarsTemplate() defined in string.js
 			objecttpl = correctHandleBarsTemplate(objecttpl);
 			//console.log(objecttpl);
 			//compile the template text into a function for replacing JSON content
@@ -925,9 +1094,9 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 		case "argeo":
 			//vFilename += "_argeo.html";
 			objecttpl = this.getTemplate("object-geo-template");
-			// correctHandleBarsTemplate() defined in string.hs
+			// correctHandleBarsTemplate() defined in string.js
 			objecttpl = correctHandleBarsTemplate(objecttpl);
-			//console.log(objecttpl);
+			//console.log("Template 'objecttpl'="+objecttpl);
 			//compile the template text into a function for replacing JSON content
 			objectScript = Handlebars.compile(objecttpl);
 
@@ -956,7 +1125,9 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 	};
 	//----- Camera Position -----
 	var vCamPosJSON = {
-		"camposxyz": getValueDOM("camposxyz")
+		"camposxyz": getValueDOM("camposxyz"),
+		"simulate4longitude": getSimulatedLongitude(getValueDOM("camposxyz")),
+		"simulate4latitude":  getSimulatedLatitude(getValueDOM("camposxyz"))
 	};
 
 	if (vTplID == "aframe") {
@@ -984,7 +1155,9 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 		"plane": "",
 		"cameraposition":vCameraPosition,
 		"ar_latitude":getValueDOM("ar_latitude"),
-		"ar_longitude":getValueDOM("ar_longitude")
+		"ar_longitude":getValueDOM("ar_longitude"),
+		"simulate4latitude":getValueDOM("ar_latitude"),
+		"simulate4longitude":getValueDOM("ar_longitude")
 	};
 	var sky_plane_context = {
 		"aframe_sky_file": getValueDOM("aframe_sky_file") || "https://niebert.github.io/HuginSample/img/cloud_grass.jpg",
@@ -1005,9 +1178,22 @@ Editor4JSON.prototype.generateHTML = function (pTplID) {
 	// Perform the replacement with the "templateScript()"
 	// Compile the template data into a function
 
+	console.log("editor4json.js:1012 - Template['"+vTplID+"']="+template);
 	var templateScript = Handlebars.compile(template);
 	savePreviewLS("preview3d",context);
-	var vHTML = templateScript(context);
+
+	var vHTML = "undefined HTML for Template '"+vTplID+"'";
+	if (vTplID != "argeo") {
+		vHTML = templateScript(context);
+	} else {
+		console.log("Template ARGEO='" + template + "'");
+		if (templateScript) {
+			vHTML = templateScript(context);
+		} else {
+			console.warn("Script for Template generation for 'argeo' undefined");
+		}
+		console.warn("HTML for Template '"+vTplID+"' was not generated");
+	}
 	//this.saveFile(vFilename,vHTML);
 	// restore old move setting
 	//$("#globalmove").val(vMoveXYZstr);
@@ -1209,6 +1395,33 @@ Editor4JSON.prototype.loadLS = function () {
 };
 //----End of Method loadLS Definition
 
+//#################################################################
+//# PUBLIC Method: clearLS()
+//#    used in Class: Editor4JSON
+//# Parameter:
+//#
+//# Comment:
+//#    clearLS() removes the JSON from Local Storage
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/06/02 20:56:06
+//#################################################################
+
+Editor4JSON.prototype.clearLS = function () {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: saveLS()");
+  // alert("js/editor4json.js - Call: saveLS()");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.saveLS();
+  //-------------------------------------------------------
+
+  if (typeof(Storage) != "undefined") {
+		localStorage.removeItem(this.aConfig["dataid"]);
+		console.log("LocalStorage["+this.aConfig["dataid"]+"] cleared!");
+	}
+
+}
 
 //#################################################################
 //# PUBLIC Method: saveLS()
@@ -1415,6 +1628,27 @@ Editor4JSON.prototype.deleteAsk = function () {
 };
 //----End of Method deleteAsk Definition
 
+Editor4JSON.prototype.deleteAll = function () {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: deleteAsk()");
+  // alert("js/editor4json.js - Call: deleteAsk()");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.deleteAsk();
+  //-------------------------------------------------------
+
+  var vOK = confirm("Do you really want to delete the 3D-model?");
+  if(vOK == true) {
+      this.clearLS();
+			this.setValue([]);
+			this.saveLS();
+  } else {
+      console.log("Delete complete 3D-model cancelled");
+  };
+
+};
+//----End of Method deleteAsk Definition
+
 
 //#################################################################
 //# PUBLIC Method: check()
@@ -1614,7 +1848,7 @@ Editor4JSON.prototype.getEditorData = function () {
 
 
 //#################################################################
-//# PUBLIC Method: load(pFileID4DOM)
+//# PUBLIC Method: loadJSON(pFileID4DOM)
 //#    used in Class: Editor4JSON
 //# Parameter:
 //#
@@ -1641,6 +1875,7 @@ Editor4JSON.prototype.load = function (pFileID4DOM) {
 		var vFilename = fileToLoad.name;
 		// vFilename ="myfile.json"
 		vFilename = vFilename.substr(vFilename.lastIndexOf("/")+1,vFilename.length);
+		vFilename = removeExtension4File(vFilename) + ".json";
 		this.aConfig["json_file"] = vFilename;
 		$('#load_filename').html('<b>File:</b> '+ vFilename); // this.value.replace(/.*[\/\\]/, '')
 		console.log("load()-Call: - File '"+vFilename+"' exists.");
@@ -1650,7 +1885,15 @@ Editor4JSON.prototype.load = function (pFileID4DOM) {
 				var vTextFromFileLoaded = fileLoadedEvent.target.result;
 				//document.getElementById("inputTextToSave").value = textFromFileLoaded;
 				//alert("vTextFromFileLoaded="+vTextFromFileLoaded);
-				vThis.importJSON(vTextFromFileLoaded);
+				vThis.clearLS();
+				if (vTextFromFileLoaded && (vTextFromFileLoaded.indexOf(",\"opacity\",") > 0)) {
+					var vSep = ",";
+					//alert("load CSV-File");
+					vThis.importCSV(vTextFromFileLoaded,vSep);
+				} else {
+					//alert("load JSON-File");
+					vThis.importJSON(vTextFromFileLoaded);
+				}
 				vThis.check();
 				vThis.edit();
   			vThis.updateDOM();
@@ -1667,9 +1910,9 @@ Editor4JSON.prototype.load = function (pFileID4DOM) {
 
 
 //#################################################################
-//# PUBLIC Method: save()
+//# PUBLIC Method: save(pFormat)
 //#    used in Class: Editor4JSON
-//# Parameter:
+//# Parameter: pFormat is 'JSON' or 'CSV'
 //#
 //# Comment:
 //#    save() stores current index, JSON data and JSON schema with storeLS() into local storage and exports the current JSON data as file
@@ -1678,18 +1921,89 @@ Editor4JSON.prototype.load = function (pFileID4DOM) {
 //# last modifications 2017/07/06 9:24:10
 //#################################################################
 
-Editor4JSON.prototype.save = function () {
+Editor4JSON.prototype.save = function (pFormat) {
   //----Debugging------------------------------------------
   // console.log("js/editor4json.js - Call: save()");
   // alert("js/editor4json.js - Call: save()");
   //----Create Object/Instance of Editor4JSON----
   //    var vMyInstance = new Editor4JSON();
   //    vMyInstance.save();
-  //-------------------------------------------------------
+  //---------------------------------- ---------------------
+	pFormat = pFormat || "json";
+	pFormat = pFormat.toUpperCase();
+	var vColSep = ",";
+	switch (pFormat) {
+		case "CSV":
+			console.log("Save 3D Data as CSV");
+			//this.exportCSV(vColSep,vDecimalPoint);
+			this.exportCSV(vColSep);
+		break;
+		case "CONFIG":
+			console.log("Save Config Data as JSON");
+			var vJSON = this.getValue(); // is already the array of 3D-elements
+			if (this.aConfig) {
+				var vStringJSON = JSON.stringify(this.aConfig,null,4);
+				this.saveFile("config_"+pFilename,vStringJSON);
+			}
+		break;
+		default:
+			console.log("Save 3D Data as JSON");
+			this.saveLS();
+			this.exportData();
+	}
+};
+//----End of Method save Definition
 
-  this.saveLS();
-  this.exportData();
 
+//#################################################################
+//# PUBLIC Method: save(pFormat)
+//#    used in Class: Editor4JSON
+//# Parameter: pFormat is 'JSON' or 'CSV'
+//#
+//# Comment:
+//#    save() stores current index, JSON data and JSON schema with storeLS() into local storage and exports the current JSON data as file
+//#
+//# created with JSCC  2017/03/05 18:13:28
+//# last modifications 2017/07/06 9:24:10
+//#################################################################
+
+Editor4JSON.prototype.saveCSV = function (pColSep,pDecimalPoint) {
+  //----Debugging------------------------------------------
+  // console.log("js/editor4json.js - Call: save()");
+  // alert("js/editor4json.js - Call: save()");
+  //----Create Object/Instance of Editor4JSON----
+  //    var vMyInstance = new Editor4JSON();
+  //    vMyInstance.save();
+  //---------------------------------- ---------------------
+	console.log("Save 3D Data as CSV: pColSep pDecimalPoint");
+	if (window && window.CSV4JSON) {
+		/*
+		[
+        {
+            "id": "78912379812",
+            "tagname": "a-torus",
+            "comment": "",
+            "position": "0.0 0.5 0.0",
+            "color": "#4545aa",
+            "opacity": 0.2,
+            "sizexyz": "1.5 2.0 4.5",
+            "rotation": "0 0 0",
+            "scale": 1,
+            "repeat": "0 0 0",
+            "repeatsteps": "1.0 1.0 1.0",
+            "animation": {
+                "type4anim": "-",
+                "params4anim": " ",
+                "duration4anim": 1000,
+                "loop4anim": true
+            }
+        }
+    ],
+		*/
+
+	} else {
+		alert("Please import library 'csv4json.js' in '"+document.location.href+"'");
+	}
 };
 //----End of Method save Definition
 

@@ -696,7 +696,7 @@ RegExp.escape = function (s) {
       // if callback was passed to options swap callback with options
       if (options !== undefined && typeof (options) === 'function') {
         if (callback !== undefined) {
-          return console.error('You cannot 3 arguments with the 2nd argument being a function');
+          return console.error('You cannot have 3 arguments with the 2nd argument being a function');
         }
         callback = options;
         options = {};
