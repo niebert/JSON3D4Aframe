@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>JSON3D for AFrame Editor - AR marker</title>
+    <title>JSON3D4Aframe - 3.0.15</title>
     <!--
       Link Parameter (optional):
        "schema" is a string defining the schema (stringified JSON)
@@ -29,7 +29,7 @@
      <script src="js/string.js"></script>
      <script src="js/pathfiles.js"></script>
      <script src="js/jquery_csv.js"></script>
-     <script src="js/csv2json.js"></script>
+     <script src="js/csv4json.js"></script>
      <script src="js/jsoneditor_i.js"></script>
      <script src="js/editor4json.js"></script>
      <script src="js/mathjs-v8.1.1.js"></script>
@@ -39,7 +39,7 @@
      <script src="js/writedom.js"></script>
      <script src="js/aframe-v1.0.4.js"></script>
      <script src="js/aframe4embedded.js"></script>
-
+     <!-- l.61 ff  Aggregated constructors in "aframe-arc.js" "aframe-pryramid.js"  are include l.61-->
      <script>
      // Contains the constructors for composite 3D objects
      var vCreator3D = {};
@@ -52,12 +52,14 @@
      var vSchemaID =  "object3d"; // file defined in schema/object3d.schema
      // Set the default CSS theme and icon library globally
      JSONEditor.defaults.theme = 'bootstrap3';
+     //JSONEditor.defaults.iconlib = 'icons4menu';
      JSONEditor.defaults.iconlib = 'fontawesome4';
      JSONEditor.plugins.ace.theme = 'xcode';
 
     </script>
 
    <!-- BEGIN: Aframe Entities -->
+    <script src="js/aframe-arc.js"></script>
     <script src="js/aframe-pyramid.js"></script>
    <!-- END: Aframe Entities -->
 
@@ -75,6 +77,7 @@
     <script src="tpl/aframe_tpl.js"></script>
     <script src="tpl/ar_tpl.js"></script>
     <script src="tpl/argeo_tpl.js"></script>
+    <script src="tpl/argeo4simulategps_tpl.js"></script>
     <script src="tpl/cameraposition_tpl.js"></script>
     <script src="tpl/object_tpl.js"></script>
     <script src="tpl/objectgeo_tpl.js"></script>
@@ -189,7 +192,7 @@
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
-    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">3.0.1</div>
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">3.0.15</div>
     </h2>
     <div data-role="fieldcontain" style="display:none">
          <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
@@ -202,15 +205,18 @@
       <img src="img/icons-svg/fa-folder-open-white.svg">
     Load
 		</button>
-    <select  class="devhidden" id="loadselect" onchange="vEditor4JSON.aConfig[this.id]=this.value"  style="display:none">
+    <select  class="devhidden" id="loadselect" onchange="vEditor4JSON.aConfig[this.id]=this.value"  style="Xdisplay:none">
       <option selected="selected" value="json">JSON</option>
       <option value="csv">CSV</option>
+      <option value="config">Config JSON</option>
     </select>
-    <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save();return false">
+    <button id='bSaveJSON' style="color: white;background-color: #225988"  onclick="vEditor4JSON.save(document.getElementById('loadselect').value);return false">
 			<!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
       <img src="img/icons-svg/fa-file-save-white.svg">
       Save
 		</button>
+
+    -
 
     <button id='bExportARSelect' style="color: white;background-color: #225988"  onclick="vEditor4JSON.exportHTML(getValueDOM('arselect'));return false">
       <!-- <i class="fa fa-floppy-o" aria-hidden="true"></i>  -->
@@ -269,6 +275,12 @@
       <!-- <img src="img/icons-svg/fa-trash-white.svg"> -->
       <img src="img/icons-svg/fa-minus-square-white.svg">
 	    Delete
+		</button>
+    <button id='bDeleteAll' style="color: white;background-color: #c10303"  onclick="vEditor4JSON.deleteAll();return false">
+			<!--<i class="fa fa-minus-square" aria-hidden="true"></i> -->
+      <!-- <img src="img/icons-svg/fa-trash-white.svg"> -->
+      <img src="img/icons-svg/fa-trash-white.svg">
+	    Model
 		</button>
     <button id='bInitDB' style="display:none;color: white;background-color: #c10303"  onclick="vEditor4JSON.initAsk();return false">
       <!-- <i class="fa fa-minus-square" aria-hidden="true"></i>  -->
@@ -416,7 +428,11 @@
                file:///Users/niehaus/Nextcloud/Javascript/WebVR/JSON3D4Aframe/docs/index.html
             -->
             <b class="devhidden" style="display:none">Map Center:</b>
-            <input class="devhidden" style="display:none" type="string" name="mapcenter" id="selectmapcenter" size="30" value="-1.81185, 52.443141"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+            <input class="devhidden" name="mapcenter" id="selectmapcenter" style="display:none" type="string" size="30" value="-1.81185, 52.443141"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+            <b class="devhidden" style="display:none">Longitude:</b>
+            <input class="devhidden" name="simulate4longitude" id="simulate4longitude" style="display:none" type="string"  size="10" value="-1.81185"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
+            <b class="devhidden" style="display:none">Latitude:</b>
+            <input class="devhidden" name="simulate4latiitude" id="simulate4longitude" style="display:none" type="string"  size="10" value="-1.81185"  onchange="vEditor4JSON.aConfig[this.id]=this.value">
             &nbsp;
             <b>Simulated GPS:</b>
             <select name="simulate4gps" id="simulate4gps" onchange="vEditor4JSON.aConfig[this.id]=this.value">
@@ -560,7 +576,7 @@
         <img src="img/icons-svg/carat-u-white.svg">
         <img src="img/icons-svg/grid-white.svg">
       </a>
-      Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">3.0.1</div>
+      Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">3.0.15</div>
     </h3>
 
     <h4>Cristal Lattice</h4>
@@ -643,9 +659,9 @@
     </div>
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
-      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">3.0.1</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2021/02/11 19:05:19</div>
-          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">3.0.1</div>)</a><br/>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">3.0.15</div> </a>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2022/12/11 11:43:33</div>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">3.0.15</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>
@@ -756,6 +772,7 @@ function previewEmbbeded() {
   updateAframeScene(vEditor4JSON);
   //createBlueCube();
 }
+
 function createBlueCube() {
     var scene = document.querySelector('a-scene');
     if (scene) {
