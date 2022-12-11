@@ -1,4 +1,4 @@
-## JSON3D4Aframe <span id4marker="version" style="display: inline-block">2.0.5</span>
+## JSON3D4Aframe <span id4marker="version" style="display: inline-block">3.0.13</span>
 
 The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
@@ -178,6 +178,7 @@ The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js) Developer Eli Grey provided the `FileSaver.js` that is used to store created `JSCC` files to the local filesystem. `JSCC` uses the same mechanism of browsers, that allows a `Save as...` in the context menu of a web pages or image. So not uncontrolled write access to your file system is implemented, because users have to select the locations in which the user whats to store the file (e.g. JSON, Javascript or HTML).
 * [JointJS](https://github.com/clientIO/joint) JointJS is a JavaScript diagramming library. It can be used to create either static diagrams. JointJS is used in this project to create UML-diagrams, that are interactive diagramming in conjunction and application builder in Javascript.
 * [Inheritage for JavaScript with protoypes](http://phrogz.net/js/classes/OOPinJS2.html) by Gavin Kistner
+* [Jquery Plugin for CSV](https://github.com/evanplaice/jquery-csv) to load and save CSV files for interoperability
 * [3 ways to define a JavaScript class](https://www.phpied.com/3-ways-to-define-a-javascript-class/) by Stoyan Stefanov
 * [JQuery](https://jqueryui.com) is used for the theme and standard operations in the Document Object Model (DOM) of HTML-pages. The [JQuery-Themeroller](https://jqueryui.com/themeroller/) was used to create a JQuery theme for JSCC.
 * [FontAwesome](http://fontawesome.io/icons/) by Dave Gandy used for the icons in HTML buttons
