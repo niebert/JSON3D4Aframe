@@ -62,6 +62,7 @@ vDataJSON[vSchemaID] = {
 							"a-cone",
 							"a-cylinder",
 							"a-ellipsoid",
+							"a-prism",
 							"a-pyramid",
 							"a-sphere",
           		"a-torus",
@@ -79,6 +80,7 @@ vDataJSON[vSchemaID] = {
 									"Cone",
 									"Cylinder",
 									"Ellipsoid",
+									"Prism",
 									"Pyramid",
 									"Sphere",
 									"Torus",
@@ -165,6 +167,18 @@ vDataJSON[vSchemaID] = {
 						"format": "text",
 						"propertyOrder": 110,
 						"description": "Defines the step width (vector length) of additional copies/repetitions of the 3D object in x-direction (width), y-direction (height), z-direction (depth). Default vector length of copies/repitiions is 1.0"
+				},
+				"animation": {
+						"type": "string",
+						"id": "/properties/animation",
+						"title": "Animation Properties",
+						"default": "1.0 1.0 1.0",
+						"format": "text",
+						"propertyOrder": 120,
+						"description": "Defines the animation properties of the 3D object",
+						"options":{
+							"hidden": true
+						}
 				}
 
  	},
