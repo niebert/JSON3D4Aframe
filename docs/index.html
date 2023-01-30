@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>JSON3D4Aframe - 3.0.15</title>
+    <title>JSON3D4Aframe - 3.0.20</title>
     <!--
       Link Parameter (optional):
        "schema" is a string defining the schema (stringified JSON)
@@ -60,6 +60,7 @@
 
    <!-- BEGIN: Aframe Entities -->
     <script src="js/aframe-arc.js"></script>
+    <script src="js/aframe-prism.js"></script>
     <script src="js/aframe-pyramid.js"></script>
    <!-- END: Aframe Entities -->
 
@@ -75,7 +76,9 @@
     <!-- END:  load JSON schema -->
     <!-- BEGIN: load Handlebars4Code Templates -->
     <script src="tpl/aframe_tpl.js"></script>
+    <script src="tpl/aframe4save_tpl.js"></script>
     <script src="tpl/ar_tpl.js"></script>
+    <script src="tpl/ar4save_tpl.js"></script>
     <script src="tpl/argeo_tpl.js"></script>
     <script src="tpl/argeo4simulategps_tpl.js"></script>
     <script src="tpl/cameraposition_tpl.js"></script>
@@ -192,7 +195,7 @@
 
     <!-- this is hidden input file div to manage a file upload of a JSON into the browser -->
     <h2 align="center">
-    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">3.0.15</div>
+    	<a href="https://niebert.github.io/json-editor/" target="_blank">JSON 3D Editor</a> for <a href="https://aframe.io/examples/showcase/sky/" target="_blank">AFrame</a> <div id4marker="version" style="display: inline-block">3.0.20</div>
     </h2>
     <div data-role="fieldcontain" style="display:none">
          <input type="file" id="fileJSON" name="fileJSON" value="Select JSON File" id="fileJSON" onchange="vEditor4JSON.load(this.id)"/>
@@ -576,7 +579,7 @@
         <img src="img/icons-svg/carat-u-white.svg">
         <img src="img/icons-svg/grid-white.svg">
       </a>
-      Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">3.0.15</div>
+      Examples of 3D Models - Version <div id4marker="version" style="display: inline-block">3.0.20</div>
     </h3>
 
     <h4>Cristal Lattice</h4>
@@ -630,6 +633,38 @@
         <a href="mods3d/snowman_mws_argeo.html" target="_blank">Snowman - GeoAR - MWS</a>
       </li>
     </ul>
+    <h4>4 Candles on Torus</h4>
+    <ul>
+      <li>
+        <a href="mods3d/candles4torus_aframe.html" target="_blank">4 Candles on Torus - AFrame Model</a>
+      </li>
+      <li>
+        <a href="mods3d/candles4torus_ar_hiro.html" target="_blank">4 Candles on Torus - AR.js Hiro Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/candles4torus_sky_ar_hiro.html" target="_blank">4 Candles on Torus - AR.js - Sky - Hiro Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/candles4torus_ar_kanji.html" target="_blank">4 Candles on Torus - AR.js Kanji Marker</a>
+      </li>
+      <li>
+        <a href="mods3d/candles4torus_sky_ar_kanji.html" target="_blank">4 Candles on Torus - AR.js - Sky - Kanji Marker</a>
+      </li>
+      <li style="display:none">
+        <a href="mods3d/snowman_mws_argeo.html" target="_blank">Snowman - GeoAR - MWS</a>
+      </li>
+    </ul>
+    <h4>Animation Demo</h4>
+    <ul>
+      <li>
+        <a href="mods3d/planetsystem_ar_hiro.html" target="_blank">Planet System Demo - AR.js Hiro Marker</a> by Irina Shaskova
+      </li>
+      <li>
+        <a href="https://de.wikiversity.org/wiki/AR_VR_in_der_Grundschule" target="_blank">AR VR in der Grundschule</a> by Irina Shaskova
+      </li>
+      <li>
+        <a href="https://en.wikiversity.org/wiki/AR_VR_in_primary_schools" target="_blank">AR VR in Primary Schools</a> by Irina Shaskova
+      </li>
     <hr>
   </div>
 
@@ -659,9 +694,9 @@
     </div>
     <div align="center" style="font-size: 80%">
     	<a href="https://en.wikiversity.org/wiki/3D_Modelling/Examples" target="_blank">Wikiversity: 3D Modelling</a><br>
-      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">3.0.15</div> </a>
-       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2022/12/11 11:43:33</div>
-          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">3.0.15</div>)</a><br/>
+      <a href="https://www.github.com/niebert/JSON3D4Aframe" target="_blank">GitHub-Repo - Version: <div id4marker="version" style="display: inline-block">3.0.20</div> </a>
+       - Engelbert Niehaus - Date: <div id4marker="datetime" style="display: inline-block">2023/01/30 12:06:26</div>
+          <a href="https://github.com/niebert/JSON3D4Aframe/archive/master.zip" target="_blank">Download GitHub (V<div id4marker="version" style="display: inline-block">3.0.20</div>)</a><br/>
         JSON3D4Aframe used <a href="https://github.com/jdorn/json-editor" target="_blank">JSON Editor by Jeremy Dorn on GitHub</a>
 
     </div>
