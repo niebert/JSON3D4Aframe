@@ -169,7 +169,7 @@ Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a we
 
 ## See also
 * [HuginSample](https://www.github.com/niebert/HuginSample) - for examples to create your own 360-degree equirectangular images for sky-tag in Aframe.
-* [AR-Examples](https://www.github.com/niebert/AR-Examples) - Fork of [Lee Stemkoskis](https://github.com/stemkoski) repositories for AR.js and three.js examples
+* [AR-Examples](https://niebert.github.io/AR-Examples/) - Fork of [Lee Stemkoskis](https://github.com/stemkoski) repositories for AR.js and three.js examples  ([GitHub-Repo](https://www.github.com/niebert/AR-Examples))
 
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
