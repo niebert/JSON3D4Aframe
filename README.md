@@ -167,6 +167,10 @@ Some Aframe 3D-objects are visisible if the aframe 3D scene was loaded from a we
 * Windows (install python): `python -m http.server 8000`
 * Check Aframe scene with: `http://localhost:8000`
 
+## See also
+* [HuginSample](https://www.github.com/niebert/HuginSample) - for examples to create your own 360-degree equirectangular images for sky-tag in Aframe.
+* [AR-Examples](https://www.github.com/niebert/AR-Examples) - Fork of [Lee Stemkoskis](https://github.com/stemkoski) repositories for AR.js and three.js examples
+
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
 * [AFrame](https://aframe.io) is the WebVR framework that renders the geometric primitives on HTML canvas handles the 3D operations in the space for the defined 3D elements in the `Aframe` scene.
@@ -184,4 +188,3 @@ The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 
 * [FontAwesome](http://fontawesome.io/icons/) by Dave Gandy used for the icons in HTML buttons
 
 
-<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow="" material="" geometry="" scale="1 2 3" rotation=""></a-sphere>
