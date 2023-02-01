@@ -119,6 +119,10 @@ function get3DRepeatedArray(pData) {
             vData.name4type = "ARC";
             // vCreator3D.pyramid() defined in js/aframe_pyramid.js
             v3DOutArr = vCreator3D.arc(v3DOutArr,vData,vSizeXYZ);
+        } else if (vData.tagname == "a-prism") {
+            vData.name4type = "PRISM";
+            // vCreator3D.prism() defined in js/aframe_prism.js
+            v3DOutArr = vCreator3D.prism(v3DOutArr,vData,vSizeXYZ);
         } else if (vData.tagname == "a-pyramid") {
             vData.name4type = "PYRAMID";
             // vCreator3D.pyramid() defined in js/aframe_pyramid.js
