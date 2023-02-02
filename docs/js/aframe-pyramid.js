@@ -1,8 +1,11 @@
 //var vCreator3D = {}; Defined in index.html
+// Pyramid does not respect size for repeating objects
+// pyramids increase in size if they are far away.
+// scale factor is not respected - pyramids do not scale for scale factor
 
 vCreator3D.pyramid = function (v3DOutArr,vData,pSizeXYZ) {
-  var vSizeXYZ = cloneJSON(pSizeXYZ);
   // Global scaling will be performed in calcRecordJSON() with push to v3DOutArr.
+  var vSizeXYZ = cloneJSON(pSizeXYZ);
   var vGlobalScale = getGlobalScale();
   var vScale = vData.scale || parseFloatBig("1.0");
   vScale *= vGlobalScale; //
@@ -142,5 +145,5 @@ vCreator3D.pyramid = function (v3DOutArr,vData,pSizeXYZ) {
   // v3DOutArr.push(calcRecordJSON(vTriangle2))
   // v3DOutArr.push(calcRecordJSON(vTriangle3))
   // v3DOutArr.push(calcRecordJSON(vTriangle4))
-
+  return v3DOutArr;
 };
