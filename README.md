@@ -50,7 +50,7 @@ https://github.com/niebert/JSON3D4Aframe/tree/master/docs
 ## Screenshots Examples
 ![AFrame Example](https://niebert.github.io/SamplesAR/img/water_molecule_aframe.png)
 ![AR.js Kanji Marker Example](https://niebert.github.io/SamplesAR/img/water_molecule_kanji.png)
-![AR.js Hiro Marker Dinosaur](https://niebert.github.io/images/img/spinosaurus_on_ar_marker.png)
+![AR.js Hiro Marker Dinosaur](./docs/img/spinosaurus_on_ar_marker.png)
 [AR.js Hiro Marker Dinosaur](https://niebert.github.io/AR-Examples/spinosaurus_hiro_ar.html)
 
 
