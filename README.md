@@ -3,12 +3,9 @@
 The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
 This repository provides a generator for a 3D scene in [AFrame](https://www.aframe.io) with primitives like cubes, planes, spheres or general boxes. Color, position, and size  can be controlled, loaded and saved as JSON and exported to [`AFrame`](https://aframe.io) and [`AR.js`](https://ar-js-org.github.io/AR.js-Docs/)
+ 
 
-
-## Online Demo
-
-https://niebert.github.io/JSON3D4Aframe
-
+<h3>&nbsp;&nbsp;<a href="https://niebert.github.io/JSON3D4Aframe" target="_blank">Online Demo</a></h3>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
