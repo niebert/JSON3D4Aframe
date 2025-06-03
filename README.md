@@ -1,4 +1,4 @@
-## JSON3D4Aframe <span id4marker="version" style="display: inline-block">3.0.15</span>
+## JSON3D4Aframe <span id4marker="version" style="display: inline-block">3.0.21</span>
 
 The abbreviation stands for **JSON** editor  for **3D** objects generate **FOR** (4) **Aframe**. Furthermore [JSON3D4Aframe](https://niebert.github.io/JSON3D4Aframe) is able to export the 3D model in JSON format to [`ÀR.js`](https://ar-js-org.github.io/AR.js-Docs/), which is a library created by Jermome Etienne and the GeoAR capabilities are added by Nicolo Carpignoli et.al.. Without their great work this small tool for the [Wikiversity learning resource about 3D Modelling](https://en.wikiversity.org/wiki/3D_Modelling) would not exist.
 
